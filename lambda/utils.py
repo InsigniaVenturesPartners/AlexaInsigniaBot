@@ -1,6 +1,7 @@
 import logging
 import os
 import boto3
+import json
 from botocore.exceptions import ClientError
 
 
@@ -25,3 +26,17 @@ def create_presigned_url(object_name):
 
     # The response contains the presigned URL
     return response
+
+def load_json_from_path(file_path):
+    with open(file_path) as f:
+        return json.load(f)
+
+def create_all_video_playlist(playlist):
+    return {
+        "videoplayerData": {
+            "type": "object",
+            "properties": {
+                "playlist": playlist
+            }
+        }
+    }

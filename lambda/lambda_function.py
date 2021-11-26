@@ -7,10 +7,23 @@ from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
 
 from ask_sdk_model import Response
+from ask_sdk_model.interfaces.alexa.presentation.apl import (RenderDocumentDirective, ExecuteCommandsDirective)
+
+from utils import (load_json_from_path, create_all_video_playlist, create_presigned_url)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+insignia_video_url = create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
+
+def playlist():
+    return [
+        {
+            "url": insignia_video_url,
+            "title": "Insignia Video",
+            "subtitle": "Subtitle"
+        }
+    ]
 
 class LaunchRequestHandler(AbstractRequestHandler):
     #Handler for Skill Launch
@@ -33,12 +46,28 @@ class IntroductionIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("IntroductionIntent")(handler_input)
 
     def handle(self, handler_input):
-        speak_output = "Hello World!"
+        speak_output = "Insignia Ventures Partners is an early-stage technology venture capital firm partnering with unstoppable founders to build great companies in Southeast Asia. Portfolio companies include Goto, Appier, Carro, Ajaib, Shipper, Tonik, Flip, Payfazz, Super and many other technology market leaders. We partner early with founders and support them from seed through growth stage as their companies create meaningful impact for millions of people in Southeast Asia and beyond. Our team of investment and operating professionals bring together decades of experience and proprietary networks to equip our founders with the tools they need for growth. Insignia Ventures Partners manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America."
 
         return (
             handler_input.response_builder
                 .speak(speak_output)
                 # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
+
+class VideoIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("VideoIntent")(handler_input)
+
+    def handle(self, handler_input):
+        video_directive = RenderDocumentDirective(
+            token = "videoplayer",
+            document = load_json_from_path("apl/render-videoplayer.json"),
+            datasources = create_all_video_playlist(playlist())
+        )
+        return (
+            handler_input.response_builder
+                .add_directive(video_directive)
                 .response
         )
 
@@ -159,7 +188,8 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
-sb.add_request_handler(HelloWorldIntentHandler())
+sb.add_request_handler(IntroductionIntentHandler())
+sb.add_request_handler(VideoIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
