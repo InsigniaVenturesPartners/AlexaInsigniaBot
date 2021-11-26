@@ -61,7 +61,7 @@ class VideoIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         video_directive = RenderDocumentDirective(
-            token = "videoplayer",
+            token = "VideoPlayer",
             document = load_json_from_path("apl/render-videoplayer.json"),
             datasources = create_all_video_playlist(playlist())
         )
@@ -79,11 +79,11 @@ class PlayIntentHandler(AbstractRequestHandler):
     
     def handle(self, handler_input):
         video_directive = ExecuteCommandsDirective(
-                            token = "videoplayer",
+                            token = "VideoPlayer",
                             commands = [
                                 {
                                     "type": "ControlMedia",
-                                    "componentId": "videoPlayer",
+                                    "componentId": "VideoPlayer",
                                     "command": "play"
                                 },
                                 {
@@ -105,11 +105,11 @@ class PauseIntentHandler(AbstractRequestHandler):
     
     def handle(self, handler_input):
         video_directive = ExecuteCommandsDirective(
-                            token = "videoplayer",
+                            token = "VideoPlayer",
                             commands = [
                                 {
                                     "type": "ControlMedia",
-                                    "componentId": "videoPlayer",
+                                    "componentId": "VideoPlayer",
                                     "command": "pause"
                                 }
                             ]
@@ -239,6 +239,8 @@ sb = SkillBuilder()
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(VideoIntentHandler())
+sb.add_request_handler(PlayIntentHandler())
+sb.add_request_handler(PauseIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
