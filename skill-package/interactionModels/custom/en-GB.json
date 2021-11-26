@@ -1,0 +1,51 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "insignia bot",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "IntroductionIntent",
+          "slots": [],
+          "samples": [
+            "can i get more information about insignia",
+            "may I know what insignia is",
+            "what is insignia",
+            "introduce me to insignia",
+            "introduce insignia",
+            "tell me about insignia ventures partners"
+          ]
+        },
+        {
+          "name": "FounderInfoIntent",
+          "slots": [],
+          "samples": [
+            "what is the name of the founder of insignia",
+            "who is the founder of insignia"
+          ]
+        }
+      ],
+      "types": []
+    }
+  },
+  "version": "7"
+}
