@@ -93,6 +93,7 @@ class PlayIntentHandler(AbstractRequestHandler):
                             )
         return (
             handler_input.response_builder
+                .speak("")
                 .add_directive(video_directive)
                 .response
             )
@@ -115,6 +116,7 @@ class PauseIntentHandler(AbstractRequestHandler):
                             )
         return (
             handler_input.response_builder
+                .speak("")
                 .add_directive(video_directive)
                 .response
             )
