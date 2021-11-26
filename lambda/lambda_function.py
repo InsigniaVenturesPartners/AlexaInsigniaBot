@@ -237,6 +237,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
+sb.add_request_handler(IntentReflectorHandler())
 sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(VideoIntentHandler())
 sb.add_request_handler(PlayIntentHandler())
@@ -245,7 +246,7 @@ sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())
-sb.add_request_handler(IntentReflectorHandler()) # make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+
 
 sb.add_exception_handler(CatchAllExceptionHandler())
 
