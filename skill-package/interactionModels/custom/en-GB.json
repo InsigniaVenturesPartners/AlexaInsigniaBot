@@ -42,6 +42,13 @@
             "what is the name of the founder of insignia",
             "who is the founder of insignia"
           ]
+        },
+        {
+          "name": "VideoIntent",
+          "slots": [],
+          "samples": [
+            "play insignia video"
+          ]
         }
       ],
       "types": []
