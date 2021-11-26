@@ -41,7 +41,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
 
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        logging.info("Can Intro Intent Request")
+        logging.info("Can Intro Intent")
         
         return ask_utils.is_request_type("IntroductionIntent")(handler_input)
 
