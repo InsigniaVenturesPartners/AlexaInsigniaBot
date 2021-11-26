@@ -48,7 +48,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         speak_output = "Insignia VC is some company"
-
+        
         return (
             handler_input.response_builder
                 .speak(speak_output)
