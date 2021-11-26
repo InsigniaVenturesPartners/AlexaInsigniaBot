@@ -28,7 +28,8 @@ class LaunchRequestHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         speak_output = "Welcome, my name is Insignia Bot, I'm here to tell you more about Insignia Ventures Partners"
-
+        
+        
         return (
             handler_input.response_builder
                 .speak(speak_output)
