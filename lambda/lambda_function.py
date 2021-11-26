@@ -49,7 +49,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         speak_output = "Insignia VC is some company"
         
-        logging.info("Can Intro Intent")
+        logging.info("Intro Intent")
         
         return (
             handler_input.response_builder
