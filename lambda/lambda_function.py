@@ -36,6 +36,24 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .response
         )
 
+class IntroductionIntentHandler(AbstractRequestHandler):
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+
+        return ask_utils.is_request_type("IntroductionIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        speak_output = "Insignia VC is some company"
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .ask(speak_output)
+                .response
+        )
+
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
@@ -140,10 +158,11 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
+sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(SessionEndedRequestHandler())
-sb.add_request_handler(IntentReflectorHandler()) # make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
+#sb.add_request_handler(IntentReflectorHandler()) # make sure IntentReflectorHandler is last so it doesn't override your custom intent handlers
 
 sb.add_exception_handler(CatchAllExceptionHandler())
 
