@@ -21,7 +21,7 @@ def playlist():
         {
             "url": insignia_video_url,
             "title": "Insignia Video",
-            "subtitle": "Subtitle"
+            "subtitle": ""
         }
     ]
 
