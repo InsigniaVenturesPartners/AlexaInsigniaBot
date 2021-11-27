@@ -16,7 +16,7 @@ logger.setLevel(logging.INFO)
 
 insignia_video_url = create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
 
-currentState = "IDLE"
+CURRENT_STATE = "IDLE"
 
 def playlist():
     return [
@@ -49,7 +49,8 @@ class IntroductionIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         insignia_def = "Insignia Ventures Partners is an early-stage technology venture capital firm partnering with unstoppable founders to build great companies in Southeast Asia. Portfolio companies include Goto, Appier, Carro, Ajaib, Shipper, Tonik, Flip, Payfazz, Super and many other technology market leaders. We partner early with founders and support them from seed through growth stage as their companies create meaningful impact for millions of people in Southeast Asia and beyond. Our team of investment and operating professionals bring together decades of experience and proprietary networks to equip our founders with the tools they need for growth. Insignia Ventures Partners manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America."
-        currentState = "PROMPTING_VIDEO"
+        global CURRENT_STATE
+        CURRENT_STATE = "PROMPTING_VIDEO"
         return (
             handler_input.response_builder
                 .speak(insignia_def)
@@ -62,13 +63,14 @@ class YesIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
 
     def handle(self, handler_input):
-        if currentState == "PROMPTING_VIDEO":
+        global CURRENT_STATE
+        if CURRENT_STATE == "PROMPTING_VIDEO":
             video_directive = RenderDocumentDirective(
                 token = "VideoPlayer",
                 document = load_json_from_path("apl/render-videoplayer.json"),
                 datasources = create_all_video_playlist(playlist())
             )
-            currentState = "IDLE"
+            CURRENT_STATE = "IDLE"
             return (
                 handler_input.response_builder
                     .speak("Here is a video for more information on Insignia Ventures Partners")
@@ -76,7 +78,7 @@ class YesIntentHandler(AbstractRequestHandler):
                     .response
             )
         else:
-            currentState = "IDLE"
+            CURRENT_STATE = "IDLE"
             return (
                 handler_input.response_builder
                     .speak("")
@@ -88,10 +90,11 @@ class NoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.NoIntent")(handler_input)
 
     def handle(self, handler_input):
+        global CURRENT_STATE
         speak_output = ""
-        if currentState == "PROMPTING_VIDEO":
+        if CURRENT_STATE == "PROMPTING_VIDEO":
             speak_output = "Okay, that's alright"
-        currentState = "IDLE"
+        CURRENT_STATE = "IDLE"
         return (
             handler_input.response_builder
                 .speak(speak_output)
