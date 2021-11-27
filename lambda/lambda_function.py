@@ -52,7 +52,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
         currentState = "PROMPTING_VIDEO"
         return (
             handler_input.response_builder
-                .speak(speak_output)
+                .speak(insignia_def)
                 .ask("Would you like to watch a video from Insignia Ventures Partners?")
                 .response
         )
