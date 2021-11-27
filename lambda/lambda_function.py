@@ -82,6 +82,32 @@ class NoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
 
     def handle(self, handler_input):
+        speak_output = ""
+        if currentState == "PROMPTING_VIDEO":
+            video_directive = RenderDocumentDirective(
+                token = "VideoPlayer",
+                document = load_json_from_path("apl/render-videoplayer.json"),
+                datasources = create_all_video_playlist(playlist())
+            )
+            
+            currentState = "IDLE"
+            
+            return (
+                handler_input.response_builder
+                    .speak("Here is a video for more information on Insignia Ventures Partners")
+                    .add_directive(video_directive)
+                    .response
+            )
+        else:
+            
+            currentState = "IDLE"
+            
+            return (
+                handler_input.response_builder
+                    .speak(speak_output)
+                    .response
+            )
+        
         speak_output = "Insignia Ventures Partners is an early-stage technology venture capital firm partnering with unstoppable founders to build great companies in Southeast Asia. Portfolio companies include Goto, Appier, Carro, Ajaib, Shipper, Tonik, Flip, Payfazz, Super and many other technology market leaders. We partner early with founders and support them from seed through growth stage as their companies create meaningful impact for millions of people in Southeast Asia and beyond. Our team of investment and operating professionals bring together decades of experience and proprietary networks to equip our founders with the tools they need for growth. Insignia Ventures Partners manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America."
         speak_output = ""
         speak_output += " Would you like to watch a video from Insignia Ventures Partners?"
