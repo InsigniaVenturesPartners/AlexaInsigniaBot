@@ -61,8 +61,6 @@ class IntroductionIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-
-
 class PlayIntentHandler(AbstractRequestHandler):
     
     def can_handle(self, handler_input):
