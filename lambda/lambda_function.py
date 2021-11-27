@@ -57,7 +57,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                .speak("Here is a video for more information on Insignia Ventures Partners")
+                .speak()
                 .add_directive(video_directive)
                 .response
         )
