@@ -73,7 +73,7 @@ class YesIntentHandler(AbstractRequestHandler):
             
             return (
                 handler_input.response_builder
-                    .speak( + " Here is a video for more information on Insignia Ventures Partners")
+                    .speak(" Here is a video for more information on Insignia Ventures Partners")
                     .add_directive(video_directive)
                     .response
             )
