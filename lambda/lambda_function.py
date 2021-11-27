@@ -104,7 +104,7 @@ class NoIntentHandler(AbstractRequestHandler):
         else:
             return (
                 handler_input.response_builder
-                    .speak(speak_output)
+                    .speak("")
                     .response
             )
 
