@@ -60,9 +60,24 @@ class IntroductionIntentHandler(AbstractRequestHandler):
                 .response
         )
 
+class IntroductionIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("IntroductionIntent")(handler_input)
 
+    def handle(self, handler_input):
+        speak_output = "Insignia Ventures Partners is an early-stage technology venture capital firm partnering with unstoppable founders to build great companies in Southeast Asia. Portfolio companies include Goto, Appier, Carro, Ajaib, Shipper, Tonik, Flip, Payfazz, Super and many other technology market leaders. We partner early with founders and support them from seed through growth stage as their companies create meaningful impact for millions of people in Southeast Asia and beyond. Our team of investment and operating professionals bring together decades of experience and proprietary networks to equip our founders with the tools they need for growth. Insignia Ventures Partners manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America."
+        speak_output = ""
+        speak_output += " Would you like to watch a video from Insignia Ventures Partners?"
+        currentState = "PROMPTING_VIDEO"
+        
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .ask(speak_output)
+                .response
+        )
 
-class YesIntentHandler(AbstractRequestHandler):
+class (AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
     def handle(self, handler_input):
