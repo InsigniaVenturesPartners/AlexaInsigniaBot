@@ -56,7 +56,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                .ask(Would you like to watch a video from Insignia Ventures Partners?)
+                .ask("Would you like to watch a video from Insignia Ventures Partners?")
                 .response
         )
 
