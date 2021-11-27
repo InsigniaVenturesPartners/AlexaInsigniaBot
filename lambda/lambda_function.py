@@ -84,7 +84,6 @@ class YesIntentHandler(AbstractRequestHandler):
         else:
             
             currentState = "IDLE"
-        
             return (
                 handler_input.response_builder
                     .speak(speak_output)
