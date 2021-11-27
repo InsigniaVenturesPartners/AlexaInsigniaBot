@@ -85,7 +85,7 @@ class YesIntentHandler(AbstractRequestHandler):
             )
             
 class NoIntentHandler(AbstractRequestHandler):
-    def can_handle
+    def can_handle(self, handler_input)
 
 class PlayIntentHandler(AbstractRequestHandler):
     
