@@ -85,7 +85,8 @@ class YesIntentHandler(AbstractRequestHandler):
             )
             
 class NoIntentHandler(AbstractRequestHandler):
-    def can_handle(self, handler_input)
+    def can_handle(self, handler_input):
+        retun ask_utils.is_intent_name("AMAZON.NoIntent")
 
 class PlayIntentHandler(AbstractRequestHandler):
     
