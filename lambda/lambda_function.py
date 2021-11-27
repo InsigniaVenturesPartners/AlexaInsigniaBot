@@ -82,8 +82,9 @@ class YesIntentHandler(AbstractRequestHandler):
                 handler_input.response_builder
                     .speak(speak_output)
                     .response
+            )
             
-            
+
 
 class PlayIntentHandler(AbstractRequestHandler):
     
