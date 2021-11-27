@@ -129,7 +129,6 @@ class HelpIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-
 class CancelOrStopIntentHandler(AbstractRequestHandler):
     """Single handler for Cancel and Stop Intent."""
     def can_handle(self, handler_input):
