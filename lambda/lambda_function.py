@@ -79,7 +79,7 @@ class YesIntentHandler(AbstractRequestHandler):
             )
         else:
             return (
-                
+                handler_input.response_builder    
             )
 
 class PlayIntentHandler(AbstractRequestHandler):
