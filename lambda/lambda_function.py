@@ -63,19 +63,6 @@ class IntroductionIntentHandler(AbstractRequestHandler):
 
 
 
-class VideoIntentHandler(AbstractRequestHandler):
-    def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("VideoIntent")(handler_input)
-
-    def handle(self, handler_input):
-        
-        return (
-            handler_input.response_builder
-                .speak("Here is a video for more information on Insignia Ventures Partners")
-                .add_directive(video_directive)
-                .response
-        )
-
 class PlayIntentHandler(AbstractRequestHandler):
     
     def can_handle(self, handler_input):
