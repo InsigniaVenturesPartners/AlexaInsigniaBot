@@ -62,7 +62,6 @@ class YesIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
 
     def handle(self, handler_input):
-        speak_output = 
         if currentState == "PROMPTING_VIDEO":
             video_directive = RenderDocumentDirective(
                 token = "VideoPlayer",
@@ -80,7 +79,7 @@ class YesIntentHandler(AbstractRequestHandler):
             currentState = "IDLE"
             return (
                 handler_input.response_builder
-                    .speak(speak_output)
+                    .speak("")
                     .response
             )
         
