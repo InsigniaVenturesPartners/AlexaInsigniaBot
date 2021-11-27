@@ -93,7 +93,7 @@ class NoIntentHandler(AbstractRequestHandler):
             speak_output = "Okay, that's alright"
         return (
             handler_input.response_builder
-                .speak("")
+                .speak(speak_output)
                 .response
         )
 
