@@ -75,6 +75,8 @@ class YesIntentHandler(AbstractRequestHandler):
             
             currentState = "IDLE"
             
+            
+            
             return (
                 handler_input.response_builder
                     .speak("Here is a video for more information on Insignia Ventures Partners")
