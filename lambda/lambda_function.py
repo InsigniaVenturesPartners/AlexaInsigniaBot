@@ -52,7 +52,8 @@ class IntroductionIntentHandler(AbstractRequestHandler):
         currentState = "PROMPTING_VIDEO"
         
         return (
-            handler_input.response_builder    
+            handler_input.response_builder
+                .speak(speak_output)
         )
 
 class YesIntentHandler(AbstractRequestHandler):
