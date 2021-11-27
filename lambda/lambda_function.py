@@ -63,7 +63,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-
+class YesIntentHandler(AbstractRequestHandler)
 
 class PlayIntentHandler(AbstractRequestHandler):
     
