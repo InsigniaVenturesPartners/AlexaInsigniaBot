@@ -62,11 +62,7 @@ class VideoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("VideoIntent")(handler_input)
 
     def handle(self, handler_input):
-        video_directive = RenderDocumentDirective(
-            token = "VideoPlayer",
-            document = load_json_from_path("apl/render-videoplayer.json"),
-            datasources = create_all_video_playlist(playlist())
-        )
+        
         return (
             handler_input.response_builder
                 .speak("Here is a video for more information on Insignia Ventures Partners")
