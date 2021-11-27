@@ -90,7 +90,7 @@ class YesIntentHandler(AbstractRequestHandler):
         
 class NoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
+        return ask_utils.is_intent_name("AMAZON.NoIntent")(handler_input)
 
     def handle(self, handler_input):
         
