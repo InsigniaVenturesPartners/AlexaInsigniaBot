@@ -85,12 +85,12 @@ class YesIntentHandler(AbstractRequestHandler):
             
             currentState = "IDLE"
         
-        return (
-            handler_input.response_builder
-                .speak(speak_output)
-                .ask(speak_output)
-                .response
-        )
+            return (
+                handler_input.response_builder
+                    .speak(speak_output)
+                    .ask(speak_output)
+                    .response
+            )
         
 class NoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
