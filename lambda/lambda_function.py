@@ -52,8 +52,8 @@ class IntroductionIntentHandler(AbstractRequestHandler):
         currentState = "PROMPTING_VIDEO"
         
         return (
-            
-            )
+            handler_input.response_builder    
+        )
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
