@@ -16,6 +16,8 @@ logger.setLevel(logging.INFO)
 
 insignia_video_url = create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
 
+
+
 def playlist():
     return [
         {
