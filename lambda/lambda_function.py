@@ -70,7 +70,18 @@ class YesIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         speak_output = ""
         if currentState == "PROMPTING_VIDEO":
+            video_directive = RenderDocumentDirective(
+                token = "VideoPlayer",
+                document = load_json_from_path("apl/render-videoplayer.json"),
+                datasources = create_all_video_playlist(playlist())
+            )
             
+            return (
+                handler_input.response_builder
+                    .speak(speak_output + " Here is a video for more information on Insignia Ventures Partners")
+                    .add_directive(video_directive)
+                    .response
+            )
 
 class PlayIntentHandler(AbstractRequestHandler):
     
