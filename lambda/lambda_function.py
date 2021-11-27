@@ -84,7 +84,7 @@ class YesIntentHandler(AbstractRequestHandler):
                     .response
             )
             
-
+class NoIntentHandler(AbstractRequestHandler)
 
 class PlayIntentHandler(AbstractRequestHandler):
     
