@@ -54,7 +54,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                
+                .ask(speak_output)
         )
 
 class YesIntentHandler(AbstractRequestHandler):
