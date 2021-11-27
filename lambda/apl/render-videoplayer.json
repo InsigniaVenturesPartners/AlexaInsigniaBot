@@ -99,7 +99,6 @@
                         "type": "Container",
                         "alignItems": "center",
                         "item": [
-                            
                             {
                                 "type": "AlexaTransportControls",
                                 "mediaComponentId": "videoPlayerId",
