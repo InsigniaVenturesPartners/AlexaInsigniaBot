@@ -98,31 +98,7 @@ class (AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("")(handler_input)
     def handle(self, handler_input):
-        speak_output = ""
-        if currentState == "PROMPTING_VIDEO":
-            video_directive = RenderDocumentDirective(
-                token = "VideoPlayer",
-                document = load_json_from_path("apl/render-videoplayer.json"),
-                datasources = create_all_video_playlist(playlist())
-            )
-            
-            currentState = "IDLE"
-            
-            return (
-                handler_input.response_builder
-                    .speak("Here is a video for more information on Insignia Ventures Partners")
-                    .add_directive(video_directive)
-                    .response
-            )
-        else:
-            
-            currentState = "IDLE"
-            
-            return (
-                handler_input.response_builder
-                    .speak(speak_output)
-                    .response
-            )
+        
 
 
 class NoIntentHandler(AbstractRequestHandler):
