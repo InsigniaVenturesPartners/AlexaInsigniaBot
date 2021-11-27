@@ -84,7 +84,8 @@ class YesIntentHandler(AbstractRequestHandler):
                     .response
             )
             
-class NoIntentHandler(AbstractRequestHandler)
+class NoIntentHandler(AbstractRequestHandler):
+    def can_handle
 
 class PlayIntentHandler(AbstractRequestHandler):
     
