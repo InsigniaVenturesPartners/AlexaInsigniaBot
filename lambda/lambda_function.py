@@ -91,12 +91,11 @@ class NoIntentHandler(AbstractRequestHandler):
         speak_output = ""
         if currentState == "PROMPTING_VIDEO":
             speak_output = "Okay, that's alright"
-        else:
-            return (
-                handler_input.response_builder
-                    .speak("")
-                    .response
-            )
+        return (
+            handler_input.response_builder
+                .speak("")
+                .response
+        )
 
 class PlayIntentHandler(AbstractRequestHandler):
     
