@@ -60,7 +60,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class IntroductionIntentHandler(AbstractRequestHandler):
+class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("IntroductionIntent")(handler_input)
 
@@ -79,7 +79,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
 
 class (AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
+        return ask_utils.is_intent_name("")(handler_input)
     def handle(self, handler_input):
         speak_output = ""
         if currentState == "PROMPTING_VIDEO":
