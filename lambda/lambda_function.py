@@ -77,7 +77,8 @@ class YesIntentHandler(AbstractRequestHandler):
                     .add_directive(video_directive)
                     .response
             )
-            
+        else
+        :
 
 class PlayIntentHandler(AbstractRequestHandler):
     
