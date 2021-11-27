@@ -78,13 +78,13 @@ class YesIntentHandler(AbstractRequestHandler):
             return (
                 handler_input.response_builder
                     .speak(speak_output)
-                    .ask(speak_output)
+                    .add_directive(video_directive)
                     .response
             )
             
             return (
                 handler_input.response_builder
-                    .speak("Here is a video for more information on Insignia Ventures Partners")
+                    .speak()
                     
                     .response
             )
