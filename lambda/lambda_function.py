@@ -89,6 +89,7 @@ class NoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.NoIntent")
     def handle(self, handler_input):
         if currentState == "PROMPTING_VIDEO":
+            
         else:
             return (
                 handler_input.response_builder
