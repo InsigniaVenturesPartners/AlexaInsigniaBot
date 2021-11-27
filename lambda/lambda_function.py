@@ -96,8 +96,9 @@ class NoIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         speak_output = ""
         if currentState == "PROMPTING_VIDEO":
-            
             speak_output = "Okay, that's alright"
+            
+        currentState = "IDLE"
         return (
             handler_input.response_builder
                 .speak(speak_output)
