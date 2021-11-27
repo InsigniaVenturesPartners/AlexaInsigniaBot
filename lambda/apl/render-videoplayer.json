@@ -20,10 +20,6 @@
                 "paddingTop": "@spacingSmall",
                 "bind": [
                     {
-                        "name": "sliderThumbPosition",
-                        "value": 0
-                    },
-                    {
                         "name": "videoProgressValue",
                         "type": "number",
                         "value": 0
