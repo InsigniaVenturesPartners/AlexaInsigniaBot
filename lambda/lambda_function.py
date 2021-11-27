@@ -79,6 +79,8 @@ class YesIntentHandler(AbstractRequestHandler):
             )
         else:
             return (
+                
+            )
 
 class PlayIntentHandler(AbstractRequestHandler):
     
