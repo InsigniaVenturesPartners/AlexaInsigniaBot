@@ -71,8 +71,6 @@ class YesIntentHandler(AbstractRequestHandler):
                 datasources = create_all_video_playlist(playlist())
             )
             
-            currentState = "IDLE"
-            
             return (
                 handler_input.response_builder
                     .speak("Here is a video for more information on Insignia Ventures Partners")
