@@ -102,8 +102,7 @@ class NoIntentHandler(AbstractRequestHandler):
                 .speak(speak_output)
                 .response
         )
-    
-    
+
 class PlayIntentHandler(AbstractRequestHandler):
     
     def can_handle(self, handler_input):
