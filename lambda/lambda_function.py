@@ -78,7 +78,7 @@ class FounderInfoIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class CoinvestorCEOIntentHandler(AbstractRequestHandler):
+class InvestorCEOIntentH(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("CoinvestorCEOIntent")(handler_input)
     
@@ -326,6 +326,8 @@ sb = SkillBuilder()
 
 
 sb.add_request_handler(LaunchRequestHandler())
+sb.add_request_handler(YesIntentHandler())
+sb.add_request_handler(NoIntentHandler())
 sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(FounderInfoIntentHandler())
 sb.add_request_handler(CoinvestorInfoIntentHandler())
