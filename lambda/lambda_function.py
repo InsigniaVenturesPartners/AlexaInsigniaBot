@@ -149,6 +149,7 @@ class YesIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         global CURRENT_STATE
         if CURRENT_STATE == "PROMPTING_VIDEO":
+            
             CURRENT_STATE = "IDLE"
             return (
                 handler_input.response_builder
