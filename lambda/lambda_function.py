@@ -147,6 +147,15 @@ class VideoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("VideoIntent")(handler_input)
     
     def handle(self, handler_input):
+        video_directive = get_video_directive()
+            CURRENT_STATE = "IDLE"
+            return (
+                handler_input.response_builder
+                    .speak("Here is a video for more information on Insignia Ventures Partners")
+                    .add_directive(video_directive)
+                    .response
+            )
+        
         return (
             handler_input.response_builder
                 .speak(speech_output)
