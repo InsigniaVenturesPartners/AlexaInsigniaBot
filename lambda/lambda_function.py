@@ -65,7 +65,7 @@ class FounderInfoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("FounderInfoIntent")(handler_input)
 
     def handle(self, handler_input):
-        speech_output = 
+        speech_output = ""
         return (
             handler_input.response_builder
                 .speak(speak_output)
