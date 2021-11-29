@@ -158,7 +158,7 @@ class VideoIntentHandler(AbstractRequestHandler):
         
 class NewsIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("VideoIntent")(handler_input)
+        return ask_utils.is_intent_name("NewsIntent")(handler_input)
     
     def handle(self, handler_input):
         video_directive = get_video_directive()
