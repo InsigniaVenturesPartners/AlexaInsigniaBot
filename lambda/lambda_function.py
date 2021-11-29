@@ -23,8 +23,7 @@ PLAYLIST = [{
 }]
 
 def init():
-    global DATA, PLAYLIST
-    PLAYLIST[0] = 
+    global DATA
     DATA = load_json_from_path("data.json")
 
 def get_coinvestor(coinvestor):
