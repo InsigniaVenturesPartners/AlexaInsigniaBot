@@ -30,6 +30,13 @@ def get_coinvestor(coinvestor):
     global DATA
     return DATA["COMPANIES"].get(coinvestor.upper())
 
+def get_video_directive():
+    video_directive = RenderDocumentDirective(
+        token = "VideoPlayer",
+        document = load_json_from_path("apl/render-videoplayer.json"),
+        datasources = create_all_video_playlist(playlist())
+    )
+
 class LaunchRequestHandler(AbstractRequestHandler):
     #Handler for Skill Launch
     def can_handle(self, handler_input):
