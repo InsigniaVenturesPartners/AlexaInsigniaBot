@@ -89,7 +89,7 @@ class CoinvestorCEOIntentHandler(AbstractRequestHandler):
         if data:
             speech_output = "The CEO of " + coinvestor " is " + data["ceo"] + "."
         else:
-            speech_output = "error!!!!"
+            speech_output = "The coinvestor " + coinvestor + " could not be found."
         
         return (
             handler_input.response_builder
