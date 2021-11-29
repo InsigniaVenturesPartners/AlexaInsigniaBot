@@ -16,9 +16,6 @@ logger.setLevel(logging.INFO)
 
 CURRENT_STATE = "IDLE"
 DATA = load_json_from_path("data.json")
-PLAYLIST = [{
-    
-}]
 
 def playlist():
     return [
