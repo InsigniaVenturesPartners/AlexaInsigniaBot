@@ -155,6 +155,8 @@ class VideoIntentHandler(AbstractRequestHandler):
                 .add_directive(video_directive)
                 .response
         )
+        
+        
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
