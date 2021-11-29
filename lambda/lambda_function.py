@@ -272,6 +272,7 @@ sb.add_request_handler(InvestorInfoIntentHandler())
 sb.add_request_handler(InvestorCEOIntentHandler())
 sb.add_request_handler(InvestorFoundersIntentHandler())
 sb.add_request_handler(VideoIntentHandler())
+sb.add_request_handler(NewsIntentHandler())
 
 sb.add_request_handler(PlayIntentHandler())
 sb.add_request_handler(PauseIntentHandler())
