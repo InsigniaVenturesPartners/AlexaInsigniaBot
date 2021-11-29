@@ -78,7 +78,7 @@ class FounderInfoIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class InvestorCEOIntentH(AbstractRequestHandler):
+class InvestorCEOIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("CoinvestorCEOIntent")(handler_input)
     
