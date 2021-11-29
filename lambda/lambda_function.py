@@ -22,7 +22,6 @@ PLAYLIST = [{
     "subtitle": ""
 }]
 
-
 def get_coinvestor(coinvestor):
     global DATA
     return DATA["COMPANIES"].get(coinvestor.upper())
@@ -332,7 +331,6 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 # payloads to the handlers above. Make sure any new handlers or interceptors you've
 # defined are included below. The order matters - they're processed top to bottom.
 
-init()
 sb = SkillBuilder()
 
 
