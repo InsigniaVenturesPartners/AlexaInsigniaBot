@@ -14,9 +14,14 @@ from utils import (load_json_from_path, create_all_video_playlist, create_presig
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-insignia_video_url = create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
-
+insignia_video_url = None
 CURRENT_STATE = "IDLE"
+coinvestors = {}
+
+def init():
+    global insignia_video_url, coinvestors
+    insignia_video_url = create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
+    coinvestors = load_json_from_path("data.json")
 
 def playlist():
     return [
@@ -71,6 +76,15 @@ class FounderInfoIntentHandler(AbstractRequestHandler):
                 .ask(speech_output)
                 .response
         )
+
+class CoinvestorCEOIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("CoinvestorCEOIntent")(handler_input)
+    
+    def handle(self, handler_input):
+        slots = handler_input.request_envelope.request.slots
+        coinvestor = slots["coinvestor"].value
+        
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
