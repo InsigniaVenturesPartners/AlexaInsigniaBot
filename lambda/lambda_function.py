@@ -100,7 +100,7 @@ class InvestorCEOIntentHandler(AbstractRequestHandler):
 
 class InvestorInfoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("CoinvestorInfoIntent")(handler_input)
+        return ask_utils.is_intent_name("InvestorInfoIntent")(handler_input)
     
     def handle(self, handler_input):
         global coinvestors
