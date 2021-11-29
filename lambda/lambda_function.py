@@ -58,6 +58,9 @@ class IntroductionIntentHandler(AbstractRequestHandler):
                 .ask(speech_output)
                 .response
         )
+        
+class FounderInfoIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input)
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
