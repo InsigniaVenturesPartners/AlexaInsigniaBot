@@ -142,7 +142,7 @@ class InvestorInfoIntentHandler(AbstractRequestHandler):
                 .response
         )
         
-class InvestorInfoIntentHandler(AbstractRequestHandler):
+class VideoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("InvestorInfoIntent")(handler_input)
     
