@@ -91,6 +91,7 @@ class InvestorFoundersIntentHandler(AbstractRequestHandler):
     
     def handle(self, handler_input):
         coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
+        print(coinvestor)
         data = get_coinvestor(coinvestor)
         speech_output = ""
         if data:
