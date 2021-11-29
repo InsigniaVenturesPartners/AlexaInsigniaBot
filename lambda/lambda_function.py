@@ -69,7 +69,7 @@ class FounderInfoIntentHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                
+                .response
         )
 
 class YesIntentHandler(AbstractRequestHandler):
