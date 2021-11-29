@@ -36,6 +36,7 @@ def get_video_directive():
         document = load_json_from_path("apl/render-videoplayer.json"),
         datasources = create_all_video_playlist(playlist())
     )
+    return video_directive
 
 class LaunchRequestHandler(AbstractRequestHandler):
     #Handler for Skill Launch
