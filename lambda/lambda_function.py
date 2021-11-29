@@ -9,7 +9,7 @@ from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_model import Response
 from ask_sdk_model.interfaces.alexa.presentation.apl import (RenderDocumentDirective, ExecuteCommandsDirective)
 
-from utils import (load_json_from_path, create_all_video_playlist, create_presigned_url)
+from utils import *
 from built_in_handlers import *
 
 logger = logging.getLogger(__name__)
