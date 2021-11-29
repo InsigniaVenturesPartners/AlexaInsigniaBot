@@ -82,9 +82,20 @@ class CoinvestorCEOIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("CoinvestorCEOIntent")(handler_input)
     
     def handle(self, handler_input):
+        global coinvestors
         slots = handler_input.request_envelope.request.slots
         coinvestor = slots["coinvestor"].value
+        data = coinvestors["coinvestors"].get(coinvestor)
+        if data:
+            speech_output = "The CEO of " + coinvestor " is " + data["ceo"] + "."
+        else:
+            speech_output = "error!!!!"
         
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .response
+        )
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -289,7 +300,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 # payloads to the handlers above. Make sure any new handlers or interceptors you've
 # defined are included below. The order matters - they're processed top to bottom.
 
-
+init()
 sb = SkillBuilder()
 
 sb.add_request_handler(YesIntentHandler())
