@@ -22,6 +22,10 @@ PLAYLIST = [{
     "subtitle": ""
 }]
 
+def playlist():
+    return [
+        
+    ]
 
 def get_coinvestor(coinvestor):
     global DATA
