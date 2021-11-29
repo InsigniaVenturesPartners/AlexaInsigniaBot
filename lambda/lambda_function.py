@@ -24,7 +24,9 @@ PLAYLIST = [{
 
 def playlist():
     return [
-        
+        {
+            
+        }    
     ]
 
 def get_coinvestor(coinvestor):
