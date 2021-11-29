@@ -61,7 +61,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
 
 class FounderInfoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("IntroductionIntent")(handler_input)
+        return ask_utils.is_intent_name("FounderInfoIntent")(handler_input)
 
     def handle(self, handler_input):
         speech_output = "Tan Yinglan is the CEO and Founding Managing Partner at Insignia Ventures Partners. Insignia Ventures Partners is an early stage technology venture fund focusing on Southeast Asia started in 2017 and manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America. Insignia Ventures Partners is the recipient of 'Deal of the Year (Small Cap / VC)' for Ajaib (2021) by AVCJ, 'Best Early-Stage Technology Venture Capital Fund - Southeast Asia (2020) from APAC Insider, Most Innovative Early-Stage Tech Partner - Southeast Asia (2020) from Capital Finance International, 'Investor of the Year' (2019) from New Entrepreneurs Foundation, two back-to-back VC Deal of Year awards for Payfazz (2019) and Carro (2018) from the Singapore Venture Capital and Private Equity Association and its portfolio include many other technology leaders in Southeast Asia. See more at http://www.insignia.vc"
