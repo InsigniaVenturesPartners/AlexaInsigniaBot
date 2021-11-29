@@ -144,7 +144,7 @@ class InvestorInfoIntentHandler(AbstractRequestHandler):
         
 class VideoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("InvestorInfoIntent")(handler_input)
+        return ask_utils.is_intent_name("VideoIntent")(handler_input)
     
     def handle(self, handler_input):
         coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
@@ -159,8 +159,6 @@ class VideoIntentHandler(AbstractRequestHandler):
                 .speak(speech_output)
                 .response
         )
-
-
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
