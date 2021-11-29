@@ -73,6 +73,7 @@ class InvestorCEOIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
         data = get_coinvestor(coinvestor)
+        speech_output = ""
         if data:
             speech_output = "The CEO of " + coinvestor + " is " + data["CEO"] + "."
         else:
@@ -91,6 +92,7 @@ class InvestorFoundersIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
         data = get_coinvestor(coinvestor)
+        speech_output = ""
         if data:
             founders = data["FOUNDER"]
             if len(founders) > 1:
