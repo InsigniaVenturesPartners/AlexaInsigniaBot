@@ -147,13 +147,6 @@ class VideoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("VideoIntent")(handler_input)
     
     def handle(self, handler_input):
-        coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
-        data = get_coinvestor(coinvestor)
-        if data:
-            speech_output = data["INFO"]
-        else:
-            speech_output = "Sorry, the coinvestor " + coinvestor + " could not be found."
-        
         return (
             handler_input.response_builder
                 .speak(speech_output)
