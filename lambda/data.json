@@ -2,43 +2,53 @@
     "coinvestors": {
         "Goto": {
             "ceo": "Andre Soelistyo",
+            "founder": ["Andre Soelistyo", "Patrick Cao"],
             "info": "GoTo is the largest technology group in Indonesia, combining on-demand, e-commerce and financial services through the Gojek, Tokopedia and GoTo Financial brands. It is the first platform in Southeast Asia to host these three essential use cases in one ecosystem, capturing a majority of Indonesian consumer household expenditure."
         },
         "Appier": {
             "ceo": "Chih-Han Yu",
+            "founder": ["Chih Han Yu", "Winnie Lee"],
             "info": "Appier is a technology company which enables businesses with artificial intelligence to grow and succeed based on data-driven decisions. We are a technology partner to some of the world’s leading brands, helping them effectively implement and leverage AI to drive business growth. Our suite of enterprise-grade products helps organizations maximize data, uncover hidden insights and personalize customer outreach. Appier was established in 2012 by a passionate team of experts in AI, data analysis, distributed systems and marketing. Appier now extends across 15 offices in 13 markets in Asia and Europe with more than 400 employees. It has raised US$162 million in funding, and has been recognized as a leader in AI by Fortune Magazine and others. "
         },
         "Tonik": {
             "ceo": "Greg Krasnov",
+            "founder": ["Greg Krasnov"],
             "info": "Tonik is a transformative digital bank on a mission to revolutionize the way money works in Southeast Asia. Tonik is officially the Philippines’ first neobank to secure a digital bank license from the Bangko Sentral ng Pilipinas (BSP). Deposits are insured by the Philippine Deposit Insurance Corporation (PDIC)."
         },
         "Carro": {
             "ceo": "Aaron Tan",
+            "founder": ["Aaron Tan"],
             "info": "Carro is an automotive marketplace that offers a full-stack service for all aspects of car ownership. By offering a trustworthy and transparent experience, Carro challenges the traditional way of buying and selling cars through a proprietary pricing algorithm."
         },
         "Shipper": {
             "ceo": "Phil Opamuratawongse",
+            "founder": ["Phil Opamuratawongse", "Budi Handoko"],
             "info": "Shipper is one of the fastest-growing tech company in Indonesia. In just few years, we have built a vast network of fulfilment centers and partnered with hundreds of local delivery companies across the country. We aim to digitize Indonesian logistics and enable cost-efficiencies at nationwide scale. Shipper is a Series B funded company backed by DST Global partners, Sequoia Capital India, Prosus Ventures, Floodgate, Lightspeed, Insignia Ventures, AC Ventures and Y Combinator."
         },
         "Ajaib": {
-            "ceo": "Andre Soelistyo",
-            "info": "GoTo is an Indonesian holding company. The company formed in 2021 in a merger between Gojek and Tokopedia. It is the most valuable startup in Indonesia, contributes to about 2% of the country's GDP."
+            "ceo": "Anderson Sumarli",
+            "founder": ["Anderson Sumarli", "Yada Piyajomkwan"],
+            "info": "Ajaib is an online brokerage that allows Indonesians to buy and sell stocks, ETFs and mutual funds. We are Indonesia's leading financial technology platform driven by a mission to educate the importance of investing for the future."
         },
         "Flip": {
             "ceo": "Andre Soelistyo",
-            "info": "GoTo is an Indonesian holding company. The company formed in 2021 in a merger between Gojek and Tokopedia. It is the most valuable startup in Indonesia, contributes to about 2% of the country's GDP."
+            "founder": ["Luqman Sungkar", "Ginanjar Ibnu Solikhin", "Rafi Putra Arriyan"],
+            "info": "Flip helps people send money securely without any transaction fee. Individual users are able to use Flip to send money across 14 biggest banks in Indonesia with zero cost. Meanwhile, business users can send money swiftly, securely, and with lower cost to more than 100 banks across Indonesia."
         },
         "Super": {
-            "ceo": "Andre Soelistyo",
-            "info": "GoTo is an Indonesian holding company. The company formed in 2021 in a merger between Gojek and Tokopedia. It is the most valuable startup in Indonesia, contributes to about 2% of the country's GDP."
+            "ceo": "Steven Wongsoredjo",
+            "founder": ["Steven Wongsoredjo", "Michael Rendy"],
+            "info": "Super is a social commerce platform targeting the over 240 million Indonesians who live in second-tier and third-tier cities in Indonesia. Super’s group buying model allows community leaders to become retailers in their communities and aggregates demand from households and MSMEs."
         },
         "Pinhome": {
-            "ceo": "Andre Soelistyo",
-            "info": "GoTo is an Indonesian holding company. The company formed in 2021 in a merger between Gojek and Tokopedia. It is the most valuable startup in Indonesia, contributes to about 2% of the country's GDP."
+            "ceo": "Dayu Dara Permata",
+            "founder": ["Dayu Dara Permata", "Ahmed Aljunied"],
+            "info": "Pinhome utilizes the best technology to ensure the property sale, purchase, and rental transactions through our platform become hassle-free, efficient, and transparent. Our mission is to remove the barriers that buyers and owners often experience when making property transactions by providing the best possible experience. We are a team of 200+ people with amazing backgrounds all across the functions. We called ourselves Pinfams and brace Customer Love, Impact Orientation, Entrepreneurial Mindset, Execution Excellence, and People Leadership as our core values."
         },
         "Payfazz": {
-            "ceo": "Andre Soelistyo",
-            "info": "GoTo is an Indonesian holding company. The company formed in 2021 in a merger between Gojek and Tokopedia. It is the most valuable startup in Indonesia, contributes to about 2% of the country's GDP."
+            "ceo": "Hendra Kwik",
+            "founder": ["Hendra Kwik", "Ricky Winata", "Jefriyanto"],
+            "info": "PAYFAZZ is a financial technology startup from Indonesia that was established in 2016. PAYFAZZ creates a distributed network of bank agents in Indonesia, who performs financial transactions on behalf of unbanked and underbanked customers."
         },
     }
 }
