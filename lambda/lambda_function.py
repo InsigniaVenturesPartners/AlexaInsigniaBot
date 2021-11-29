@@ -140,7 +140,7 @@ class YesIntentHandler(AbstractRequestHandler):
             video_directive = RenderDocumentDirective(
                 token = "VideoPlayer",
                 document = load_json_from_path("apl/render-videoplayer.json"),
-                datasources = create_all_video_playlist(PLAYLIST)
+                datasources = create_all_video_playlist(playlist())
             )
             CURRENT_STATE = "IDLE"
             return (
