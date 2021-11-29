@@ -20,7 +20,7 @@ PLAYLIST = [{
         "url": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4"),
         "title": "Insignia Video",
         "subtitle": ""
-    }
+    }]
 
 def init():
     global DATA, PLAYLIST
