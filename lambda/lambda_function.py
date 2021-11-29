@@ -45,7 +45,7 @@ class IntroductionIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         global CURRENT_STATE
         CURRENT_STATE = "PROMPTING_VIDEO"
-        speech_output = DATA["CompanyIntroduction"] + " Would you like to watch a video from Insignia Ventures Partners?"
+        speech_output = DATA["COMPANYINTRO"] + " Would you like to watch a video from Insignia Ventures Partners?"
         return (
             handler_input.response_builder
                 .speak(speech_output)
