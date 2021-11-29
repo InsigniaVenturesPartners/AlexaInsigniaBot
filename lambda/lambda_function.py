@@ -22,9 +22,6 @@ PLAYLIST = [{
     "subtitle": ""
 }]
 
-def init():
-    global DATA
-    DATA = 
 
 def get_coinvestor(coinvestor):
     global DATA
