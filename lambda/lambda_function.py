@@ -62,7 +62,9 @@ class IntroductionIntentHandler(AbstractRequestHandler):
 class FounderInfoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("FounderInfoIntent")(handler_input)
-    def handle(self, handler_input)
+    
+    def handle(self, handler_input):
+        
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
