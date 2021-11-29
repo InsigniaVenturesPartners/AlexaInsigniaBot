@@ -38,7 +38,6 @@ class LaunchRequestHandler(AbstractRequestHandler):
         return ask_utils.is_request_type("LaunchRequest")(handler_input)
 
     def handle(self, handler_input):
-        print("hello")
         speak_output = "Welcome, my name is Insignia Bot, I'm here to tell you more about Insignia Ventures Partners"
 
         return (
