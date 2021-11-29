@@ -89,7 +89,27 @@ class CoinvestorCEOIntentHandler(AbstractRequestHandler):
         if data:
             speech_output = "The CEO of " + coinvestor " is " + data["ceo"] + "."
         else:
-            speech_output = "The coinvestor " + coinvestor + " could not be found."
+            speech_output = "Sorry, the coinvestor " + coinvestor + " could not be found."
+        
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .response
+        )
+
+class CoinvestorInfoIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("CoinvestorInfoIntent")(handler_input)
+    
+    def handle(self, handler_input):
+        global coinvestors
+        slots = handler_input.request_envelope.request.slots
+        coinvestor = slots["coinvestor"].value
+        data = coinvestors["coinvestors"].get(coinvestor)
+        if data:
+            speech_output = data["info"]
+        else:
+            speech_output = "Sorry, the coinvestor " + coinvestor + " could not be found."
         
         return (
             handler_input.response_builder
