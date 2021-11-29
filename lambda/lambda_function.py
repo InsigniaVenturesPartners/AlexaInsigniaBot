@@ -16,7 +16,7 @@ logger.setLevel(logging.INFO)
 
 insignia_video_url = None
 CURRENT_STATE = "IDLE"
-coinvestors = {}
+companies = {}
 
 def init():
     global insignia_video_url, coinvestors
