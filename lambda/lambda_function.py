@@ -98,7 +98,7 @@ class InvestorCEOIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class CoinvestorInfoIntentHandler(AbstractRequestHandler):
+class InvestorInfoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("CoinvestorInfoIntent")(handler_input)
     
