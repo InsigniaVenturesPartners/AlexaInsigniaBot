@@ -22,6 +22,7 @@ PLAYLIST = [{
     "subtitle": ""
 }]
 
+
 def get_coinvestor(coinvestor):
     global DATA
     return DATA["COMPANIES"].get(coinvestor.upper())
