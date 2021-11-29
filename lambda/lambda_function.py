@@ -67,7 +67,7 @@ class FounderInfoIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         speech_output = ""
         return (
-                
+            handler_input.response_builder    
         )
 
 class YesIntentHandler(AbstractRequestHandler):
