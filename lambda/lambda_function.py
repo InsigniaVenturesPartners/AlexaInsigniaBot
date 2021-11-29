@@ -72,17 +72,6 @@ class FounderInfoIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class FounderInfoIntentHandler(AbstractRequestHandler):
-    def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("FounderInfoIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return (
-            handler_input.response_builder
-                .speak(speak_output)
-                .response
-        )
-
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
