@@ -58,13 +58,14 @@ class IntroductionIntentHandler(AbstractRequestHandler):
                 .ask(speech_output)
                 .response
         )
-        
+
+
 class FounderInfoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("FounderInfoIntent")(handler_input)
 
     def handle(self, handler_input):
-        
+        speech_output
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
