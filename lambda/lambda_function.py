@@ -82,7 +82,6 @@ class InvestorCEOIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("InvestorCEOIntent")(handler_input)
     
     def handle(self, handler_input):
-        print("handling")
         global coinvestors
         slots = handler_input.request_envelope.request.slots
         coinvestor = slots["coinvestor"].value
