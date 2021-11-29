@@ -163,7 +163,7 @@ class NewsIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         return (
             handler_input.response_builder
-                .speak("Here is a video for more information on Insignia Ventures Partners")
+                .speak("We are currently working on this feature")
                 .response
         )
 
