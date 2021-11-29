@@ -20,11 +20,7 @@ PLAYLIST = []
 
 def init():
     global DATA, PLAYLIST
-    PLAYLIST[0] = {
-        "url": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4"),
-        "title": "Insignia Video",
-        "subtitle": ""
-    }
+    PLAYLIST[0] = 
     DATA = load_json_from_path("data.json")
 
 def get_coinvestor(coinvestor):
