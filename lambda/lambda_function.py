@@ -102,6 +102,8 @@ class InvestorFoundersIntentHandler(AbstractRequestHandler):
                     speech_output += founders[i]
                     speech_output += ", "
                 speech_output += " and " + founders[len(founders) - 1] + "."
+            else:
+                speech_output = "The Founder of " + coinvestor " is " + founders[0]
         else:
             speech_output = "Sorry, the coinvestor " + coinvestor + " could not be found."
         
