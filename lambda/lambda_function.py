@@ -149,11 +149,6 @@ class YesIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         global CURRENT_STATE
         if CURRENT_STATE == "PROMPTING_VIDEO":
-            video_directive = RenderDocumentDirective(
-                token = "VideoPlayer",
-                document = load_json_from_path("apl/render-videoplayer.json"),
-                datasources = create_all_video_playlist(playlist())
-            )
             CURRENT_STATE = "IDLE"
             return (
                 handler_input.response_builder
