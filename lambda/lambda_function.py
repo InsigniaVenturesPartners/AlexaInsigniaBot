@@ -324,7 +324,8 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 init()
 sb = SkillBuilder()
 
-
+sb.add_request_handler(YesIntentHandler())
+sb.add_request_handler(NoIntentHandler())
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(FounderInfoIntentHandler())
