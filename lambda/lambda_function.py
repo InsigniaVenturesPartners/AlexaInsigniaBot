@@ -155,12 +155,6 @@ class VideoIntentHandler(AbstractRequestHandler):
                 .add_directive(video_directive)
                 .response
         )
-        
-        return (
-            handler_input.response_builder
-                .speak(speech_output)
-                .response
-        )
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
