@@ -87,7 +87,7 @@ class InvestorCEOIntentHandler(AbstractRequestHandler):
         slots = handler_input.request_envelope.request.slots
         coinvestor = slots["coinvestor"].value
         data = coinvestors["coinvestors"].get(coinvestor)
-        
+        print(data)
         if data:
             speech_output = "The CEO of " + coinvestor + " is " + data["ceo"] + "."
         else:
