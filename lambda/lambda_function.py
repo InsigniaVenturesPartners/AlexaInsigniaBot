@@ -21,7 +21,7 @@ DATA = {}
 def init():
     global insignia_video_url, coinvestors
     insignia_video_url = create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
-    coinvestors = load_json_from_path("data.json")
+    DATA = load_json_from_path("data.json")
 
 def playlist():
     return [
