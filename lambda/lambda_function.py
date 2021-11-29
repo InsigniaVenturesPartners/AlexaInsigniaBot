@@ -17,9 +17,7 @@ logger.setLevel(logging.INFO)
 CURRENT_STATE = "IDLE"
 DATA = load_json_from_path("data.json")
 PLAYLIST = [{
-    "url": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4"),
-    "title": "Insignia Video",
-    "subtitle": ""
+    
 }]
 
 def playlist():
