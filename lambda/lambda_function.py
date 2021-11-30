@@ -29,7 +29,7 @@ def get_video_directive():
         token = "VideoPlayer",
         document = load_json_from_path("apl/render-videoplayer.json"),
         datasources = {
-            "videoURL": 
+            "videoURL": url
         }
     )
     return video_directive
