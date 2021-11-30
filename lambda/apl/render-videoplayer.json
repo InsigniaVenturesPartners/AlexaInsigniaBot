@@ -40,7 +40,7 @@
                     },
                     {
                         "type": "Video",
-                        "height": "100%",
+                        "height": "10%",
                         "width": "100%",
                         "alignSelf": "center",
                         "shrink": 1,
