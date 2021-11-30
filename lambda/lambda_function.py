@@ -241,7 +241,6 @@ class PauseIntentHandler(AbstractRequestHandler):
         return is_intent_name("AMAZON.PauseIntent")(handler_input)
     
     def handle(self, handler_input):
-        language_prompts = handler_input.attributes_manager.request_attributes["_"]
         video_directive = ExecuteCommandsDirective(
                             token = "videoplayer",
                             commands = [
