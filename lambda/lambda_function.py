@@ -212,7 +212,7 @@ class NoIntentHandler(AbstractRequestHandler):
 class PlayIntentHandler(AbstractRequestHandler):
     
     def can_handle(self, handler_input):
-        return is_intent_name("AMAZON.ResumeIntent")(handler_input)
+        return ask_utils.is_intent_name("AMAZON.ResumeIntent")(handler_input)
     
     def handle(self, handler_input):
         video_directive = ExecuteCommandsDirective(
