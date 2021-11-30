@@ -30,13 +30,3 @@ def create_presigned_url(object_name):
 def load_json_from_path(file_path):
     with open(file_path) as f:
         return json.load(f)
-
-def create_all_video_playlist(playlist):
-    return {
-        "videoplayerData": {
-            "type": "object",
-            "properties": {
-                "playlist": playlist
-            }
-        }
-    }
