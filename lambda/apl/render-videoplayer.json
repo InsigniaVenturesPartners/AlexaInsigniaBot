@@ -19,7 +19,7 @@
                 "width": "100vw",
                 "paddingTop": "@spacingSmall",
                 "bind": [
-                    {
+/*                    {
                         "name": "sliderThumbPosition",
                         "value": 0
                     },
@@ -32,7 +32,7 @@
                         "name": "videoTotalValue",
                         "type": "number",
                         "value": 0
-                    }
+                    }*/
                 ],
                 "items": [
                     {
