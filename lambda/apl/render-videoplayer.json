@@ -1,16 +1,4 @@
-// // Sample playlist
-// const playlist = [
-//     {
-//         "url": "https://skill-sample-apl-video.s3-eu-west-1.amazonaws.com/northernspain.mp4",
-//         "title": "Northern Spain",
-//         "subtitle": "Drone footage of northern Spain landscapes"
-//     },
-//     {
-//         "url": "https://skill-sample-apl-video.s3-eu-west-1.amazonaws.com/Driving_timelapse_CCBY_NatureClip.mov",
-//         "title": "Driving timelapse",
-//         "subtitle": "Timelapse video of a country road in the UK"
-//     }
-// ];
+
 
 module.exports = (playlist) => {
     return {
