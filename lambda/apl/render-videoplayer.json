@@ -136,7 +136,7 @@
                         "items": [
                             {
                                 "type": "Video",
-                                "id": "videoplayer",
+                                "id": "videoPlayer",
                                 "width": "100vw",
                                 "height": "100vh",
                                 "autoplay": true,
