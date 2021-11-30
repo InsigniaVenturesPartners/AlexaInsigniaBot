@@ -10,7 +10,7 @@
   ],
   "mainTemplate": {
     "parameters": [
-      "payload"
+      "payload",
     ],
     "items": [
       {
