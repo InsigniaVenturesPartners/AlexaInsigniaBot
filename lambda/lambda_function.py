@@ -18,9 +18,6 @@ logger.setLevel(logging.INFO)
 CURRENT_STATE = "IDLE"
 DATA = load_json_from_path("data.json")
 
-def playlist():
-    return 
-
 def get_coinvestor(coinvestor):
     global DATA
     return DATA["COMPANIES"].get(coinvestor.upper())
@@ -30,7 +27,7 @@ def get_video_directive():
         token = "VideoPlayer",
         document = load_json_from_path("apl/render-videoplayer.json"),
         datasources = {
-        "videoURL": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
+            "videoURL": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
         }
     )
     return video_directive
