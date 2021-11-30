@@ -35,7 +35,7 @@ def get_video_directive():
     video_directive = RenderDocumentDirective(
         token = "VideoPlayer",
         document = load_json_from_path("apl/render-videoplayer.json"),
-        datasources = create_all_video_playlist(playlist())
+        datasources = {}}
     )
     return video_directive
 
