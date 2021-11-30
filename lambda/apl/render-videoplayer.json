@@ -1,181 +1,356 @@
 {
-  "type": "APL",
-  "version": "1.6",
-  "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
-  "import": [
-    {
-      "name": "alexa-layouts",
-      "version": "1.3.0"
-    }
-  ],
-  "mainTemplate": {
-    "parameters": [
-      "myData"
+    "type": "APL",
+    "version": "1.1",
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.1.0"
+        }
     ],
-    "items": [
-      {
-        "type": "Container",
-        "height": "100%",
-        "width": "100%",
-        "paddingTop": "@spacingSmall",
-        "bind": [
-          {
-            "name": "sliderThumbPosition",
-            "value": 0
-          },
-          {
-            "name": "videoProgressValue",
-            "type": "number",
-            "value": 0
-          },
-          {
-            "name": "videoTotalValue",
-            "type": "number",
-            "value": 0
-          }
+    "layouts": {
+        "CustomAlexaTransportControls": {
+            "description": "Modified AlexaTransportControls from alexa-layouts 1.1.0 to avoid pausing after pressing previous/next button",
+            "parameters": [
+            {
+                "name": "secondaryControls",
+                "type": "string",
+                "default": "skip",
+                "description": "The type of secondary controls to use. Default is skip (foward and backwards). Valid options are skip | jump10 | jump30 | none"
+            },
+            {
+                "name": "primaryControlSize",
+                "type": "dimension",
+                "default": "@transportPrimaryButtonSize",
+                "description": "The height and width for the primary button."
+            },
+            {
+                "name": "secondaryControlSize",
+                "type": "dimension",
+                "default": "@transportSecondaryButtonSize",
+                "description": "The height and width for the secondary buttons."
+            },
+            {
+                "name": "mediaComponentId",
+                "type": "string",
+                "description": "The id of the media playing component"
+            },
+            {
+                "name": "autoplay",
+                "type": "boolean",
+                "default": false,
+                "description": "Determines the starting state of the play/pause icon. This should match the autoplay state of the media playing component. Defaults to false. "
+            },
+            {
+                "name": "playPauseToggleButtonId",
+                "type": "string",
+                "default": "alexaPlayPauseToggleButton",
+                "description": "Optional id to set on the Play/Pause Toggle Button. This is useful when displaying mutiple Videos on one screen, each with their own transport controls."
+            }
+            ],
+            "items": [
+            {
+                "type": "Container",
+                "direction": "row",
+                "alignItems": "center",
+                "paddingTop": "@transportLayoutMargins",
+                "paddingBottom": "@transportLayoutMargins",
+                "paddingLeft": "@transportLayoutMargins",
+                "paddingRight": "@transportLayoutMargins",
+                "items": [
+                {
+                    "when": "${secondaryControls == '' || secondaryControls == 'skip'}",
+                    "type": "SecondaryControlsButton",
+                    "buttonSize": "${secondaryControlSize}",
+                    "icon": "@urlPreviousIcon",
+                    "iconFocused": "@urlPreviousIconFocused",
+                    "id": "secondaryControlLeft",
+                    "pressAction": [
+                        {
+                            "type": "ControlMedia",
+                            "componentId": "${mediaComponentId}",
+                            "command": "previous"
+                        },
+                        {
+                            "type": "ControlMedia",
+                            "componentId": "${mediaComponentId}",
+                            "command": "play"
+                        }
+                    ]
+                },
+                {
+                    "type": "Frame",
+                    "spacing": "${secondaryControls == 'none' ? '0dp' : @transportButtonSpacing}",
+                    "item": {
+                        "type": "PlayPauseToggleButton",
+                        "buttonSize": "${primaryControlSize}",
+                        "componentId": "${mediaComponentId}",
+                        "autoplay": "${autoplay}",
+                        "playPauseToggleButtonId": "${playPauseToggleButtonId}"
+                    }
+                },
+                {
+                    "when": "${secondaryControls == '' || secondaryControls == 'skip'}",
+                    "type": "Frame",
+                    "spacing": "@transportButtonSpacing",
+                    "item": {
+                        "type": "SecondaryControlsButton",
+                        "buttonSize": "${secondaryControlSize}",
+                        "icon": "@urlNextIcon",
+                        "iconFocused": "@urlNextIconFocused",
+                        "id": "secondaryControlRight",
+                        "pressAction": [
+                            {
+                                "type": "ControlMedia",
+                                "componentId": "${mediaComponentId}",
+                                "command": "next"
+                            },
+                            {
+                                "type": "ControlMedia",
+                                "componentId": "${mediaComponentId}",
+                                "command": "play"
+                            }
+                        ]
+                    }
+                }
+                ]
+            }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "parameters": [
+            "payload"
         ],
         "items": [
-          {
-            "type": "AlexaBackground"
-          },
-          {
-            "type": "Container",
-            "id": "ToastContainer",
-            "display": "none",
-            "position": "absolute",
-            "alignSelf": "start",
-            "justifyContent": "center",
-            "width": "100%",
-            "height": "10%",
-            "items": [
-              {
-                "type": "Frame",
-                "position": "absolute",
-                "width": "100%",
-                "height": "100%",
-                "backgroundColor": "@colorBlue800"
-              },
-              {
-                "type": "Text",
-                "id": "ToastText",
-                "text": "[Uninitialized Toast]",
-                "style": "textStyleBody",
-                "paddingLeft": "@spacingSmall"
-              }
-            ]
-          },
-          {
-            "type": "Video",
-            "height": "100%",
-            "width": "70%",
-            "alignSelf": "center",
-            "shrink": 1,
-            "autoplay": true,
-            "audioTrack": "foreground",
-            "id": "videoPlayerId",
-            "source": [
-              "{myData.videoURL}"
-            ],
-            "onPlay": [
-              {
-                "type": "SetValue",
-                "property": "videoTotalValue",
-                "value": "${event.duration}"
-              }
-            ],
-            "onTrackUpdate": [
-              {
-                "type": "SetValue",
-                "property": "videoTotalValue",
-                "value": "${event.duration}"
-              },
-              {
-                "type": "Sequential",
-                "commands": [
-                  {
-                    "type": "SetValue",
-                    "componentId": "ToastText",
-                    "property": "text",
-                    "value": "Playing next video..."
-                  },
-                  {
-                    "type": "SetValue",
-                    "componentId": "ToastContainer",
-                    "property": "display",
-                    "value": "visible"
-                  },
-                  {
-                    "type": "SetValue",
-                    "componentId": "ToastContainer",
-                    "property": "display",
-                    "value": "none",
-                    "delay": "3000"
-                  }
+            {
+                "type": "Container",
+                "direction": "column",
+                "height": "100vh",
+                "width": "100vw",
+                "items": [
+                    {
+                        "type": "TouchWrapper",
+                        "id": "videoWideToggleButton",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "items": [
+                            {
+                                "type": "Video",
+                                "id": "videoPlayer",
+                                "width": "100vw",
+                                "height": "100vh",
+                                "autoplay": true,
+                                "audioTrack": "foreground",
+                                "source": "${payload.videoplayerData.properties.playlist}",
+                                "onPause": [
+                                    {
+                                        "type": "Parallel",
+                                        "commands": [
+
+                                            {
+                                                "type": "SetState",
+                                                "componentId": "alexaPlayPauseToggleButton",
+                                                "state": "checked",
+                                                "value": true
+                                            },
+
+                                            {
+                                                "type": "SetValue",
+                                                "componentId": "overlayContainer",
+                                                "property": "display",
+                                                "value": "normal"
+                                            },
+                                            {
+                                                "type": "SetFocus",
+                                                "componentId": "alexaPlayPauseToggleButton"
+                                            },
+                                            {
+                                                "type": "SendEvent",
+                                                "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
+                                            }
+                                        ]
+                                    }
+                                    
+                                ],
+                                "onPlay": [
+                                    {
+                                        "type": "Parallel",
+                                        "commands": [
+
+                                            {
+                                                "type": "SetState",
+                                                "componentId": "alexaPlayPauseToggleButton",
+                                                "state": "checked",
+                                                "value": false
+                                            },
+
+                                            {
+                                                "type": "SetValue",
+                                                "componentId": "title",
+                                                "property": "text",
+                                                "value": "${payload.videoplayerData.properties.playlist[event.trackIndex].title}"
+                                            },
+                                            {
+                                                "type": "SetValue",
+                                                "componentId": "subtitle",
+                                                "property": "text",
+                                                "value": "${payload.videoplayerData.properties.playlist[event.trackIndex].subtitle}"
+                                            },
+                                            {
+                                                "type": "showOverlayShortly"
+                                            },
+                                            {
+                                                "type": "SendEvent",
+                                                "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "onEnd": [
+                                    {
+                                        "type": "SendEvent",
+                                        "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
+                                    }
+                                ],
+                                "onTimeUpdate": [
+                                    {
+                                        "type": "SendEvent",
+                                        "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
+                                    }
+                                ],
+                                "onTrackUpdate": [
+
+                                    {
+                                        "type": "SetValue",
+                                        "componentId": "title",
+                                        "property": "text",
+                                        "value": "${payload.videoplayerData.properties.playlist[event.trackIndex].title}"
+                                    },
+                                    {
+                                        "type": "SetValue",
+                                        "componentId": "subtitle",
+                                        "property": "text",
+                                        "value": "${payload.videoplayerData.properties.playlist[event.trackIndex].subtitle}"
+                                    },
+                                    {
+                                        "type": "showOverlayShortly"
+                                    },
+                                    {
+                                        "type": "SendEvent",
+                                        "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "onPress": [
+                            {
+                                "type": "showOverlayShortly"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Container",
+                        "id": "overlayContainer",
+                        "position": "absolute",
+                        "display": "invisible",
+                        "width": "100vw",
+                        "height": "100vh",
+                        "alignItems": "center",
+                        "justifyContent": "${@viewportProfile == @hubRoundSmall ? 'center' : 'start'}",
+                        "items": [
+                            {
+                                "type": "Frame",
+                                "backgroundColor": "rgba(0,0,0,40%)",
+                                "paddingTop": "5vh",
+                                "paddingBottom": "5vh",
+                                "paddingLeft": "5vh",
+                                "paddingRight": "5vh",
+                                "item": [
+                                    {
+                                        "type": "Container",
+                                        "items": [
+                                            {
+                                                "type": "Text",
+                                                "id": "title",
+                                                "text": " ",
+                                                "width": "100vw",
+                                                "fontSize": "8vh",
+                                                "maxLines": 2,
+                                                "paddingTop": "3vh",
+                                                "paddingLeft": "3vw",
+                                                "paddingRight": "3vw"
+                                            },
+                                            {
+                                                "type": "Text",
+                                                "id": "subtitle",
+                                                "text": " ",
+                                                "width": "100vw",
+                                                "fontSize": "5vh",
+                                                "paddingTop": "3vh",
+                                                "maxLines": 3,
+                                                "paddingBottom": "1vh",
+                                                "paddingLeft": "3vw",
+                                                "paddingRight": "3vw"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Frame",
+                                "position": "absolute",
+                                "bottom": "2vh",
+                                "backgroundColor": "${@viewportProfile == @hubRoundSmall ? 'transparent' : 'rgba(0,0,0,40%)'}",
+                                "borderRadius": "20",
+                                "item": {
+                                    "type": "CustomAlexaTransportControls",
+                                    "autoplay": true,
+                                    "primaryControlSize": "10vh",
+                                    "secondaryControlSize": "10vh",
+                                    "mediaComponentId": "videoPlayer",
+                                    "playPauseToggleButtonId": "alexaPlayPauseToggleButton"
+                                }
+                            }
+                        ]
+                    }
                 ]
-              }
-            ],
-            "onTimeUpdate": [
-              {
-                "type": "SetValue",
-                "property": "videoProgressValue",
-                "value": "${event.currentTime}"
-              },
-              {
-                "type": "SetValue",
-                "componentId": "slider",
-                "property": "progressValue",
-                "value": "${videoProgressValue}"
-              },
-              {
-                "type": "SetValue",
-                "property": "videoTotalValue",
-                "value": "${event.duration}"
-              }
-            ]
-          },
-          {
-            "type": "Container",
-            "alignItems": "center",
-            "item": [
-              {
-                "type": "AlexaSlider",
-                "id": "slider",
-                "progressValue": "${videoProgressValue}",
-                "totalValue": "${videoTotalValue}",
-                "positionPropertyName": "sliderThumbPosition",
-                "metadataDisplayed": true,
-                "metadataPosition": "above_right",
-                "width": "75%",
-                "paddingBottom": "90dp",
-                "onUpCommand": [
-                  {
-                    "type": "SetValue",
-                    "componentId": "debugText",
-                    "property": "text",
-                    "value": "${sliderThumbPosition - videoProgressValue}"
-                  },
-                  {
-                    "type": "ControlMedia",
-                    "componentId": "videoPlayerId",
-                    "command": "seek",
-                    "value": "${sliderThumbPosition - videoProgressValue}"
-                  }
-                ]
-              },
-              {
-                "type": "AlexaTransportControls",
-                "mediaComponentId": "videoPlayerId",
-                "playPauseToggleButtonId": "playPauseToggleButtonId",
-                "primaryControlSize": "70dp",
-                "secondaryControlSize": "60dp",
-                "autoplay": true,
-                "position": "absolute",
-                "bottom": "10dp"
-              }
-            ]
-          }
+            }
         ]
-      }
-    ]
-  }
+    },
+    "commands": {
+        "showOverlayShortly": {
+            "parameters": [ 
+                {
+                    "name": "delay",
+                    "type": "number",
+                    "default": 0
+                  }
+            ],
+            "commands": [
+                {
+                    "type": "Sequential",
+                    "delay": "${delay}",
+                    "commands": [
+                        {
+                            "type": "SetValue",
+                            "componentId": "overlayContainer",
+                            "property": "display",
+                            "value": "normal"
+                        },
+                        {
+                            "type": "SetFocus",
+                            "componentId": "alexaPlayPauseToggleButton"
+                        },
+                        {
+                            "type": "SetValue",
+                            "componentId": "overlayContainer",
+                            "property": "display",
+                            "value": "invisible",
+                            "delay": "3000"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
 }
