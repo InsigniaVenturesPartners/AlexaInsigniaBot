@@ -48,6 +48,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
                 .speak(DATA["INTRO"])
+                .ask(DATA["INTRO"])
                 .response
         )
 
