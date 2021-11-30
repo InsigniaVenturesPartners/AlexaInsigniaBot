@@ -320,7 +320,7 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
 
 class UserEventHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
+        return ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
     
     def handle(self,handler_input):
         return(
