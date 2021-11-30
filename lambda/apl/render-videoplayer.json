@@ -10,7 +10,7 @@
   ],
   "mainTemplate": {
     "parameters": [
-      "payload"
+      "myData"
     ],
     "items": [
       {
@@ -74,7 +74,7 @@
             "audioTrack": "foreground",
             "id": "videoPlayerId",
             "source": [
-              "{payload.videoURL]"
+              "{payload.videoURL}"
             ],
             "onPlay": [
               {
