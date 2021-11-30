@@ -319,7 +319,7 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
         # Any cleanup logic goes here.
 
         return handler_input.response_builder.response
-        
+      
 class UserEventHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
