@@ -74,7 +74,7 @@
             "audioTrack": "foreground",
             "id": "videoPlayerId",
             "source": [
-              "https://d2o906d8ln7ui1.cloudfront.net/videos/AdobeStock_277864451.mov"
+              "{"
             ],
             "onPlay": [
               {
