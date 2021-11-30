@@ -10,7 +10,6 @@ from ask_sdk_model import Response
 from ask_sdk_model.interfaces.alexa.presentation.apl import (RenderDocumentDirective, ExecuteCommandsDirective)
 
 from utils import *
-from built_in_handlers import *
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
