@@ -22,13 +22,22 @@ def get_coinvestor(coinvestor):
     return DATA["COMPANIES"].get(coinvestor.upper())
 
 def get_video_directive():
-    url = create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
-    print(url)
     video_directive = RenderDocumentDirective(
         token = "VideoPlayer",
         document = load_json_from_path("apl/render-videoplayer.json"),
         datasources = {
-            "videoURL": url
+            {
+                "videoplayerData": {
+                    "type": "object",
+                    "properties": {
+                        "playlist": [{
+                            "url": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4"),
+                            "title": "Insignia Video",
+                            "subtitle": ""
+                        }]
+                    }
+                }
+            }
         }
     )
     return video_directive
