@@ -10,7 +10,7 @@
   ],
   "mainTemplate": {
     "parameters": [
-      "payload",
+      "payload"
     ],
     "items": [
       {
@@ -73,7 +73,11 @@
             "autoplay": true,
             "audioTrack": "foreground",
             "id": "videoPlayerId",
-            "source": "${payload.videoURL}",
+            "source": [
+              "https://d2o906d8ln7ui1.cloudfront.net/videos/AdobeStock_277864451.mov",
+              "https://d2o906d8ln7ui1.cloudfront.net/videos/AdobeStock_292807382.mov",
+              "https://d2o906d8ln7ui1.cloudfront.net/videos/AdobeStock_320293418.mov"
+            ],
             "onPlay": [
               {
                 "type": "SetValue",
