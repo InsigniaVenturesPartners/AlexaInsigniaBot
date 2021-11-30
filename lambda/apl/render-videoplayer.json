@@ -39,18 +39,14 @@
                         "type": "AlexaBackground"
                     },
                     {
-                        "type": "Container",
-                        "alignSelf": "center",
-                        "items": {
-                            "type": "AlexaTransportControls",
-                            "mediaComponentId": "videoPlayerId",
-                            "playPauseToggleButtonId": "playPauseToggleButtonId",
-                            "primaryControlSize": "70dp",
-                            "secondaryControlSize": "60dp",
-                            "autoplay": true,
-                            "position": "absolute",
-                            "bottom": "10dp"
-                        },
+                        "type": "AlexaTransportControls",
+                        "mediaComponentId": "videoPlayerId",
+                        "playPauseToggleButtonId": "playPauseToggleButtonId",
+                        "primaryControlSize": "70dp",
+                        "secondaryControlSize": "60dp",
+                        "autoplay": true,
+                        "position": "absolute",
+                        "bottom": "10dp"
                     },
                     {
                         "type": "Video",
@@ -59,7 +55,7 @@
                         "alignSelf": "center",
                         "shrink": 1,
                         "autoplay": true,
-                        "audioTrack": "foreground",
+                        "audioTrack": "background",
                         "id": "videoPlayerId",
                         "source": "${payload.videoplayerData.properties.playlist}",
                         "onPlay": [
