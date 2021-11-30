@@ -38,7 +38,6 @@ def get_video_directive():
                     ]
                 }
             }
-            }
         }
     )
     return video_directive
