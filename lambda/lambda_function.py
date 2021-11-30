@@ -390,8 +390,7 @@ sb.add_request_handler(VideoIntentHandler())
 sb.add_request_handler(NewsIntentHandler())
 sb.add_request_handler(UserEventHandler())
 
-sb.add_request_handler(PlayIntentHandler())
-sb.add_request_handler(PauseIntentHandler())
+
 sb.add_request_handler(YesIntentHandler())
 sb.add_request_handler(NoIntentHandler())
 
