@@ -39,6 +39,23 @@
                         "type": "AlexaBackground"
                     },
                     {
+                        "type": "Container",
+                        "alignItems": "center",
+                        "display": "normal",
+                        "item": [
+                            {
+                                "type": "AlexaTransportControls",
+                                "mediaComponentId": "videoPlayerId",
+                                "playPauseToggleButtonId": "playPauseToggleButtonId",
+                                "primaryControlSize": "70dp",
+                                "secondaryControlSize": "60dp",
+                                "autoplay": true,
+                                "position": "absolute",
+                                "bottom": "10dp"
+                            }
+                        ]
+                    },
+                    {
                         "type": "Video",
                         "height": "100%",
                         "width": "100%",
@@ -92,23 +109,6 @@
                                 "type": "SetValue",
                                 "property": "videoTotalValue",
                                 "value": "0"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "Container",
-                        "alignItems": "center",
-                        "display": "normal",
-                        "item": [
-                            {
-                                "type": "AlexaTransportControls",
-                                "mediaComponentId": "videoPlayerId",
-                                "playPauseToggleButtonId": "playPauseToggleButtonId",
-                                "primaryControlSize": "70dp",
-                                "secondaryControlSize": "60dp",
-                                "autoplay": true,
-                                "position": "absolute",
-                                "bottom": "10dp"
                             }
                         ]
                     }
