@@ -27,7 +27,7 @@ def get_video_directive():
         token = "VideoPlayer",
         document = load_json_from_path("apl/render-videoplayer.json"),
         datasources = {
-            "videoURL": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
+            "videoURL": 
         }
     )
     return video_directive
