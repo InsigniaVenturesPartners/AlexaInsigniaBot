@@ -237,7 +237,7 @@ class PlayIntentHandler(AbstractRequestHandler):
 class PauseIntentHandler(AbstractRequestHandler):
     
     def can_handle(self, handler_input):
-        return is_intent_name("AMAZON.PauseIntent")(handler_input)
+        return ask_utils.is_intent_name("AMAZON.PauseIntent")(handler_input)
     
     def handle(self, handler_input):
         video_directive = ExecuteCommandsDirective(
