@@ -74,7 +74,7 @@
             "audioTrack": "foreground",
             "id": "videoPlayerId",
             "source": [
-              "{"
+              "{payload.videoURL]"
             ],
             "onPlay": [
               {
