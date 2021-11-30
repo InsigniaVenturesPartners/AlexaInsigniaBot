@@ -27,18 +27,7 @@ def get_video_directive():
         document = load_json_from_path("apl/render-videoplayer.json"),
         datasources = {
             {
-                "videoplayerData": {
-                    "type": "object",
-                    "properties": {
-                        "playlist": [
-                            {
-                            "url": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4"),
-                            "title": "Insignia Video",
-                            "subtitle": ""
-                            }
-                        ]
-                    }
-                }
+                
             }
         }
     )
