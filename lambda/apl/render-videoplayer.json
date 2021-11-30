@@ -73,11 +73,7 @@
             "autoplay": true,
             "audioTrack": "foreground",
             "id": "videoPlayerId",
-            "source": [
-              "https://d2o906d8ln7ui1.cloudfront.net/videos/AdobeStock_277864451.mov",
-              "https://d2o906d8ln7ui1.cloudfront.net/videos/AdobeStock_292807382.mov",
-              "https://d2o906d8ln7ui1.cloudfront.net/videos/AdobeStock_320293418.mov"
-            ],
+            "source": "s3://2093d99d-98ca-46f3-913f-7cf95aecfc1b-us-east-1/Media/INSIGNIA_VC_VIDEO.mp4"
             "onPlay": [
               {
                 "type": "SetValue",
