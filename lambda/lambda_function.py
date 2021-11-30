@@ -19,9 +19,9 @@ CURRENT_STATE = "IDLE"
 DATA = load_json_from_path("data.json")
 
 def playlist():
-    return [
-        
-    ]
+    return {
+            "videoURL": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
+        }
 
 def get_coinvestor(coinvestor):
     global DATA
