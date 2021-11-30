@@ -96,20 +96,14 @@
                         ]
                     },
                     {
-                        "type": "Container",
-                        "alignItems": "center",
-                        "item": [
-                            {
-                                "type": "AlexaTransportControls",
-                                "mediaComponentId": "videoPlayerId",
-                                "playPauseToggleButtonId": "playPauseToggleButtonId",
-                                "primaryControlSize": "70dp",
-                                "secondaryControlSize": "60dp",
-                                "autoplay": true,
-                                "position": "absolute",
-                                "bottom": "10dp"
-                            }
-                        ]
+                        "type": "AlexaTransportControls",
+                        "mediaComponentId": "videoPlayerId",
+                        "playPauseToggleButtonId": "playPauseToggleButtonId",
+                        "primaryControlSize": "70dp",
+                        "secondaryControlSize": "60dp",
+                        "autoplay": true,
+                        "position": "absolute",
+                        "bottom": "10dp"
                     }
                 ]
             }
