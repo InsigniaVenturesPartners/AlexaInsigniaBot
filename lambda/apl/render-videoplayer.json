@@ -307,7 +307,7 @@
                                     "autoplay": true,
                                     "primaryControlSize": "10vh",
                                     "secondaryControlSize": "10vh",
-                                    "mediaComponentId": "videoplayer",
+                                    "mediaComponentId": "videoPlayer",
                                     "playPauseToggleButtonId": "alexaPlayPauseToggleButton"
                                 }
                             }
