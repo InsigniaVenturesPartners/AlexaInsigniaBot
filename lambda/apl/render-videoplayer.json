@@ -40,7 +40,7 @@
                     },
                     {
                         "type": "Video",
-                        "height": "10%",
+                        "height": "100%",
                         "width": "100%",
                         "alignSelf": "center",
                         "shrink": 1,
@@ -98,6 +98,7 @@
                     {
                         "type": "Container",
                         "alignItems": "center",
+                        "display": "normal",
                         "item": [
                             {
                                 "type": "AlexaTransportControls",
