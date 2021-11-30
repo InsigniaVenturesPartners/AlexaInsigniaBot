@@ -36,9 +36,12 @@
                 ],
                 "items": [
                     {
+                        "type": "AlexaBackground"
+                    },
+                    {
                         "type": "Video",
                         "height": "100%",
-                        "width": "70vw",
+                        "width": "100%",
                         "alignSelf": "center",
                         "shrink": 1,
                         "autoplay": true,
