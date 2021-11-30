@@ -213,15 +213,16 @@ class NoIntentHandler(AbstractRequestHandler):
 class PlayIntentHandler(AbstractRequestHandler):
     
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("AMAZON.ResumeIntent")(handler_input)
+        return is_intent_name("AMAZON.ResumeIntent")(handler_input)
     
     def handle(self, handler_input):
+        language_prompts = handler_input.attributes_manager.request_attributes["_"]
         video_directive = ExecuteCommandsDirective(
-                            token = "VideoPlayer",
+                            token = "videoplayer",
                             commands = [
                                 {
                                     "type": "ControlMedia",
-                                    "componentId": "VideoPlayer",
+                                    "componentId": "videoPlayer",
                                     "command": "play"
                                 },
                                 {
@@ -231,7 +232,6 @@ class PlayIntentHandler(AbstractRequestHandler):
                             )
         return (
             handler_input.response_builder
-                .speak("")
                 .add_directive(video_directive)
                 .response
             )
@@ -239,22 +239,22 @@ class PlayIntentHandler(AbstractRequestHandler):
 class PauseIntentHandler(AbstractRequestHandler):
     
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("AMAZON.PauseIntent")(handler_input)
+        return is_intent_name("AMAZON.PauseIntent")(handler_input)
     
     def handle(self, handler_input):
+        language_prompts = handler_input.attributes_manager.request_attributes["_"]
         video_directive = ExecuteCommandsDirective(
-                            token = "VideoPlayer",
+                            token = "videoplayer",
                             commands = [
                                 {
                                     "type": "ControlMedia",
-                                    "componentId": "VideoPlayer",
+                                    "componentId": "videoPlayer",
                                     "command": "pause"
                                 }
                             ]
                             )
         return (
             handler_input.response_builder
-                .speak("")
                 .add_directive(video_directive)
                 .response
             )
