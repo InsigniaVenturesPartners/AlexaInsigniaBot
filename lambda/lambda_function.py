@@ -322,7 +322,7 @@ class UserEventHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
     
-    def handle(self,handler_input):
+    def handle(self, handler_input):
         return(
             handler_input.response_builder
                 .response
