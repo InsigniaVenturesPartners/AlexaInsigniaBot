@@ -73,7 +73,7 @@
             "autoplay": true,
             "audioTrack": "foreground",
             "id": "videoPlayerId",
-            "source": "https://www.youtube.com/watch?v=cvh0nX08nRw&ab_channel=AlexeyKutepov",
+            "source": "https://2093d99d-98ca-46f3-913f-7cf95aecfc1b-us-east-1.s3.amazonaws.com/Media/INSIGNIA_VC_VIDEO.mp4",
             "onPlay": [
               {
                 "type": "SetValue",
