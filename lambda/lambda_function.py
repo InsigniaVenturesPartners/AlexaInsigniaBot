@@ -182,7 +182,6 @@ class YesIntentHandler(AbstractRequestHandler):
             CURRENT_STATE = "IDLE"
             return (
                 handler_input.response_builder
-                    .speak("Here is a video for more information on Insignia Ventures Partners")
                     .add_directive(video_directive)
                     .response
             )
