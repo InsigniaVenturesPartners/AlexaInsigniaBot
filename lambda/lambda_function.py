@@ -84,9 +84,9 @@ class FounderInfoIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class GetNewsIntentHandler(AbstractRequestHandler):
+class NewsIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("GetNewsIntent")(handler_input)
+        return ask_utils.is_intent_name("NewsIntent")(handler_input)
 
     def handle(self, handler_input):
         news = [i["title"] for i in get_news()]
