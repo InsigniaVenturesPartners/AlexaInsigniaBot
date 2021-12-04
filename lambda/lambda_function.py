@@ -1,356 +1,413 @@
-{
-    "type": "APL",
-    "version": "1.8",
-    "import": [
-        {
-            "name": "alexa-layouts",
-            "version": "1.1.0"
-        }
-    ],
-    "layouts": {
-        "CustomAlexaTransportControls": {
-            "description": "Modified AlexaTransportControls from alexa-layouts 1.1.0 to avoid pausing after pressing previous/next button",
-            "parameters": [
-            {
-                "name": "secondaryControls",
-                "type": "string",
-                "default": "skip",
-                "description": "The type of secondary controls to use. Default is skip (foward and backwards). Valid options are skip | jump10 | jump30 | none"
-            },
-            {
-                "name": "primaryControlSize",
-                "type": "dimension",
-                "default": "@transportPrimaryButtonSize",
-                "description": "The height and width for the primary button."
-            },
-            {
-                "name": "secondaryControlSize",
-                "type": "dimension",
-                "default": "@transportSecondaryButtonSize",
-                "description": "The height and width for the secondary buttons."
-            },
-            {
-                "name": "mediaComponentId",
-                "type": "string",
-                "description": "The id of the media playing component"
-            },
-            {
-                "name": "autoplay",
-                "type": "boolean",
-                "default": false,
-                "description": "Determines the starting state of the play/pause icon. This should match the autoplay state of the media playing component. Defaults to false. "
-            },
-            {
-                "name": "playPauseToggleButtonId",
-                "type": "string",
-                "default": "alexaPlayPauseToggleButton",
-                "description": "Optional id to set on the Play/Pause Toggle Button. This is useful when displaying mutiple Videos on one screen, each with their own transport controls."
-            }
-            ],
-            "items": [
-            {
-                "type": "Container",
-                "direction": "row",
-                "alignItems": "center",
-                "paddingTop": "@transportLayoutMargins",
-                "paddingBottom": "@transportLayoutMargins",
-                "paddingLeft": "@transportLayoutMargins",
-                "paddingRight": "@transportLayoutMargins",
-                "items": [
-                {
-                    "when": "${secondaryControls == '' || secondaryControls == 'skip'}",
-                    "type": "SecondaryControlsButton",
-                    "buttonSize": "${secondaryControlSize}",
-                    "icon": "@urlPreviousIcon",
-                    "iconFocused": "@urlPreviousIconFocused",
-                    "id": "secondaryControlLeft",
-                    "pressAction": [
+import logging
+import ask_sdk_core.utils as ask_utils
+
+from ask_sdk_core.skill_builder import SkillBuilder
+from ask_sdk_core.dispatch_components import AbstractRequestHandler
+from ask_sdk_core.dispatch_components import AbstractExceptionHandler
+from ask_sdk_core.handler_input import HandlerInput
+
+from ask_sdk_model import Response
+from ask_sdk_model.interfaces.alexa.presentation.apl import (RenderDocumentDirective, ExecuteCommandsDirective)
+
+from utils import *
+from news import *
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+CURRENT_STATE = "IDLE"
+DATA = load_json_from_path("data.json")
+
+def get_coinvestor(coinvestor):
+    global DATA
+    return DATA["COMPANIES"].get(coinvestor.upper())
+
+def get_video_directive():
+    video_directive = RenderDocumentDirective(
+        token = "videoplayer",
+        document = load_json_from_path("apl/render-videoplayer.json"),
+        datasources = {
+            "videoplayerData": {
+                "type": "object",
+                "properties": {
+                    "playlist": [
                         {
-                            "type": "ControlMedia",
-                            "componentId": "${mediaComponentId}",
-                            "command": "previous"
-                        },
-                        {
-                            "type": "ControlMedia",
-                            "componentId": "${mediaComponentId}",
-                            "command": "play"
+                            "url": create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4"),
+                            "title": "Insignia Video",
+                            "subtitle": ""
                         }
                     ]
-                },
-                {
-                    "type": "Frame",
-                    "spacing": "${secondaryControls == 'none' ? '0dp' : @transportButtonSpacing}",
-                    "item": {
-                        "type": "PlayPauseToggleButton",
-                        "buttonSize": "${primaryControlSize}",
-                        "componentId": "${mediaComponentId}",
-                        "autoplay": "${autoplay}",
-                        "playPauseToggleButtonId": "${playPauseToggleButtonId}"
-                    }
-                },
-                {
-                    "when": "${secondaryControls == '' || secondaryControls == 'skip'}",
-                    "type": "Frame",
-                    "spacing": "@transportButtonSpacing",
-                    "item": {
-                        "type": "SecondaryControlsButton",
-                        "buttonSize": "${secondaryControlSize}",
-                        "icon": "@urlNextIcon",
-                        "iconFocused": "@urlNextIconFocused",
-                        "id": "secondaryControlRight",
-                        "pressAction": [
-                            {
-                                "type": "ControlMedia",
-                                "componentId": "${mediaComponentId}",
-                                "command": "next"
-                            },
-                            {
-                                "type": "ControlMedia",
-                                "componentId": "${mediaComponentId}",
-                                "command": "play"
-                            }
-                        ]
-                    }
                 }
-                ]
             }
-            ]
         }
-    },
-    "mainTemplate": {
-        "parameters": [
-            "payload"
-        ],
-        "items": [
-            {
-                "type": "Container",
-                "direction": "column",
-                "height": "100vh",
-                "width": "100vw",
-                "items": [
-                    {
-                        "type": "TouchWrapper",
-                        "id": "videoWideToggleButton",
-                        "width": "100vw",
-                        "height": "100vh",
-                        "items": [
-                            {
-                                "type": "Video",
-                                "id": "videoPlayer",
-                                "width": "100vw",
-                                "height": "100vh",
-                                "autoplay": true,
-                                "audioTrack": "foreground",
-                                "source": "${payload.videoplayerData.properties.playlist}",
-                                "onPause": [
-                                    {
-                                        "type": "Parallel",
-                                        "commands": [
+    )
+    return video_directive
 
-                                            {
-                                                "type": "SetState",
-                                                "componentId": "alexaPlayPauseToggleButton",
-                                                "state": "checked",
-                                                "value": true
-                                            },
+class LaunchRequestHandler(AbstractRequestHandler):
+    #Handler for Skill Launch
+    def can_handle(self, handler_input):
+        return ask_utils.is_request_type("LaunchRequest")(handler_input)
 
-                                            {
-                                                "type": "SetValue",
-                                                "componentId": "overlayContainer",
-                                                "property": "display",
-                                                "value": "normal"
-                                            },
-                                            {
-                                                "type": "SetFocus",
-                                                "componentId": "alexaPlayPauseToggleButton"
-                                            },
-                                            {
-                                                "type": "SendEvent",
-                                                "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
-                                            }
-                                        ]
-                                    }
-                                    
-                                ],
-                                "onPlay": [
-                                    {
-                                        "type": "Parallel",
-                                        "commands": [
+    def handle(self, handler_input):
+        return (
+            handler_input.response_builder
+                .speak(DATA["INTRO"])
+                .ask(DATA["INTRO"])
+                .response
+        )
 
-                                            {
-                                                "type": "SetState",
-                                                "componentId": "alexaPlayPauseToggleButton",
-                                                "state": "checked",
-                                                "value": false
-                                            },
+class IntroductionIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("IntroductionIntent")(handler_input)
 
-                                            {
-                                                "type": "SetValue",
-                                                "componentId": "title",
-                                                "property": "text",
-                                                "value": "${payload.videoplayerData.properties.playlist[event.trackIndex].title}"
-                                            },
-                                            {
-                                                "type": "SetValue",
-                                                "componentId": "subtitle",
-                                                "property": "text",
-                                                "value": "${payload.videoplayerData.properties.playlist[event.trackIndex].subtitle}"
-                                            },
-                                            {
-                                                "type": "showOverlayShortly"
-                                            },
-                                            {
-                                                "type": "SendEvent",
-                                                "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
-                                            }
-                                        ]
-                                    }
-                                ],
-                                "onEnd": [
-                                    {
-                                        "type": "SendEvent",
-                                        "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
-                                    }
-                                ],
-                                "onTimeUpdate": [
-                                    {
-                                        "type": "SendEvent",
-                                        "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
-                                    }
-                                ],
-                                "onTrackUpdate": [
+    def handle(self, handler_input):
+        global CURRENT_STATE
+        CURRENT_STATE = "PROMPTING_VIDEO"
+        speech_output = DATA["COMPANYINTRO"] + " Would you like to watch a video from Insignia Ventures Partners?"
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .ask(speech_output)
+                .response
+        )
 
-                                    {
-                                        "type": "SetValue",
-                                        "componentId": "title",
-                                        "property": "text",
-                                        "value": "${payload.videoplayerData.properties.playlist[event.trackIndex].title}"
-                                    },
-                                    {
-                                        "type": "SetValue",
-                                        "componentId": "subtitle",
-                                        "property": "text",
-                                        "value": "${payload.videoplayerData.properties.playlist[event.trackIndex].subtitle}"
-                                    },
-                                    {
-                                        "type": "showOverlayShortly"
-                                    },
-                                    {
-                                        "type": "SendEvent",
-                                        "arguments": [ "trackIndex: ${event.trackIndex}, trackCount: ${event.trackCount}, currentTime: ${event.currentTime}, duration: ${event.duration}, paused: ${event.paused}, ended: ${event.ended}" ]
-                                    }
-                                ]
-                            }
-                        ],
-                        "onPress": [
-                            {
-                                "type": "showOverlayShortly"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "Container",
-                        "id": "overlayContainer",
-                        "position": "absolute",
-                        "display": "invisible",
-                        "width": "100vw",
-                        "height": "100vh",
-                        "alignItems": "center",
-                        "justifyContent": "${@viewportProfile == @hubRoundSmall ? 'center' : 'start'}",
-                        "items": [
-                            {
-                                "type": "Frame",
-                                "backgroundColor": "rgba(0,0,0,40%)",
-                                "paddingTop": "5vh",
-                                "paddingBottom": "5vh",
-                                "paddingLeft": "5vh",
-                                "paddingRight": "5vh",
-                                "item": [
-                                    {
-                                        "type": "Container",
-                                        "items": [
-                                            {
-                                                "type": "Text",
-                                                "id": "title",
-                                                "text": " ",
-                                                "width": "100vw",
-                                                "fontSize": "8vh",
-                                                "maxLines": 2,
-                                                "paddingTop": "3vh",
-                                                "paddingLeft": "3vw",
-                                                "paddingRight": "3vw"
-                                            },
-                                            {
-                                                "type": "Text",
-                                                "id": "subtitle",
-                                                "text": " ",
-                                                "width": "100vw",
-                                                "fontSize": "5vh",
-                                                "paddingTop": "3vh",
-                                                "maxLines": 3,
-                                                "paddingBottom": "1vh",
-                                                "paddingLeft": "3vw",
-                                                "paddingRight": "3vw"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "Frame",
-                                "position": "absolute",
-                                "bottom": "2vh",
-                                "backgroundColor": "${@viewportProfile == @hubRoundSmall ? 'transparent' : 'rgba(0,0,0,40%)'}",
-                                "borderRadius": "20",
-                                "item": {
-                                    "type": "CustomAlexaTransportControls",
-                                    "autoplay": true,
-                                    "primaryControlSize": "10vh",
-                                    "secondaryControlSize": "10vh",
-                                    "mediaComponentId": "videoPlayer",
-                                    "playPauseToggleButtonId": "alexaPlayPauseToggleButton"
+class FounderInfoIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("FounderInfoIntent")(handler_input)
+
+    def handle(self, handler_input):
+        speech_output = DATA["FOUNDER"]
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .ask(speech_output)
+                .response
+        )
+
+class NewsIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("NewsIntent")(handler_input)
+
+    def handle(self, handler_input):
+        news = [i["title"] + ". " for i in get_news()[:5]]
+        speech_output = "".join(news)
+        print(speech_output)
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .response
+        )
+
+class InvestorCEOIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("InvestorCEOIntent")(handler_input)
+    
+    def handle(self, handler_input):
+        coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
+        data = get_coinvestor(coinvestor)
+        speech_output = ""
+        if data:
+            speech_output = "The CEO of " + coinvestor + " is " + data["CEO"] + "."
+        else:
+            speech_output = "Sorry, the coinvestor " + coinvestor + " could not be found."
+        
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .response
+        )
+
+class InvestorFoundersIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("InvestorFoundersIntent")(handler_input)
+    
+    def handle(self, handler_input):
+        coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
+        data = get_coinvestor(coinvestor)
+        speech_output = ""
+        if data:
+            founders = data["FOUNDER"]
+            if len(founders) > 1:
+                speech_output = "The Founders of " + coinvestor + " are "
+                for i in range(len(founders) - 1):
+                    speech_output += founders[i]
+                    speech_output += ", "
+                speech_output += " and " + founders[len(founders) - 1] + "."
+            else:
+                speech_output = "The Founder of " + coinvestor +  " is " + founders[0] + "."
+        else:
+            speech_output = "Sorry, the coinvestor " + coinvestor + " could not be found."
+        
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .response
+        )
+
+class InvestorInfoIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("InvestorInfoIntent")(handler_input)
+    
+    def handle(self, handler_input):
+        coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
+        data = get_coinvestor(coinvestor)
+        if data:
+            speech_output = data["INFO"]
+        else:
+            speech_output = "Sorry, the coinvestor " + coinvestor + " could not be found."
+        
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .response
+        )
+
+class VideoIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("VideoIntent")(handler_input)
+    
+    def handle(self, handler_input):
+        video_directive = get_video_directive()
+        return (
+            handler_input.response_builder
+                .add_directive(video_directive)
+                .response
+        )
+
+class YesIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
+
+    def handle(self, handler_input):
+        global CURRENT_STATE
+        if CURRENT_STATE == "PROMPTING_VIDEO":
+            video_directive = get_video_directive()
+            CURRENT_STATE = "IDLE"
+            return (
+                handler_input.response_builder
+                    .add_directive(video_directive)
+                    .response
+            )
+        else:
+            CURRENT_STATE = "IDLE"
+            return (
+                handler_input.response_builder
+                    .speak("")
+                    .response
+            )
+        
+class NoIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("AMAZON.NoIntent")(handler_input)
+
+    def handle(self, handler_input):
+        global CURRENT_STATE
+        speak_output = ""
+        if CURRENT_STATE == "PROMPTING_VIDEO":
+            speak_output = "Okay, that's alright"
+        CURRENT_STATE = "IDLE"
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .response
+        )
+
+class PlayIntentHandler(AbstractRequestHandler):
+    
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("AMAZON.ResumeIntent")(handler_input)
+    
+    def handle(self, handler_input):
+        video_directive = ExecuteCommandsDirective(
+                            token = "videoplayer",
+                            commands = [
+                                {
+                                    "type": "ControlMedia",
+                                    "componentId": "videoPlayer",
+                                    "command": "play"
+                                },
+                                {
+                                    "type": "showOverlayShortly"
                                 }
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    "commands": {
-        "showOverlayShortly": {
-            "parameters": [ 
-                {
-                    "name": "delay",
-                    "type": "number",
-                    "default": 0
-                  }
-            ],
-            "commands": [
-                {
-                    "type": "Sequential",
-                    "delay": "${delay}",
-                    "commands": [
-                        {
-                            "type": "SetValue",
-                            "componentId": "overlayContainer",
-                            "property": "display",
-                            "value": "normal"
-                        },
-                        {
-                            "type": "SetFocus",
-                            "componentId": "alexaPlayPauseToggleButton"
-                        },
-                        {
-                            "type": "SetValue",
-                            "componentId": "overlayContainer",
-                            "property": "display",
-                            "value": "invisible",
-                            "delay": "3000"
-                        }
-                    ]
-                }
-            ]
-        }
-    }
-}
+                            ]
+                            )
+        return (
+            handler_input.response_builder
+                .add_directive(video_directive)
+                .response
+            )
+
+class PauseIntentHandler(AbstractRequestHandler):
+    
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("AMAZON.PauseIntent")(handler_input)
+    
+    def handle(self, handler_input):
+        video_directive = ExecuteCommandsDirective(
+                            token = "videoplayer",
+                            commands = [
+                                {
+                                    "type": "ControlMedia",
+                                    "componentId": "videoPlayer",
+                                    "command": "pause"
+                                }
+                            ]
+                            )
+        return (
+            handler_input.response_builder
+                .add_directive(video_directive)
+                .response
+            )
+
+class HelpIntentHandler(AbstractRequestHandler):
+    """Handler for Help Intent."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("AMAZON.HelpIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        speak_output = "You can say hello to me! How can I help?"
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .ask(speak_output)
+                .response
+        )
+
+class CancelOrStopIntentHandler(AbstractRequestHandler):
+    """Single handler for Cancel and Stop Intent."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return (ask_utils.is_intent_name("AMAZON.CancelIntent")(handler_input) or
+                ask_utils.is_intent_name("AMAZON.StopIntent")(handler_input))
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        speak_output = "Goodbye!"
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .response
+        )
+
+class FallbackIntentHandler(AbstractRequestHandler):
+    """Single handler for Fallback Intent."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("AMAZON.FallbackIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        logger.info("In FallbackIntentHandler")
+        speech = "Hmm, I'm not sure. You can say Hello or Help. What would you like to do?"
+        reprompt = "I didn't catch that. What can I help you with?"
+
+        return handler_input.response_builder.speak(speech).ask(reprompt).response
+
+class SessionEndedRequestHandler(AbstractRequestHandler):
+    """Handler for Session End."""
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_request_type("SessionEndedRequest")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+
+        # Any cleanup logic goes here.
+
+        return handler_input.response_builder.response
+
+class UserEventHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
+    
+    def handle(self, handler_input):
+        return(
+            handler_input.response_builder
+                .response
+            )
+
+class IntentReflectorHandler(AbstractRequestHandler):
+    """The intent reflector is used for interaction model testing and debugging.
+    It will simply repeat the intent the user said. You can create custom handlers
+    for your intents by defining them above, then also adding them to the request
+    handler chain below.
+    """
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_request_type("IntentRequest")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        intent_name = ask_utils.get_intent_name(handler_input)
+        speak_output = "You just triggered " + intent_name + "."
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                # .ask("add a reprompt if you want to keep the session open for the user to respond")
+                .response
+        )
+
+class CatchAllExceptionHandler(AbstractExceptionHandler):
+    """Generic error handling to capture any syntax or routing errors. If you receive an error
+    stating the request handler chain is not found, you have not implemented a handler for
+    the intent being invoked or included it in the skill builder below.
+    """
+    def can_handle(self, handler_input, exception):
+        # type: (HandlerInput, Exception) -> bool
+        return True
+
+    def handle(self, handler_input, exception):
+        # type: (HandlerInput, Exception) -> Response
+        logger.error(exception, exc_info=True)
+
+        speak_output = "Sorry, I had trouble doing what you asked. Please try again."
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .ask(speak_output)
+                .response
+        )
+
+
+# The SkillBuilder object acts as the entry point for your skill, routing all request and response
+# payloads to the handlers above. Make sure any new handlers or interceptors you've
+# defined are included below. The order matters - they're processed top to bottom.
+
+sb = SkillBuilder()
+
+
+sb.add_request_handler(LaunchRequestHandler())
+sb.add_request_handler(PlayIntentHandler())
+sb.add_request_handler(PauseIntentHandler())
+sb.add_request_handler(UserEventHandler())
+
+sb.add_request_handler(IntroductionIntentHandler())
+sb.add_request_handler(FounderInfoIntentHandler())
+sb.add_request_handler(InvestorInfoIntentHandler())
+sb.add_request_handler(InvestorCEOIntentHandler())
+sb.add_request_handler(InvestorFoundersIntentHandler())
+sb.add_request_handler(VideoIntentHandler())
+sb.add_request_handler(NewsIntentHandler())
+
+
+
+sb.add_request_handler(YesIntentHandler())
+sb.add_request_handler(NoIntentHandler())
+
+#Built In Intents
+sb.add_request_handler(HelpIntentHandler())
+sb.add_request_handler(CancelOrStopIntentHandler())
+sb.add_request_handler(FallbackIntentHandler())
+sb.add_request_handler(SessionEndedRequestHandler())
+sb.add_request_handler(IntentReflectorHandler())
+
+
+sb.add_exception_handler(CatchAllExceptionHandler())
+
+lambda_handler = sb.lambda_handler()
