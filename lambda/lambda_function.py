@@ -168,7 +168,7 @@ class VideoIntentHandler(AbstractRequestHandler):
     
     def handle(self, handler_input):
         video_directive = get_video_directive()
-        video_directive = RenderDocumentDirective()
+        video_directive = VideoApp()
         return (
             handler_input.response_builder
                 .add_directive(video_directive)
