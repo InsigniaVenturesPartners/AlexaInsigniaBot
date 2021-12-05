@@ -178,7 +178,7 @@ class VideoIntentHandler(AbstractRequestHandler):
         else:
             return(
                 handler_input.response_builder
-                
+                    
             )
 
 class YesIntentHandler(AbstractRequestHandler):
