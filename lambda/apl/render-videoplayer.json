@@ -21,7 +21,8 @@
 					{
 						"type": "Video",
 						"id": "videoPlayer",
-						"url": "${payload.videoplayerData.properties.url}"
+						"url": "${payload.videoplayerData.properties.url}",
+						"autoplay": "true"
 					}
 				]
 			}
