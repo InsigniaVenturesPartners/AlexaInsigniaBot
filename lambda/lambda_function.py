@@ -177,8 +177,8 @@ class VideoIntentHandler(AbstractRequestHandler):
             )
         else:
             return(
-                
-                )
+                handler_input.    
+            )
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
