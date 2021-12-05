@@ -168,6 +168,8 @@ class VideoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("VideoIntent")(handler_input)
     
     def handle(self, handler_input):
+        
+        
         video_directive = get_video_directive()
         return (
             handler_input.response_builder
