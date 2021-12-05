@@ -24,6 +24,7 @@ def get_coinvestor(coinvestor):
     return DATA["COMPANIES"].get(coinvestor.upper())
 
 def get_video_directive():
+    #https://youtu.be/9uRvv6CA6sQ
     video_directive = RenderDocumentDirective(
         token = "videoplayer",
         document = load_json_from_path("apl/render-videoplayer.json"),
@@ -319,10 +320,12 @@ class UserEventHandler(AbstractRequestHandler):
         return ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
     
     def handle(self, handler_input):
+        speech_text = ""
+        if handler_input.request_envelope.request.source.get("id") == "touchWrapper":
+            speech_text = "User Cleek Screen"
         return(
-            handler_input.response_builder
-                .response
-            )
+            handler_input.response_builder.speak(speech_text).response
+        )
 
 class IntentReflectorHandler(AbstractRequestHandler):
     """The intent reflector is used for interaction model testing and debugging.
