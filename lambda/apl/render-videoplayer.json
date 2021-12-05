@@ -256,7 +256,7 @@
                         "width": "100vw",
                         "height": "100vh",
                         "alignItems": "center",
-                        "justifyContent": "${@viewportProfile == @hubRoundSmall ? 'center' : 'start'}",
+                        "justifyContent": "${@viewportProfile == @hubLandscapeMedium ? 'center' : 'start'}",
                         "items": [
                             {
                                 "type": "Frame",
