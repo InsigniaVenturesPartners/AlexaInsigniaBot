@@ -300,7 +300,7 @@
                                 "type": "Frame",
                                 "position": "absolute",
                                 "bottom": "2vh",
-                                "backgroundColor": "${@viewportProfile == @hubRoundSmall ? 'transparent' : 'rgba(0,0,0,40%)'}",
+                                "backgroundColor": "${@viewportProfile == @hubLandscapeMedium ? 'transparent' : 'rgba(0,0,0,40%)'}",
                                 "borderRadius": "20",
                                 "item": {
                                     "type": "CustomAlexaTransportControls",
