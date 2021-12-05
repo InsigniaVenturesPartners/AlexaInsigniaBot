@@ -176,7 +176,9 @@ class VideoIntentHandler(AbstractRequestHandler):
                     .response
             )
         else:
-            
+            return(
+                
+                )
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
