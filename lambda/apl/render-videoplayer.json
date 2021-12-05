@@ -22,6 +22,8 @@
 						"type": "Video",
 						"id": "videoPlayer",
 						"url": "${payload.videoURL}"
+						"onPause": [
+						    ]
 					}
 				]
 			}
