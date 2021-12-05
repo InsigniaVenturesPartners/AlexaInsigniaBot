@@ -261,7 +261,7 @@
                             {
                                 "type": "Frame",
                                 "backgroundColor": "rgba(0,0,0,40%)",
-                                "paddingTop": "5vh",
+                                "paddingTop": "1vh",
                                 "paddingBottom": "5vh",
                                 "paddingLeft": "5vh",
                                 "paddingRight": "5vh",
