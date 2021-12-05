@@ -24,10 +24,12 @@ def get_coinvestor(coinvestor):
     return DATA["COMPANIES"].get(coinvestor.upper())
 
 def get_video_directive():
-    #https://youtu.be/9uRvv6CA6sQ
     video_directive = RenderDocumentDirective(
         token = "videoplayer",
         document = load_json_from_path("apl/render-videoplayer.json"),
+        datasources = {
+            "videoURL": "https://youtu.be/9uRvv6CA6sQ"
+        }
     )
     return video_directive
 

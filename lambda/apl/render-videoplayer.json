@@ -19,17 +19,9 @@
 				"width": "${viewport.width}",
 				"items": [
 					{
-						"type": "TouchWrapper",
-						"alignSelf": "center",
-						"id": "touchWrapper",
-						"onDown": [
-							{
-								"type": "SendEvent",
-								"arguments": [
-									"user clicked screen"
-								]
-							}
-						]
+						"type": "Video",
+						"id": "videoPlayer",
+						"url": "${payload.videoURL}"
 					}
 				]
 			}
