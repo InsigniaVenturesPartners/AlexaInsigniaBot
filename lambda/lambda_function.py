@@ -317,13 +317,11 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
 
 class UserEventHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        print("touch event")
-        return ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
+        if ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input):
+            return handler_input.request_envelope.request.source.get("id") == "touchWrapper"
     
     def handle(self, handler_input):
-        speech_text = ""
-        if handler_input.request_envelope.request.source.get("id") == "touchWrapper":
-            speech_text = "User Cleek Screen"
+        speech_text = "User Cleek Screen"
         return(
             handler_input.response_builder.speak(speech_text).response
         )
