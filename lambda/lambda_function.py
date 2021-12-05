@@ -8,6 +8,7 @@ from ask_sdk_core.handler_input import HandlerInput
 
 from ask_sdk_model import Response
 from ask_sdk_model.interfaces.alexa.presentation.apl import (RenderDocumentDirective, ExecuteCommandsDirective)
+from ask_sdk_core.utils import get_supported_interfaces
 
 from utils import *
 from news import *
