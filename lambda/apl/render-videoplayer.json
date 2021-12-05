@@ -260,44 +260,6 @@
                         "items": [
                             {
                                 "type": "Frame",
-                                "backgroundColor": "rgba(0,0,0,40%)",
-                                "paddingTop": "1vh",
-                                "paddingBottom": "5vh",
-                                "paddingLeft": "5vh",
-                                "paddingRight": "5vh",
-                                "item": [
-                                    {
-                                        "type": "Container",
-                                        "items": [
-                                            {
-                                                "type": "Text",
-                                                "id": "title",
-                                                "text": " ",
-                                                "width": "100vw",
-                                                "fontSize": "8vh",
-                                                "maxLines": 2,
-                                                "paddingTop": "3vh",
-                                                "paddingLeft": "3vw",
-                                                "paddingRight": "3vw"
-                                            },
-                                            {
-                                                "type": "Text",
-                                                "id": "subtitle",
-                                                "text": " ",
-                                                "width": "100vw",
-                                                "fontSize": "5vh",
-                                                "paddingTop": "3vh",
-                                                "maxLines": 3,
-                                                "paddingBottom": "1vh",
-                                                "paddingLeft": "3vw",
-                                                "paddingRight": "3vw"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "Frame",
                                 "position": "absolute",
                                 "bottom": "2vh",
                                 "backgroundColor": "${@viewportProfile == @hubLandscapeMedium ? 'transparent' : 'rgba(0,0,0,40%)'}",
