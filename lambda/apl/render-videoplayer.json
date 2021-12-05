@@ -21,7 +21,7 @@
 					{
 						"type": "Video",
 						"id": "videoPlayer",
-						"url": "${payload.videoURL}"
+						"url": "${payload.videoplayerData.properties.url}"
 					}
 				]
 			}
