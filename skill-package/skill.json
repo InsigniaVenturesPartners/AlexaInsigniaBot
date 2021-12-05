@@ -7,9 +7,6 @@
         },
         "interfaces": [
           {
-            "type": "VIDEO_APP"
-          },
-          {
             "supportedViewports": [
               {
                 "maxHeight": 540,
