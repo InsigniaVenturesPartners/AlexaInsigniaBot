@@ -37,7 +37,7 @@
             {
                 "name": "autoplay",
                 "type": "boolean",
-                "default": false,
+                "default": true,
                 "description": "Determines the starting state of the play/pause icon. This should match the autoplay state of the media playing component. Defaults to false. "
             },
             {
