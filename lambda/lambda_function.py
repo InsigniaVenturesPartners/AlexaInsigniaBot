@@ -158,7 +158,7 @@ class VideoIntentHandler(AbstractRequestHandler):
     
     def handle(self, handler_input):
         if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
-            
+            print("can support")
             video_directive = get_video_directive()
             return (
                 handler_input.response_builder
