@@ -7,7 +7,7 @@ from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
 
 from ask_sdk_model import Response
-from ask_sdk_model.interfaces.alexa.presentation.apl import (RenderDocumentDirective, ExecuteCommandsDirective)
+from ask_sdk_model.interfaces.alexa.presentation.apl import (RenderDocumentDirective, ExecuteCommandsDirective, UserEvent)
 from ask_sdk_core.utils import get_supported_interfaces
 
 from utils import *
@@ -156,11 +156,9 @@ class VideoIntentHandler(AbstractRequestHandler):
     
     def handle(self, handler_input):
         if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
-            video_directive = get_video_directive()
+            handler_input.add_directive(get_video_directive())
             return (
-                handler_input.response_builder
-                    .add_directive(video_directive)
-                    .response
+                handler_input.response_builder.response
             )
         else:
             return(
@@ -317,6 +315,7 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
 
 class UserEventHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
+        print("touch event")
         return ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
     
     def handle(self, handler_input):
