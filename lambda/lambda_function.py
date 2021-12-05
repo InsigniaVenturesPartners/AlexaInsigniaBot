@@ -178,7 +178,7 @@ class VideoIntentHandler(AbstractRequestHandler):
         else:
             return(
                 handler_input.response_builder
-                    .
+                    .speak("Sorry, this device does not support video playing.")
             )
 
 class YesIntentHandler(AbstractRequestHandler):
