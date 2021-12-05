@@ -318,6 +318,7 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
 class UserEventHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         if ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input):
+            print(handler_input.request_envelope.request.source.get("id"))
             return handler_input.request_envelope.request.source.get("id") == "touchWrapper"
     
     def handle(self, handler_input):
