@@ -222,22 +222,8 @@ class PlayIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.ResumeIntent")(handler_input)
     
     def handle(self, handler_input):
-        video_directive = ExecuteCommandsDirective(
-                            token = "videoplayer",
-                            commands = [
-                                {
-                                    "type": "ControlMedia",
-                                    "componentId": "videoPlayer",
-                                    "command": "play"
-                                },
-                                {
-                                    "type": "showOverlayShortly"
-                                }
-                            ]
-                            )
         return (
             handler_input.response_builder
-                .add_directive(video_directive)
                 .response
             )
 
@@ -247,19 +233,8 @@ class PauseIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.PauseIntent")(handler_input)
     
     def handle(self, handler_input):
-        video_directive = ExecuteCommandsDirective(
-                            token = "videoplayer",
-                            commands = [
-                                {
-                                    "type": "ControlMedia",
-                                    "componentId": "videoPlayer",
-                                    "command": "pause"
-                                }
-                            ]
-                            )
         return (
             handler_input.response_builder
-                .add_directive(video_directive)
                 .response
             )
 
@@ -326,9 +301,7 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
 
 class UserEventHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        if ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input):
-            print(handler_input.request_envelope.request.source.get("id"))
-            return handler_input.request_envelope.request.source.get("id") == "touchWrapper"
+        return ask_utils.is_request_type("Alexa.Presentation.APL.UserEvent")(handler_input)
     
     def handle(self, handler_input):
         speech_text = "User Cleek Screen"
