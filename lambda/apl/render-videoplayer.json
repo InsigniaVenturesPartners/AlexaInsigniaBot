@@ -23,7 +23,8 @@
 						"id": "videoPlayer",
 						"url": "${payload.videoURL}"
 						"onPause": [
-						    ]
+						
+						]
 					}
 				]
 			}
