@@ -15,7 +15,7 @@
 		"items": [
 			{
 				"type": "Container",
-				
+				"width": "100vw"
 				"items": [
 					{
 						"type": "Video",
