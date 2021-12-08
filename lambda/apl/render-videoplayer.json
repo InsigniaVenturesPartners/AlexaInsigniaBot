@@ -15,8 +15,6 @@
 		"items": [
 			{
 				"type": "Container",
-				"height": "${viewport.height}",
-				"width": "${viewport.width}",
 				"items": [
 					{
 						"type": "Video",
