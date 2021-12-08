@@ -292,7 +292,6 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        print("User Event")
         # Any cleanup logic goes here.
 
         return handler_input.response_builder.response
