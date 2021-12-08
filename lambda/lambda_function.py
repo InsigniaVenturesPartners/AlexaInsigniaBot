@@ -15,7 +15,6 @@ from news import *
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-#newest version
 
 CURRENT_STATE = "IDLE"
 DATA = load_json_from_path("data.json")
