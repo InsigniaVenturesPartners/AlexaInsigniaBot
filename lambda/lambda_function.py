@@ -419,4 +419,3 @@ sb.add_request_handler(IntentReflectorHandler())
 sb.add_exception_handler(CatchAllExceptionHandler())
 
 lambda_handler = sb.lambda_handler()
-
