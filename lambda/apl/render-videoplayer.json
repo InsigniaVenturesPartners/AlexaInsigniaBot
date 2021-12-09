@@ -1,32 +1,4 @@
-{
-	"type": "APL",
-	"version": "1.8",
-	"description": "This APL document places text on the screen and includes a button that sends the skill a message when selected. The button is a pre-defined responsive component from the alexa-layouts package.",
-	"import": [
-		{
-			"name": "alexa-layouts",
-			"version": "1.4.0"
-		}
-	],
-	"mainTemplate": {
-		"parameters": [
-			"payload"
-		],
-		"items": [
-			{
-				"type": "Container",
-				"items": [
-					{
-						"type": "Video",
-						"id": "videoPlayer",
-						"url": "${payload.videoplayerData.properties.url}",
-						"autoplay": "true"
-					}
-				]
-			}
-		]
-	}
-}
+
 
 {
     "type": "APL",
