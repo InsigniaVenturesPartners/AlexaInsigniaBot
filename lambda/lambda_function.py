@@ -211,11 +211,7 @@ class NoIntentHandler(AbstractRequestHandler):
             speak_output += "Okay, that's alright"
         
         CURRENT_STATE = "IDLE"
-        return (
-            handler_input.response_builder
-                .speak(speak_output)
-                .response
-        )
+        return response_builder.speak(speak_output)
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
