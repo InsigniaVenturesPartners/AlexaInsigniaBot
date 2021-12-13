@@ -198,6 +198,8 @@ class YesIntentHandler(AbstractRequestHandler):
         else:
             speak_output += "Okay, that's alright"
         CURRENT_STATE = "IDLE"
+        return response_builder.speak(speak_output).response
+        
         
         return response_builder.speak(speak_output).response
     def handle(self, handler_input):
