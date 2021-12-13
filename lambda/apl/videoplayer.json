@@ -1,4 +1,5 @@
 {
+    "type": "Alexa.Presentation.APL.RenderDocument"
     "document": {
         "type": "APL",
         "version": "1.8",
