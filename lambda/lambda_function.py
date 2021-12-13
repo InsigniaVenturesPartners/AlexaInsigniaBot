@@ -168,11 +168,6 @@ class VideoIntentHandler(AbstractRequestHandler):
             response_builder.add_directive(
                 get_video_directive()
             )
-            return (
-                handler_input.response_builder
-                    .add_directive(video_directive)
-                    .response
-            )
         else:
             return(
                 handler_input.response_builder
