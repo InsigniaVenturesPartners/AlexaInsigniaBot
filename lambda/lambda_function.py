@@ -197,22 +197,9 @@ class YesIntentHandler(AbstractRequestHandler):
                 speak_output += "Sorry, this device does not support video playing."
         else:
             speak_output += "Okay, that's alright"
+            
         CURRENT_STATE = "IDLE"
         return response_builder.speak(speak_output).response
-        
-        
-        return response_builder.speak(speak_output).response
-    def handle(self, handler_input):
-        global CURRENT_STATE
-        if CURRENT_STATE == "PROMPTING_VIDEO":
-            
-        else:
-            CURRENT_STATE = "IDLE"
-            return (
-                handler_input.response_builder
-                    .speak("")
-                    .response
-            )
         
 class NoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
