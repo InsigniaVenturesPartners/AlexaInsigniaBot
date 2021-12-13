@@ -25,6 +25,7 @@ def get_coinvestor(coinvestor):
 
 def get_video_directive():
     video_directive = RenderDocumentDirective(
+        token = "VideoPlayer"
         document = load_json_from_path("apl/videoplayer.json")
     )
     return video_directive
