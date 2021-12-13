@@ -143,12 +143,5 @@
                 }
             ]
         }
-    },
-    "datasources": {
-        "videoPlayerData": {
-            "properties": {
-                "url": ""
-            }
-        }
     }
 }
