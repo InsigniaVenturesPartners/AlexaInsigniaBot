@@ -1,6 +1,6 @@
 {
     "type": "Alexa.Presentation.APL.RenderDocument",
-    "token": "VideoPlayer"
+    "token": "VideoPlayer",
     "document": {
         "type": "APL",
         "version": "1.8",
