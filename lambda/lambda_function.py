@@ -30,7 +30,7 @@ def get_video_directive():
         datasources = {
             "videoPlayerData": {
                 "properties" : {
-                    "url" : create_presigned_url("Media/TEST_VIDEO.mov")
+                    "url" : create_presigned_url("Media/INSIGNIA_VC_VIDEO.mov")
                 }
             }
         }
@@ -84,6 +84,9 @@ class NewsIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("NewsIntent")(handler_input)
 
     def handle(self, handler_input):
+        user_id = handler_input.request_envelope.session.user.user_id
+        client = connect_to_dynamodb()
+        
         news = [i["title"] + ". " for i in get_news()[:5]]
         speech_output = "".join(news)
         print(speech_output)
