@@ -204,7 +204,8 @@ class NoIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         speak_output = ""
-        response_builder = handler_input.response_builder;
+        response_builder = handler_input.response_builder
+        
         global CURRENT_STATE
         
         if CURRENT_STATE == "PROMPTING_VIDEO":
