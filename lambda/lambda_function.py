@@ -187,12 +187,17 @@ class YesIntentHandler(AbstractRequestHandler):
         speak_output = ""
         response_builder = handler_input.response_builder
         
-        if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
-            response_builder.add_directive(
-                get_video_directive()
-            )
+        global CURRENT_STATE
+        if CURRENT_STATE == "PROMPTING_VIDEO":
+            if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
+                response_builder.add_directive(
+                    get_video_directive()
+                )
+            else:
+                speak_output += "Sorry, this device does not support video playing."
         else:
-            speak_output += "Sorry, this device does not support video playing."
+            speak_output += "Okay, that's alright"
+        CURRENT_STATE = "IDLE"
         
         return response_builder.speak(speak_output).response
     def handle(self, handler_input):
