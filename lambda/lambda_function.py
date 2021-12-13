@@ -184,15 +184,21 @@ class YesIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
 
     def handle(self, handler_input):
+        speak_output = ""
+        response_builder = handler_input.response_builder
+        
+        if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
+            response_builder.add_directive(
+                get_video_directive()
+            )
+        else:
+            speak_output += "Sorry, this device does not support video playing."
+        
+        return response_builder.speak(speak_output).response
+    def handle(self, handler_input):
         global CURRENT_STATE
         if CURRENT_STATE == "PROMPTING_VIDEO":
-            video_directive = get_video_directive()
-            CURRENT_STATE = "IDLE"
-            return (
-                handler_input.response_builder
-                    .add_directive(video_directive)
-                    .response
-            )
+            
         else:
             CURRENT_STATE = "IDLE"
             return (
