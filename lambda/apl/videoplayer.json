@@ -89,7 +89,6 @@
                         ],
                         "source": [
                             "${payload.videoPlayerData.properties.url1}",
-                            
                             "${payload.videoPlayerData.properties.url1}"
                         ],
                         "type": "Video",
