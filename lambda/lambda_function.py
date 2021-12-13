@@ -27,6 +27,13 @@ def get_video_directive():
     video_directive = RenderDocumentDirective(
         token = "VideoPlayer",
         document = load_json_from_path("apl/videoplayer.json")
+        datasources = {
+            "videoPlayerData": {
+                "properties" : {
+                    "url" : create_presigned_url("Media/INSIGNIA_VIDEO.mp4")
+                }
+            }
+        }
     )
     return video_directive
 
