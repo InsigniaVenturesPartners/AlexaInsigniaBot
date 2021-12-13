@@ -86,6 +86,8 @@ class NewsIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         user_id = handler_input.request_envelope.session.user.user_id
         client = connect_to_dynamodb()
+        table = client.Table("2093d99d-98ca-46f3-913f-7cf95aecfc1b")
+        # table.put_item()
         
         news = [i["title"] + ". " for i in get_news()[:5]]
         speech_output = "".join(news)
