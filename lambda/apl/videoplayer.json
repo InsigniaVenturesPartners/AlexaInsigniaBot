@@ -45,7 +45,7 @@
                             "autoplay": true,
                             "audioTrack": "foreground",
                             "source": [
-                                "${}"
+                                ""
                             ],
                             "onPlay": [
                                 {
