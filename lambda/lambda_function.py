@@ -165,7 +165,7 @@ class VideoIntentHandler(AbstractRequestHandler):
         response_builder = handler_input.response_builder
         
         if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
-            video_directive = get_video_directive()
+            video_directive = 
             response_builder.add_directive(
                 RenderDocumentDirective(
                     token=HELLO_WORLD_TOKEN,
