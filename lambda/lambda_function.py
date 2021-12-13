@@ -234,7 +234,7 @@ class PlayIntentHandler(AbstractRequestHandler):
                                     "type": "showOverlayShortly"
                                 }
                             ]
-                            )
+        )
         return (
             handler_input.response_builder
                 .add_directive(video_directive)
