@@ -161,6 +161,7 @@ class VideoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("VideoIntent")(handler_input)
     
     def handle(self, handler_input):
+        speak_output = ""
         response_builder = handler_input.response_builder
         
         if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
