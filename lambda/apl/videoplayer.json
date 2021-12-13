@@ -87,7 +87,6 @@
                                 "value": "0"
                             }
                         ],
-                        "scale": "best-fit",
                         "source": [
                             "${payload.videoPlayerData.properties.url}"
                         ],
