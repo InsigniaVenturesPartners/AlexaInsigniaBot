@@ -1,146 +1,150 @@
 {
-    "type": "APL",
-    "version": "1.8",
-    "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
-    "import": [
-        {
-            "name": "alexa-layouts",
-            "version": "1.4.0"
-        }
-    ],
-    "mainTemplate": {
-        "parameters": [
-            "payload"
-        ],
-        "items": [
+    "document": {
+        "type": "APL",
+        "version": "1.8",
+        "license": "Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.\nSPDX-License-Identifier: LicenseRef-.amazon.com.-AmznSL-1.0\nLicensed under the Amazon Software License  http://aws.amazon.com/asl/",
+        "import": [
             {
-                "type": "Container",
-                "height": "100vh",
-                "width": "100vw",
-                "paddingTop": "@spacingSmall",
-                "bind": [
-                    {
-                        "name": "sliderThumbPosition",
-                        "value": 0
-                    },
-                    {
-                        "name": "videoProgressValue",
-                        "type": "number",
-                        "value": 0
-                    },
-                    {
-                        "name": "videoTotalValue",
-                        "type": "number",
-                        "value": 0
-                    }
-                ],
-                "items": [
-                    {
-                        "type": "AlexaBackground"
-                    },
-                    {
-                        "autoplay": true,
-                        "audioTrack": "foreground",
-                        "source": [
-                            "https://2093d99d-98ca-46f3-913f-7cf95aecfc1b-us-east-1.s3.us-east-1.amazonaws.com/Media/INSIGNIA_VC_VIDEO.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFgaCXVzLWVhc3QtMSJIMEYCIQCifKQsoC4b%2B0u4Dyv7MQJgP5iLBA3rhZ9oCn2EjqTicgIhAIB1MAKWuwKquoqYOg%2B0f5j500YIeBlQ34593LQBj3IEKvUCCEEQABoMMzgzNzEzNDgyODU4Igx6wC93NRTdVsH%2Buikq0gLyg9eMDaMKdZLTm806%2BDD9gEaVyFOh8x0j6HT59Ok60ChfgZJZQUJSQ77z9DPgQ2f1GJwJy0i%2B%2Bj7Ce4qNUd%2F3aej%2BuqqSgGvRlhDBlqaTCZ7Ki%2FCF6tuTZtV8S5rj9DDFeDp83rYLUhl3dEXrj7zwovVYfr7KPezUul17UA0mQB5YdT48ZnBgHdnEb0oGWB0%2Bac89gIsNh7okueVBQRoHuKaMoMdrMc8CdkmCcNuo02cmnYF%2BzZoxbfFYsp3lYqbK%2BALDhmnCtLN0yCKyEG9ezY21qRlkjgbUQDXN%2BhGPFlU%2FzD7FsHrgMKSjI8ILeld9mq7OXQ6mkW3Zv3OCtFc8jNsMaXx67ajcQeUAJSkz41uFIXuZWJ%2F6GEUM4BG%2FDhH0YG9Nhhw4pk8XwEAJ2tag5nbU5q3idLE5d4lvSyD3Ik4Fa9uWUagPu7LCML%2FIcqfTRDC87duNBjqGApLIdwwla2aXs7RLqJCAuGWBXGcdYGwUEzMfV4oZoggMTFy2Jl%2BMQ5CevgBRyOOx2W3u6Sql0zY1ozkQwUVeJL8RCaAKdVf3OdpjgG98n%2BD8p7hWO7H3T7%2Foe7e9z248VnZSxFOHxs7gmzQnBV2MM%2BY5%2BKpBQMWyi%2BRWihg8NcBNwRzzti87AjQM%2BUSX5Z6o4Sp%2BA%2FL5mB6OUU1Cl4R1nscH8uiATq6nMDXQQBojr47wN1RYx7Xk3aec5i0OmkB%2BxyBolq19rJO35mG%2B5QiSeFN1X5DTWz1VUgCDnLsSK9i%2FRQmxr248eLXhC4ATiNVXrnLAXwJidVqFGJfwkqSbtoc81HNJg0Q%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20211213T073550Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAVSVY3DBVFJ7MH5AQ%2F20211213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=da5fca8efcda22ab0c8a38061f6e18f79c35e7e1fce4e06d4d4f7367fe4b6063"
-                        ],
-                        "onPlay": [
-                            {
-                                "type": "SetValue",
-                                "property": "videoTotalValue",
-                                "value": "${event.duration}"
-                            }
-                        ],
-                        "onTrackUpdate": [
-                            {
-                                "type": "SetValue",
-                                "property": "videoTotalValue",
-                                "value": "${event.duration}"
-                            }
-                        ],
-                        "onTimeUpdate": [
-                            {
-                                "type": "SetValue",
-                                "property": "videoProgressValue",
-                                "value": "${event.currentTime}"
-                            },
-                            {
-                                "type": "SetValue",
-                                "componentId": "slider",
-                                "property": "progressValue",
-                                "value": "${videoProgressValue}"
-                            },
-                            {
-                                "type": "SetValue",
-                                "property": "videoTotalValue",
-                                "value": "${event.duration}"
-                            }
-                        ],
-                        "onTrackReady": [
-                            {
-                                "type": "SetValue",
-                                "property": "videoTotalValue",
-                                "value": "${event.duration}"
-                            }
-                        ],
-                        "onTrackFail": [
-                            {
-                                "type": "SetValue",
-                                "property": "videoTotalValue",
-                                "value": "0"
-                            }
-                        ],
-                        "scale": "best-fit",
-                        "type": "Video",
-                        "id": "videoPlayerId",
-                        "width": "70vw",
-                        "height": "100%",
-                        "alignSelf": "center",
-                        "shrink": 1
-                    },
-                    {
-                        "type": "Container",
-                        "alignItems": "center",
-                        "item": [
-                            {
-                                "type": "AlexaSlider",
-                                "id": "slider",
-                                "progressValue": "${videoProgressValue}",
-                                "totalValue": "${videoTotalValue}",
-                                "positionPropertyName": "sliderThumbPosition",
-                                "metadataDisplayed": true,
-                                "metadataPosition": "above_right",
-                                "width": "75vw",
-                                "paddingBottom": "90dp",
-                                "onUpCommand": [
-                                    {
-                                        "type": "SetValue",
-                                        "componentId": "debugText",
-                                        "property": "text",
-                                        "value": "${sliderThumbPosition - videoProgressValue}"
-                                    },
-                                    {
-                                        "type": "ControlMedia",
-                                        "componentId": "videoPlayerId",
-                                        "command": "seek",
-                                        "value": "${sliderThumbPosition - videoProgressValue}"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "AlexaTransportControls",
-                                "mediaComponentId": "videoPlayerId",
-                                "playPauseToggleButtonId": "playPauseToggleButtonId",
-                                "primaryControlSize": "70dp",
-                                "secondaryControlSize": "60dp",
-                                "autoplay": true,
-                                "position": "absolute",
-                                "bottom": "10dp"
-                            }
-                        ]
-                    }
-                ]
+                "name": "alexa-layouts",
+                "version": "1.4.0"
             }
-        ]
-    }
+        ],
+        "mainTemplate": {
+            "parameters": [
+                "payload"
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "height": "100vh",
+                    "width": "100vw",
+                    "paddingTop": "@spacingSmall",
+                    "bind": [
+                        {
+                            "name": "sliderThumbPosition",
+                            "value": 0
+                        },
+                        {
+                            "name": "videoProgressValue",
+                            "type": "number",
+                            "value": 0
+                        },
+                        {
+                            "name": "videoTotalValue",
+                            "type": "number",
+                            "value": 0
+                        }
+                    ],
+                    "items": [
+                        {
+                            "type": "AlexaBackground"
+                        },
+                        {
+                            "autoplay": true,
+                            "audioTrack": "foreground",
+                            "onPlay": [
+                                {
+                                    "type": "SetValue",
+                                    "property": "videoTotalValue",
+                                    "value": "${event.duration}"
+                                }
+                            ],
+                            "onTrackUpdate": [
+                                {
+                                    "type": "SetValue",
+                                    "property": "videoTotalValue",
+                                    "value": "${event.duration}"
+                                }
+                            ],
+                            "onTimeUpdate": [
+                                {
+                                    "type": "SetValue",
+                                    "property": "videoProgressValue",
+                                    "value": "${event.currentTime}"
+                                },
+                                {
+                                    "type": "SetValue",
+                                    "componentId": "slider",
+                                    "property": "progressValue",
+                                    "value": "${videoProgressValue}"
+                                },
+                                {
+                                    "type": "SetValue",
+                                    "property": "videoTotalValue",
+                                    "value": "${event.duration}"
+                                }
+                            ],
+                            "onTrackReady": [
+                                {
+                                    "type": "SetValue",
+                                    "property": "videoTotalValue",
+                                    "value": "${event.duration}"
+                                }
+                            ],
+                            "onTrackFail": [
+                                {
+                                    "type": "SetValue",
+                                    "property": "videoTotalValue",
+                                    "value": "0"
+                                }
+                            ],
+                            "scale": "best-fit",
+                            "source": [
+                                "https://2093d99d-98ca-46f3-913f-7cf95aecfc1b-us-east-1.s3.us-east-1.amazonaws.com/Media/INSIGNIA_VC_VIDEO.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFgaCXVzLWVhc3QtMSJHMEUCIQDbiX0lmy43t9rlveCyg9zlflJA2nEeDMoF05SjHFA1AgIgPGlE6rSfO%2F9JU87TJk3UgiBP7D1%2FKpcYqkCUXzxagrQq9QIIQRAAGgwzODM3MTM0ODI4NTgiDJDyB6P%2FmjEbnu%2FYcCrSAoXAuv%2BJhmbhoIluWjY9zn9zIn7bansOoC5nVZ967cZwEHOP6IAy%2BZQlNTQsOljCmH6W0u1ckanEMpOFaa0L8P3IY15%2FSxJgqMIQfaVros0gr2tpq6gpqashxPw8w7dyYRZZ%2BHXxyEm4r4%2BUkd2A4rKzLU0YNGWYr56DdzgtiQOOSZtKR%2F9wj4PScrmKxbY7iGJ%2F5DeN%2FRDRFebzEYzMcNVDugfj3KPC1BYpbIOV%2FhaoMHEsnzjlUrq1KgNnA3e5I2RE5Me9oiovMUKktWgeqWpgtVLrTbXT6%2BgyB%2F4NCznsr9irG624eob9WaMtNLox2MUhhxbsdWVT96ZuQH0EgHrHlnIsWOOis843sTnw6ZqbxYUIwm3HG5m1AUM81FrroTnfvvbr%2BvYa8uuxPJzz4r84ZI69IEKj4y%2FeKyMtf5HDJ4ZfhoJW7%2Fw%2F5zqlgXUMvq9IMP3y240GOocCI7cVaWOis1yWXNm2sE%2F4bYQRS5aQrILjSV3B6mU323okAUMItMSOxWz1%2B2ICUjiMcqJqAVQMcOOpY8U%2BhVE0hYfM87dinlbGCkAn19heN3Et8m1tbeZFxydHm3A9ccZIL1JM01B9J0cD9aBxZHawTZndbnR229I9Pyw3O99Dlh3aBoWUNttzMBcsbgzHxTCAfzz8jgVtjLXhTWChXEnscBpZEbZWhT8PSPRSlD7fqNANmwVmEcff6fsL%2F5H7JAq5%2BP30sUAkTv7Gsgvvli9rIXJeXeQC7FiFrIo2ymvhnBLqdAIhf%2FMMz30B%2FHw4fHsr53557l%2BmtHpjk56fyqDxCnpXW9drvhE%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20211213T074306Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAVSVY3DBVDHNBT3XY%2F20211213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=dc4b5b16682a560bb71bb459bdb600ca4cd0c3b1a4e6306d69aa3961cdd38a73"
+                            ],
+                            "type": "Video",
+                            "id": "videoPlayerId",
+                            "width": "70vw",
+                            "height": "100%",
+                            "alignSelf": "center",
+                            "shrink": 1
+                        },
+                        {
+                            "type": "Container",
+                            "alignItems": "center",
+                            "item": [
+                                {
+                                    "type": "AlexaSlider",
+                                    "id": "slider",
+                                    "progressValue": "${videoProgressValue}",
+                                    "totalValue": "${videoTotalValue}",
+                                    "positionPropertyName": "sliderThumbPosition",
+                                    "metadataDisplayed": true,
+                                    "metadataPosition": "above_right",
+                                    "width": "75vw",
+                                    "paddingBottom": "90dp",
+                                    "onUpCommand": [
+                                        {
+                                            "type": "SetValue",
+                                            "componentId": "debugText",
+                                            "property": "text",
+                                            "value": "${sliderThumbPosition - videoProgressValue}"
+                                        },
+                                        {
+                                            "type": "ControlMedia",
+                                            "componentId": "videoPlayerId",
+                                            "command": "seek",
+                                            "value": "${sliderThumbPosition - videoProgressValue}"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "AlexaTransportControls",
+                                    "mediaComponentId": "videoPlayerId",
+                                    "playPauseToggleButtonId": "playPauseToggleButtonId",
+                                    "primaryControlSize": "70dp",
+                                    "secondaryControlSize": "60dp",
+                                    "autoplay": true,
+                                    "position": "absolute",
+                                    "bottom": "10dp"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "datasources": {},
+    "sources": {}
 }
