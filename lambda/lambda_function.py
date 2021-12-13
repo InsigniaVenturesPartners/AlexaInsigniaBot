@@ -384,8 +384,8 @@ sb = SkillBuilder()
 
 
 sb.add_request_handler(LaunchRequestHandler())
-sb.add_request_handler(PlayIntentHandler())
-sb.add_request_handler(PauseIntentHandler())
+#sb.add_request_handler(PlayIntentHandler())
+#sb.add_request_handler(PauseIntentHandler())
 sb.add_request_handler(UserEventHandler())
 
 sb.add_request_handler(IntroductionIntentHandler())
