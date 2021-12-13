@@ -170,6 +170,8 @@ class VideoIntentHandler(AbstractRequestHandler):
             )
         else:
             speak_output += "Sorry, this device does not support video playing."
+        
+        return response_builder.speak(speak_output).response
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
