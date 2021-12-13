@@ -31,7 +31,7 @@ def get_video_directive():
             "videoPlayerData": {
                 "properties" : {
                     "url1" : create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
-                    "url2"
+                    "url2" : create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
                 }
             }
         }
