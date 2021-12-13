@@ -324,7 +324,6 @@ class SessionEndedRequestHandler(AbstractRequestHandler):
 
         return handler_input.response_builder.response
 
-
 class IntentReflectorHandler(AbstractRequestHandler):
     """The intent reflector is used for interaction model testing and debugging.
     It will simply repeat the intent the user said. You can create custom handlers
@@ -380,7 +379,6 @@ sb = SkillBuilder()
 sb.add_request_handler(LaunchRequestHandler())
 #sb.add_request_handler(PlayIntentHandler())
 #sb.add_request_handler(PauseIntentHandler())
-#sb.add_request_handler(UserEventHandler())
 
 sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(FounderInfoIntentHandler())
