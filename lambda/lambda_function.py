@@ -30,7 +30,7 @@ def get_video_directive():
         datasources = {
             "videoPlayerData": {
                 "properties" : {
-                    "url" : create_presigned_url("Media/INSIGNIA_VIDEO.mp4")
+                    "url" : create_presigned_url("Media/INSIGNIA_VC_VIDEO.mp4")
                 }
             }
         }
