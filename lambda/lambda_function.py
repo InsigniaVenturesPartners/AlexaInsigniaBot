@@ -24,7 +24,6 @@ def get_coinvestor(coinvestor):
     return DATA["COMPANIES"].get(coinvestor.upper())
 
 def get_video_directive():
-    '''
     video_directive = RenderDocumentDirective(
         token = "VideoPlayer",
         document = load_json_from_path("apl/videoplayer.json"),
@@ -36,7 +35,6 @@ def get_video_directive():
             }
         }
     )
-    '''
     
     video_directive = RenderDocumentDirective(
         token = "VideoPlayer",
