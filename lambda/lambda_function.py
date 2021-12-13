@@ -207,7 +207,6 @@ class NoIntentHandler(AbstractRequestHandler):
         response_builder = handler_input.response_builder
         
         global CURRENT_STATE
-        
         if CURRENT_STATE == "PROMPTING_VIDEO":
             speak_output += "Okay, that's alright"
         
