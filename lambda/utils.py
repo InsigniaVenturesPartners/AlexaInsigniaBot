@@ -27,6 +27,11 @@ def create_presigned_url(object_name):
     # The response contains the presigned URL
     return response
 
+def connect_to_dynamodb():
+    dynamodb_client = boto3.client("dynamodb",
+                                    region_name="us-east-1") # how to env 
+    return dynamodb_client
+
 def load_json_from_path(file_path):
     with open(file_path) as f:
         return json.load(f)
