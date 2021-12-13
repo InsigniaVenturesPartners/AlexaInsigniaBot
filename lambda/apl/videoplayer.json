@@ -42,7 +42,7 @@
                         "autoplay": true,
                         "audioTrack": "foreground",
                         "source": [
-                            "https://2093d99d-98ca-46f3-913f-7cf95aecfc1b-us-east-1.s3.amazonaws.com/Media/INSIGNIA_VC_VIDEO.mp4"
+                            "https://2093d99d-98ca-46f3-913f-7cf95aecfc1b-us-east-1.s3.us-east-1.amazonaws.com/Media/INSIGNIA_VC_VIDEO.mp4?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFgaCXVzLWVhc3QtMSJIMEYCIQCifKQsoC4b%2B0u4Dyv7MQJgP5iLBA3rhZ9oCn2EjqTicgIhAIB1MAKWuwKquoqYOg%2B0f5j500YIeBlQ34593LQBj3IEKvUCCEEQABoMMzgzNzEzNDgyODU4Igx6wC93NRTdVsH%2Buikq0gLyg9eMDaMKdZLTm806%2BDD9gEaVyFOh8x0j6HT59Ok60ChfgZJZQUJSQ77z9DPgQ2f1GJwJy0i%2B%2Bj7Ce4qNUd%2F3aej%2BuqqSgGvRlhDBlqaTCZ7Ki%2FCF6tuTZtV8S5rj9DDFeDp83rYLUhl3dEXrj7zwovVYfr7KPezUul17UA0mQB5YdT48ZnBgHdnEb0oGWB0%2Bac89gIsNh7okueVBQRoHuKaMoMdrMc8CdkmCcNuo02cmnYF%2BzZoxbfFYsp3lYqbK%2BALDhmnCtLN0yCKyEG9ezY21qRlkjgbUQDXN%2BhGPFlU%2FzD7FsHrgMKSjI8ILeld9mq7OXQ6mkW3Zv3OCtFc8jNsMaXx67ajcQeUAJSkz41uFIXuZWJ%2F6GEUM4BG%2FDhH0YG9Nhhw4pk8XwEAJ2tag5nbU5q3idLE5d4lvSyD3Ik4Fa9uWUagPu7LCML%2FIcqfTRDC87duNBjqGApLIdwwla2aXs7RLqJCAuGWBXGcdYGwUEzMfV4oZoggMTFy2Jl%2BMQ5CevgBRyOOx2W3u6Sql0zY1ozkQwUVeJL8RCaAKdVf3OdpjgG98n%2BD8p7hWO7H3T7%2Foe7e9z248VnZSxFOHxs7gmzQnBV2MM%2BY5%2BKpBQMWyi%2BRWihg8NcBNwRzzti87AjQM%2BUSX5Z6o4Sp%2BA%2FL5mB6OUU1Cl4R1nscH8uiATq6nMDXQQBojr47wN1RYx7Xk3aec5i0OmkB%2BxyBolq19rJO35mG%2B5QiSeFN1X5DTWz1VUgCDnLsSK9i%2FRQmxr248eLXhC4ATiNVXrnLAXwJidVqFGJfwkqSbtoc81HNJg0Q%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20211213T073550Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAVSVY3DBVFJ7MH5AQ%2F20211213%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=da5fca8efcda22ab0c8a38061f6e18f79c35e7e1fce4e06d4d4f7367fe4b6063"
                         ],
                         "onPlay": [
                             {
@@ -90,6 +90,7 @@
                                 "value": "0"
                             }
                         ],
+                        "scale": "best-fit",
                         "type": "Video",
                         "id": "videoPlayerId",
                         "width": "70vw",
