@@ -216,53 +216,6 @@ class NoIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class PlayIntentHandler(AbstractRequestHandler):
-    
-    def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("AMAZON.ResumeIntent")(handler_input)
-    
-    def handle(self, handler_input):
-        video_directive = ExecuteCommandsDirective(
-                            token = "videoplayer",
-                            commands = [
-                                {
-                                    "type": "ControlMedia",
-                                    "componentId": "videoPlayer",
-                                    "command": "play"
-                                },
-                                {
-                                    "type": "showOverlayShortly"
-                                }
-                            ]
-        )
-        return (
-            handler_input.response_builder
-                .add_directive(video_directive)
-                .response
-            )
-
-class PauseIntentHandler(AbstractRequestHandler):
-    
-    def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("AMAZON.PauseIntent")(handler_input)
-    
-    def handle(self, handler_input):
-        video_directive = ExecuteCommandsDirective(
-                            token = "videoplayer",
-                            commands = [
-                                {
-                                    "type": "ControlMedia",
-                                    "componentId": "videoPlayer",
-                                    "command": "pause"
-                                }
-                            ]
-                            )
-        return (
-            handler_input.response_builder
-                .add_directive(video_directive)
-                .response
-            )
-
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
     def can_handle(self, handler_input):
