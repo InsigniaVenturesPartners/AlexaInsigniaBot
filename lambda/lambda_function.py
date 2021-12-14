@@ -88,8 +88,7 @@ class NewsIntentHandler(AbstractRequestHandler):
         response_builder = handler_input.response_builder
         speech_output = get_news()[READ_NEWS]["title"]
         READ_NEWS += 1
-        speech_output += ". Would you like more news?"
-        
+        speech_output += ". Would you like more news?
         return response_builder.speak(speech_output).ask(speech_output).response
 
 class InvestorCEOIntentHandler(AbstractRequestHandler):
