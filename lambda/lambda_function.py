@@ -190,7 +190,12 @@ class YesIntentHandler(AbstractRequestHandler):
             else:
                 speak_output += "Sorry, this device does not support video playing."
         elif CURRENT_STATE == "PROMPTING_NEWS":
-            ()
+            response_builder = handler_input.response_builder
+            speech_output = get_news()[READ_NEWS]["title"]
+            READ_NEWS += 1
+            speech_output += ". Would you like more news?"
+            CURRENT_STATE = "PROMPTING_NEWS"
+            return response_builder.speak(speech_output).ask(speech_output).response
         CURRENT_STATE = "IDLE"
         return response_builder.speak(speak_output).response
 
