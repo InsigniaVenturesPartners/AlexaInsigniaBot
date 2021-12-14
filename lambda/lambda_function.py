@@ -17,7 +17,6 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 CURRENT_STATE = "IDLE"
-READ_NEWS = 0;
 DATA = load_json_from_path("data.json")
 
 def get_coinvestor(coinvestor):
@@ -85,13 +84,7 @@ class NewsIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("NewsIntent")(handler_input)
 
     def handle(self, handler_input): 
-        speech_output = ""
-        for i, news in enumerate(get_news()[:2]):
-            speech_output += f"{i + 1}. {news['title']}. "
-        
-        # news = [i["title"] + ". " for i in get_news()[:2]]
-        # speech_output = "".join(news)
-        print(speech_output)
+        speech_output = get_news()[0]["title"]
         return (
             handler_input.response_builder
                 .speak(speech_output)
