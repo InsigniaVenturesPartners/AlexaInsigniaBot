@@ -211,6 +211,7 @@ class YesIntentHandler(AbstractRequestHandler):
                 .ask(speech_output)
                 .response
             )
+        else: return response_builder
         
 
 class NoIntentHandler(AbstractRequestHandler):
