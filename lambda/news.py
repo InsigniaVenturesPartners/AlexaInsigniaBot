@@ -33,6 +33,5 @@ def get_news():
         key=lambda article: datetime.datetime.strptime(article["date"] or "1970-01-01","%Y-%m-%d"),
         reverse=True
     )
-    print(articles)
 
     return articles
