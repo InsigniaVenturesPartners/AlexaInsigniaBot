@@ -86,6 +86,7 @@ class NewsIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         global READ_NEWS
+        global CURRENT_STATE
         READ_NEWS = 0
         response_builder = handler_input.response_builder
         speech_output = get_news()[READ_NEWS]["title"]
