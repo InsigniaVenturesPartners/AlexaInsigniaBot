@@ -197,7 +197,6 @@ class YesIntentHandler(AbstractRequestHandler):
             speech_output += ". Would you like more news?"
             CURRENT_STATE = "PROMPTING_NEWS"
             return response_builder.speak(speech_output).ask(speech_output).response
-            CURRENT_STATE = "IDLE"
         
 
 class NoIntentHandler(AbstractRequestHandler):
