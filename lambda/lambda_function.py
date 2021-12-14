@@ -90,6 +90,7 @@ class NewsIntentHandler(AbstractRequestHandler):
         READ_NEWS += 1
         
         
+        
         return (
             handler_input.response_builder
                 .speak(speech_output)
