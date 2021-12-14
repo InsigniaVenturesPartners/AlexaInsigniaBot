@@ -85,7 +85,7 @@ class NewsIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("NewsIntent")(handler_input)
 
     def handle(self, handler_input): 
-        speech_output = get_news()[0]["title"]
+        speech_output = get_news()[READ_NEWS]["title"]
         return (
             handler_input.response_builder
                 .speak(speech_output)
