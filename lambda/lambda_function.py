@@ -93,11 +93,11 @@ class NewsIntentHandler(AbstractRequestHandler):
         speech_output += ". Would you like more news?"
         CURRENT_STATE = "PROMPTING_NEWS"
         return (
-                handler_input.response_builder
-                .speak(speech_output)
-                .ask(speech_output)
-                .response
-            )
+            handler_input.response_builder
+            .speak(speech_output)
+            .ask(speech_output)
+            .response
+        )
 
 class InvestorCEOIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
