@@ -185,6 +185,7 @@ class YesIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("AMAZON.YesIntent")(handler_input)
 
     def handle(self, handler_input):
+        print("ffs yes intent is working")
         speak_output = ""
         response_builder = handler_input.response_builder
         
