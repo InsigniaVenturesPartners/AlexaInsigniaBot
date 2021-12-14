@@ -199,7 +199,6 @@ class YesIntentHandler(AbstractRequestHandler):
                 speak_output += "Sorry, this device does not support video playing."
             return response_builder.speak(speak_output).response
         elif CURRENT_STATE == "PROMPTING_NEWS":
-            print("state is correct")
             global READ_NEWS
             speech_output += get_news()[READ_NEWS]["title"]
             READ_NEWS += 1
