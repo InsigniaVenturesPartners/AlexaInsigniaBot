@@ -86,7 +86,7 @@ class NewsIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input): 
         speech_output = ""
         for i, news in enumerate(get_news()[:2]):
-            speech_output += f"{i}. {news['title']}. "
+            speech_output += f"{i + 1}. {news['title']}. "
         
         # news = [i["title"] + ". " for i in get_news()[:2]]
         # speech_output = "".join(news)
