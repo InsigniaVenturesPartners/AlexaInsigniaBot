@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 CURRENT_STATE = "IDLE"
+READ_NEWS = 0
 DATA = load_json_from_path("data.json")
 
 def get_coinvestor(coinvestor):
