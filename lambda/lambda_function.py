@@ -134,7 +134,15 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
         if data:
             speech_output = data["INFO"]
             if "VIDEO" in data:
-                
+                global CURRENT_STATE
+                CURRENT_STATE = "PROMPTING_VIDEO"
+                speech_output = DATA["COMPANYINTRO"] + " Would you like to watch a video from Insignia Ventures Partners?"
+                return (
+                    handler_input.response_builder
+                        .speak(speech_output)
+                        .ask(speech_output)
+                        .response
+                )
             
         else:
             speech_output = "Sorry, the coinvestor " + company + " could not be found."
