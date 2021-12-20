@@ -126,6 +126,8 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         company = handler_input.request_envelope.request.intent.slots["company"].value
         data = None
+        if company:
+            get_company(company)
         print("company: " + company)
         print(data)
         speech_output = ""
