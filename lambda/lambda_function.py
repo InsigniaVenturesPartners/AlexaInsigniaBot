@@ -330,7 +330,6 @@ sb = SkillBuilder()
 sb.add_request_handler(LaunchRequestHandler())
 
 sb.add_request_handler(IntroductionIntentHandler())
-sb.add_request_handler(FounderInfoIntentHandler())
 sb.add_request_handler(CompanyInfoIntentHandler())
 sb.add_request_handler(CompanyCEOIntentHandler())
 sb.add_request_handler(CompanyFounderIntentHandler())
