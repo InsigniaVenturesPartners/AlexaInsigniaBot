@@ -52,20 +52,6 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .response
         )
 
-class IntroductionIntentHandler(AbstractRequestHandler):
-    def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("IntroductionIntent")(handler_input)
-
-    def handle(self, handler_input):
-        global CURRENT_STATE
-        CURRENT_STATE = "PROMPTING_VIDEO"
-        speech_output = DATA["COMPANYINTRO"] + " Would you like to watch a video from Insignia Ventures Partners?"
-        return (
-            handler_input.response_builder
-                .speak(speech_output)
-                .ask(speech_output)
-                .response
-        )
 
 class NewsIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
