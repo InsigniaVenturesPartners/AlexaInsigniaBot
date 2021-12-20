@@ -67,19 +67,6 @@ class IntroductionIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class FounderInfoIntentHandler(AbstractRequestHandler):
-    def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("FounderInfoIntent")(handler_input)
-
-    def handle(self, handler_input):
-        speech_output = DATA["FOUNDER"]
-        return (
-            handler_input.response_builder
-                .speak(speech_output)
-                .ask(speech_output)
-                .response
-        )
-
 class NewsIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("NewsIntent")(handler_input)
@@ -127,7 +114,6 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
         company = handler_input.request_envelope.request.intent.slots["company"].value
         data = None
         if company:
-            
             data = get_company(company.split()[0])
         speech_output = ""
         if data:
