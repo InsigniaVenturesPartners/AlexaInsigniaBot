@@ -152,7 +152,7 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
     
     def handle(self, handler_input):
         company = handler_input.request_envelope.request.intent.slots["company"].value
-        data = company(company)
+        data = get_company(company)
         if data:
             speech_output = data["INFO"]
         else:
