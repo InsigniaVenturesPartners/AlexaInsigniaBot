@@ -22,7 +22,7 @@ DATA = load_json_from_path("data.json")
 
 def get_company(company):
     global DATA
-    return DATA["COMPANIES"].get(coinvestor.upper())
+    return DATA["COMPANIES"].get(company.upper())
 
 def get_video_directive():
     video_directive = RenderDocumentDirective(
