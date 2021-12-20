@@ -93,7 +93,9 @@ class CompanyCEOIntentHandler(AbstractRequestHandler):
     
     def handle(self, handler_input):
         company = handler_input.request_envelope.request.intent.slots["company"].value
-        data = get_company(company)
+        data = None
+        if company:
+            data = get_company(company.split()[0])
         speech_output = ""
         if data:
             speech_output = "The CEO of " + company + " is " + data["CEO"] + "."
