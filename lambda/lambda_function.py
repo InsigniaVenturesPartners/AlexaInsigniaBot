@@ -207,7 +207,6 @@ class YesIntentHandler(AbstractRequestHandler):
             return response_builder.speak_output(speak_output).ask(speak_output).response
         else: return response_builder.speak_output(speak_output).response
         
-
 class NoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("AMAZON.NoIntent")(handler_input)
