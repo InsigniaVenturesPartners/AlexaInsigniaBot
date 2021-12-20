@@ -124,8 +124,8 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("CompanyFounderIntent")(handler_input)
     
     def handle(self, handler_input):
-        coinvestor = handler_input.request_envelope.request.intent.slots["company"].value
-        data = get_company(coinvestor)
+        company = handler_input.request_envelope.request.intent.slots["company"].value
+        data = get_company(company)
         speech_output = ""
         if data:
             founders = data["FOUNDER"]
