@@ -102,7 +102,7 @@ class NewsIntentHandler(AbstractRequestHandler):
 
 class InvestorCEOIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("CompanyInfoIntent")(handler_input)
+        return ask_utils.is_intent_name("CompanyCEOIntent")(handler_input)
     
     def handle(self, handler_input):
         coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
