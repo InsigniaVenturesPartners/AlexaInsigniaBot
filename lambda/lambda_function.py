@@ -52,7 +52,6 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .response
         )
 
-
 class NewsIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("NewsIntent")(handler_input)
@@ -318,7 +317,6 @@ sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
 
-sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(CompanyInfoIntentHandler())
 sb.add_request_handler(CompanyCEOIntentHandler())
 sb.add_request_handler(CompanyFounderIntentHandler())
