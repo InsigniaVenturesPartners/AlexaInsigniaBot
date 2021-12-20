@@ -20,7 +20,7 @@ CURRENT_STATE = "IDLE"
 READ_NEWS = 0
 DATA = load_json_from_path("data.json")
 
-def get_coinvestor(coinvestor):
+def get_company(coinvestor):
     global DATA
     return DATA["COMPANIES"].get(coinvestor.upper())
 
