@@ -100,7 +100,7 @@ class NewsIntentHandler(AbstractRequestHandler):
             .response
         )
 
-class InvestorCEOIntentHandler(AbstractRequestHandler):
+class CompanyCEOIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("CompanyCEOIntent")(handler_input)
     
