@@ -128,7 +128,7 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
         data = None
         if company:
             
-            data = get_company(company)
+            data = get_company(company.split()[0])
         speech_output = ""
         if data:
             founders = data["FOUNDER"]
