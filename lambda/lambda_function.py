@@ -136,7 +136,7 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
             if "VIDEO" in data:
                 global CURRENT_STATE
                 CURRENT_STATE = "PROMPTING_VIDEO"
-                speech_output = DATA["COMPANYINTRO"] + " Would you like to watch a video from Insignia Ventures Partners?"
+                speech_output += " Would you like to watch a video from Insignia Ventures Partners?"
                 return (
                     handler_input.response_builder
                         .speak(speech_output)
