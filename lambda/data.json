@@ -2,7 +2,8 @@
     "COMPANIES": {
         "INSIGNIA": {
             "CEO": "Tan Yinglan",
-            "FOUNDER": ["Tan Yinglan"]
+            "FOUNDER": ["Tan Yinglan"],
+            "INFO"
         }
         "GOTO": {
             "CEO": "Andre Soelistyo",
