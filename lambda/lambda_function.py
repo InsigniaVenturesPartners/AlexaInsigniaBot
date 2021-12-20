@@ -148,6 +148,8 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
             data = get_company(company.split()[0])
         if data:
             speech_output = data["INFO"]
+            
+            
         else:
             speech_output = "Sorry, the coinvestor " + company + " could not be found."
         
