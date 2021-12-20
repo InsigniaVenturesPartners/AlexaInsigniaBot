@@ -149,6 +149,8 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
         if data:
             speech_output = data["INFO"]
             
+            if "VIDEO" in data:
+                
             
         else:
             speech_output = "Sorry, the coinvestor " + company + " could not be found."
