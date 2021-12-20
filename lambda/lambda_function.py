@@ -338,7 +338,7 @@ sb.add_request_handler(LaunchRequestHandler())
 
 sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(FounderInfoIntentHandler())
-sb.add_request_handler(InvestorInfoIntentHandler())
+sb.add_request_handler(CompanyInfoIntentHandler())
 sb.add_request_handler(InvestorCEOIntentHandler())
 sb.add_request_handler(InvestorFoundersIntentHandler())
 sb.add_request_handler(VideoIntentHandler())
