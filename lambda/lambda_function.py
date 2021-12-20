@@ -148,7 +148,6 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
             data = get_company(company.split()[0])
         if data:
             speech_output = data["INFO"]
-            
             if "VIDEO" in data:
                 
             
