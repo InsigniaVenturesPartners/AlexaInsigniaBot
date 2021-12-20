@@ -1,6 +1,8 @@
 {
     "COMPANIES": {
-        
+        "INSIGNIA": {
+            
+        }
         "GOTO": {
             "CEO": "Andre Soelistyo",
             "FOUNDER": ["Andre Soelistyo", "Patrick Cao"],
