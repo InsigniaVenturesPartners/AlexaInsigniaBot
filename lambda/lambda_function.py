@@ -111,7 +111,7 @@ class CompanyCEOIntentHandler(AbstractRequestHandler):
         if data:
             speech_output = "The CEO of " + company + " is " + data["CEO"] + "."
         else:
-            speech_output = "Sorry, the coinvestor " + company + " could not be found."
+            speech_output = "Sorry, the company " + company + " could not be found."
         
         return (
             handler_input.response_builder
