@@ -340,7 +340,7 @@ sb.add_request_handler(IntroductionIntentHandler())
 sb.add_request_handler(FounderInfoIntentHandler())
 sb.add_request_handler(CompanyInfoIntentHandler())
 sb.add_request_handler(CompanyCEOIntentHandler())
-sb.add_request_handler(InvestorFoundersIntentHandler())
+sb.add_request_handler(CompanyFounderIntentHandler())
 sb.add_request_handler(VideoIntentHandler())
 sb.add_request_handler(NewsIntentHandler())
 
