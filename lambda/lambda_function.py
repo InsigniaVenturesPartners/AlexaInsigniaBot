@@ -105,7 +105,7 @@ class CompanyCEOIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("CompanyCEOIntent")(handler_input)
     
     def handle(self, handler_input):
-        coinvestor = handler_input.request_envelope.request.intent.slots["coinvestor"].value
+        coinvestor = handler_input.request_envelope.request.intent.slots["company"].value
         data = get_company(coinvestor)
         speech_output = ""
         if data:
