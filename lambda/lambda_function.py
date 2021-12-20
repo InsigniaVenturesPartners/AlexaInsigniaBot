@@ -146,7 +146,7 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
                 .response
         )
 
-class InvestorInfoIntentHandler(AbstractRequestHandler):
+class CompanyInfoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("InvestorInfoIntent")(handler_input)
     
