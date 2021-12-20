@@ -130,7 +130,7 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
         if data:
             founders = data["FOUNDER"]
             if len(founders) > 1:
-                speech_output = "The Founders of " + coinvestor + " are "
+                speech_output = "The Founders of " + company + " are "
                 for i in range(len(founders) - 1):
                     speech_output += founders[i]
                     speech_output += ", "
