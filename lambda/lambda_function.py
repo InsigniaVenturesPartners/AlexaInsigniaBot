@@ -138,7 +138,7 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
             else:
                 speech_output = "The Founder of " + company +  " is " + founders[0] + "."
         else:
-            speech_output = "Sorry, the coinvestor " + company + " could not be found."
+            speech_output = "Sorry, the company " + company + " could not be found."
         
         return (
             handler_input.response_builder
