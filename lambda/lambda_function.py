@@ -54,7 +54,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
 class InsigniaNewsIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
-        return ask_utils.is_intent_name("InsigniaNewsIntent")(handler_input)
+        return ask_utils.is_intent_name("NewsIntent")(handler_input)
 
     def handle(self, handler_input):
         global READ_NEWS
