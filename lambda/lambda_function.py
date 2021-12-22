@@ -197,7 +197,7 @@ class YesIntentHandler(AbstractRequestHandler):
         if CURRENT_STATE == "PROMPTING_VIDEO":
             if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
                 response_builder.add_directive(
-                    get_video_directive()
+                    get_video_directive("Insignia")
                 )
             else:
                 speak_output += "Sorry, this device does not support video playing."
