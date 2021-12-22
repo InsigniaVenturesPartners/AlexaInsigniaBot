@@ -31,7 +31,7 @@ def get_video_directive(company_name):
         datasources = {
             "videoPlayerData": {
                 "properties" : {
-                    "url" : create_presigned_url("Media/.mov" + company_name.upper() + ".mov")
+                    "url" : create_presigned_url("Media/" + company_name.upper() + ".mov")
                 }
             }
         }
