@@ -24,14 +24,14 @@ def get_company(company):
     global DATA
     return DATA["COMPANIES"].get(company.upper())
 
-def get_video_directive():
+def get_video_directive(company_name):
     video_directive = RenderDocumentDirective(
         token = "VideoPlayer",
         document = load_json_from_path("apl/videoplayer.json"),
         datasources = {
             "videoPlayerData": {
                 "properties" : {
-                    "url" : create_presigned_url("Media/INSIGNIA_VC_VIDEO.mov")
+                    "url" : create_presigned_url("Media/" + company_name.upper() + ".mov")
                 }
             }
         }
@@ -61,7 +61,7 @@ class InsigniaNewsIntentHandler(AbstractRequestHandler):
         global CURRENT_STATE
         READ_NEWS = 0
         response_builder = handler_input.response_builder
-        speech_output = get_news()[READ_NEWS]["title"]
+        speech_output = get_insignia_news()[READ_NEWS]["title"]
         READ_NEWS += 1
         speech_output += ". Would you like more news?"
         CURRENT_STATE = "PROMPTING_NEWS"
@@ -71,6 +71,21 @@ class InsigniaNewsIntentHandler(AbstractRequestHandler):
             .ask(speech_output)
             .response
         )
+
+class NewsIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("NewsIntent")(handler_input)
+
+    def handle(self, handler_input):
+        response_builder = handler_input.response_builder
+        speech_output = get_other_news()[0]["title"]
+        return (
+            handler_input.response_builder
+            .speak(speech_output)
+            .response
+        )
+
+
 
 class CompanyCEOIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -163,7 +178,7 @@ class VideoIntentHandler(AbstractRequestHandler):
         
         if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
             response_builder.add_directive(
-                get_video_directive()
+                get_video_directive("Insignia")
             )
         else:
             speak_output += "Sorry, this device does not support video playing."
@@ -182,7 +197,7 @@ class YesIntentHandler(AbstractRequestHandler):
         if CURRENT_STATE == "PROMPTING_VIDEO":
             if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
                 response_builder.add_directive(
-                    get_video_directive()
+                    get_video_directive("Insignia")
                 )
             else:
                 speak_output += "Sorry, this device does not support video playing."
