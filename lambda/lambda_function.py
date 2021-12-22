@@ -36,7 +36,7 @@ def get_video_directive(company_name):
             }
         }
     )
-    
+
     return video_directive
 
 class LaunchRequestHandler(AbstractRequestHandler):
@@ -85,12 +85,10 @@ class NewsIntentHandler(AbstractRequestHandler):
             .response
         )
 
-
-
 class CompanyCEOIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("CompanyCEOIntent")(handler_input)
-    
+
     def handle(self, handler_input):
         company = handler_input.request_envelope.request.intent.slots["company"].value
         data = None
@@ -101,7 +99,7 @@ class CompanyCEOIntentHandler(AbstractRequestHandler):
             speech_output = "The CEO of " + company + " is " + data["CEO"] + "."
         else:
             speech_output = "Sorry, the company " + company + " could not be found."
-        
+
         return (
             handler_input.response_builder
                 .speak(speech_output)
@@ -111,7 +109,7 @@ class CompanyCEOIntentHandler(AbstractRequestHandler):
 class CompanyFounderIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("CompanyFounderIntent")(handler_input)
-    
+
     def handle(self, handler_input):
         company = handler_input.request_envelope.request.intent.slots["company"].value
         data = None
@@ -130,7 +128,7 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
                 speech_output = "The Founder of " + company +  " is " + founders[0] + "."
         else:
             speech_output = "Sorry, the company could not be found."
-        
+
         return (
             handler_input.response_builder
                 .speak(speech_output)
@@ -140,7 +138,7 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
 class CompanyInfoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("CompanyInfoIntent")(handler_input)
-    
+
     def handle(self, handler_input):
         company = handler_input.request_envelope.request.intent.slots["company"].value
         data = None
@@ -158,10 +156,10 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
                         .ask(speech_output)
                         .response
                 )
-            
+
         else:
             speech_output = "Sorry, the coinvestor " + company + " could not be found."
-        
+
         return (
             handler_input.response_builder
                 .speak(speech_output)
@@ -171,18 +169,18 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
 class VideoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("VideoIntent")(handler_input)
-    
+
     def handle(self, handler_input):
         speak_output = ""
         response_builder = handler_input.response_builder
-        
+
         if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
             response_builder.add_directive(
                 get_video_directive("Insignia")
             )
         else:
             speak_output += "Sorry, this device does not support video playing."
-        
+
         return response_builder.speak(speak_output).response
 
 class YesIntentHandler(AbstractRequestHandler):
@@ -192,7 +190,7 @@ class YesIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         speak_output = ""
         response_builder = handler_input.response_builder
-        
+
         global CURRENT_STATE
         if CURRENT_STATE == "PROMPTING_VIDEO":
             if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
@@ -210,7 +208,7 @@ class YesIntentHandler(AbstractRequestHandler):
             CURRENT_STATE = "PROMPTING_NEWS"
             return response_builder.speak_output(speak_output).ask(speak_output).response
         else: return response_builder.speak_output(speak_output).response
-        
+
 class NoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         return ask_utils.is_intent_name("AMAZON.NoIntent")(handler_input)
@@ -218,7 +216,7 @@ class NoIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         speak_output = ""
         response_builder = handler_input.response_builder
-        
+
         global CURRENT_STATE
         if CURRENT_STATE == "PROMPTING_VIDEO" or CURRENT_STATE == "PROMPTING_NEWS":
             speak_output += "Okay, that's alright"
