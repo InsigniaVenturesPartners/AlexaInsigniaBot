@@ -3,7 +3,7 @@ import datetime
 
 URL = "https://www.insignia.vc/startup_info/data.json"
 
-def get_news():
+def get_insignia_news():
     response = requests.get(URL)
     response_json = response.json()
 
