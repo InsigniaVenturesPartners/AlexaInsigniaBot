@@ -61,7 +61,7 @@ class InsigniaNewsIntentHandler(AbstractRequestHandler):
         global CURRENT_STATE
         READ_NEWS = 0
         response_builder = handler_input.response_builder
-        speech_output = get_news()[READ_NEWS]["title"]
+        speech_output = get_insignia_news()[READ_NEWS]["title"]
         READ_NEWS += 1
         speech_output += ". Would you like more news?"
         CURRENT_STATE = "PROMPTING_NEWS"
@@ -71,6 +71,21 @@ class InsigniaNewsIntentHandler(AbstractRequestHandler):
             .ask(speech_output)
             .response
         )
+
+class NewsIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("NewsIntent")(handler_input)
+
+    def handle(self, handler_input):
+        response_builder = handler_input.response_builder
+        speech_output = get_other_news()[0]["title"]
+        return (
+            handler_input.response_builder
+            .speak(speech_output)
+            .response
+        )
+
+
 
 class CompanyCEOIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
