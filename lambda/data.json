@@ -3,59 +3,72 @@
         "INSIGNIA": {
             "CEO": "Tan Yinglan",
             "FOUNDER": ["Tan Yinglan"],
-            "INFO": "Insignia Ventures Partners is an early-stage technology venture capital firm partnering with unstoppable founders to build great companies in Southeast Asia. Portfolio companies include Goto, Appier, Carro, Ajaib, Shipper, Tonik, Flip, Payfazz, Super and many other technology market leaders. We partner early with founders and support them from seed through growth stage as their companies create meaningful impact for millions of people in Southeast Asia and beyond. Our team of investment and operating professionals bring together decades of experience and proprietary networks to equip our founders with the tools they need for growth. Insignia Ventures Partners manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America."
+            "INFO": "Insignia Ventures Partners is an early-stage technology venture capital firm partnering with unstoppable founders to build great companies in Southeast Asia. Portfolio companies include Goto, Appier, Carro, Ajaib, Shipper, Tonik, Flip, Payfazz, Super and many other technology market leaders. We partner early with founders and support them from seed through growth stage as their companies create meaningful impact for millions of people in Southeast Asia and beyond. Our team of investment and operating professionals bring together decades of experience and proprietary networks to equip our founders with the tools they need for growth. Insignia Ventures Partners manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America.",
+            "VIDEO": true
         },
         "GOTO": {
             "CEO": "Andre Soelistyo",
             "FOUNDER": ["Andre Soelistyo", "Patrick Cao"],
-            "INFO": "GoTo is the largest technology group in Indonesia, combining on-demand, e-commerce and financial services through the Gojek, Tokopedia and GoTo Financial brands. It is the first platform in Southeast Asia to host these three essential use cases in one ecosystem, capturing a majority of Indonesian consumer household expenditure."
+            "INFO": "GoTo is the largest technology group in Indonesia, combining on-demand, e-commerce and financial services through the Gojek, Tokopedia and GoTo Financial brands. It is the first platform in Southeast Asia to host these three essential use cases in one ecosystem, capturing a majority of Indonesian consumer household expenditure.",
+            "VIDEO": false
         },
         "APPIER": {
             "CEO": "Chih-Han Yu",
             "FOUNDER": ["Chih Han Yu", "Winnie Lee"],
-            "INFO": "Appier is a technology company which enables businesses with artificial intelligence to grow and succeed based on data-driven decisions. We are a technology partner to some of the world’s leading brands, helping them effectively implement and leverage AI to drive business growth. Our suite of enterprise-grade products helps organizations maximize data, uncover hidden insights and personalize customer outreach. Appier was established in 2012 by a passionate team of experts in AI, data analysis, distributed systems and marketing. Appier now extends across 15 offices in 13 markets in Asia and Europe with more than 400 employees. It has raised US$162 million in funding, and has been recognized as a leader in AI by Fortune Magazine and others. "
+            "INFO": "Appier is a technology company which enables businesses with artificial intelligence to grow and succeed based on data-driven decisions. We are a technology partner to some of the world’s leading brands, helping them effectively implement and leverage AI to drive business growth. Our suite of enterprise-grade products helps organizations maximize data, uncover hidden insights and personalize customer outreach. Appier was established in 2012 by a passionate team of experts in AI, data analysis, distributed systems and marketing. Appier now extends across 15 offices in 13 markets in Asia and Europe with more than 400 employees. It has raised US$162 million in funding, and has been recognized as a leader in AI by Fortune Magazine and others. ",
+            "VIDEO": false
         },
         "TONIK": {
             "CEO": "Greg Krasnov",
             "FOUNDER": ["Greg Krasnov"],
-            "INFO": "Tonik is a transformative digital bank on a mission to revolutionize the way money works in Southeast Asia. Tonik is officially the Philippines’ first neobank to secure a digital bank license from the Bangko Sentral ng Pilipinas (BSP). Deposits are insured by the Philippine Deposit Insurance Corporation (PDIC)."
+            "INFO": "Tonik is a transformative digital bank on a mission to revolutionize the way money works in Southeast Asia. Tonik is officially the Philippines’ first neobank to secure a digital bank license from the Bangko Sentral ng Pilipinas (BSP). Deposits are insured by the Philippine Deposit Insurance Corporation (PDIC).",
+            "VIDEO": false
         },
         "CARRO": {
             "CEO": "Aaron Tan",
             "FOUNDER": ["Aaron Tan"],
-            "INFO": "Carro is an automotive marketplace that offers a full-stack service for all aspects of car ownership. By offering a trustworthy and transparent experience, Carro challenges the traditional way of buying and selling cars through a proprietary pricing algorithm."
+            "INFO": "Carro is an automotive marketplace that offers a full-stack service for all aspects of car ownership. By offering a trustworthy and transparent experience, Carro challenges the traditional way of buying and selling cars through a proprietary pricing algorithm.",
+            "VIDEO": false
         },
         "SHIPPER": {
             "CEO": "Phil Opamuratawongse",
             "FOUNDER": ["Phil Opamuratawongse", "Budi Handoko"],
-            "INFO": "Shipper is one of the fastest-growing tech company in Indonesia. In just few years, we have built a vast network of fulfilment centers and partnered with hundreds of local delivery companies across the country. We aim to digitize Indonesian logistics and enable cost-efficiencies at nationwide scale. Shipper is a Series B funded company backed by DST Global partners, Sequoia Capital India, Prosus Ventures, Floodgate, Lightspeed, Insignia Ventures, AC Ventures and Y Combinator."
+            "INFO": "Shipper is one of the fastest-growing tech company in Indonesia. In just few years, we have built a vast network of fulfilment centers and partnered with hundreds of local delivery companies across the country. We aim to digitize Indonesian logistics and enable cost-efficiencies at nationwide scale. Shipper is a Series B funded company backed by DST Global partners, Sequoia Capital India, Prosus Ventures, Floodgate, Lightspeed, Insignia Ventures, AC Ventures and Y Combinator.",
+            "VIDEO": false
         },
         "AJAIB": {
             "CEO": "Anderson Sumarli",
             "FOUNDER": ["Anderson Sumarli", "Yada Piyajomkwan"],
-            "INFO": "Ajaib is an online brokerage that allows Indonesians to buy and sell stocks, ETFs and mutual funds. We are Indonesia's leading financial technology platform driven by a mission to educate the importance of investing for the future."
+            "INFO": "Ajaib is an online brokerage that allows Indonesians to buy and sell stocks, ETFs and mutual funds. We are Indonesia's leading financial technology platform driven by a mission to educate the importance of investing for the future.",
+            "VIDEO": false
         },
         "FLIP": {
             "CEO": "Andre Soelistyo",
             "FOUNDER": ["Luqman Sungkar", "Ginanjar Ibnu Solikhin", "Rafi Putra Arriyan"],
-            "INFO": "Flip helps people send money securely without any transaction fee. Individual users are able to use Flip to send money across 14 biggest banks in Indonesia with zero cost. Meanwhile, business users can send money swiftly, securely, and with lower cost to more than 100 banks across Indonesia."
+            "INFO": "Flip helps people send money securely without any transaction fee. Individual users are able to use Flip to send money across 14 biggest banks in Indonesia with zero cost. Meanwhile, business users can send money swiftly, securely, and with lower cost to more than 100 banks across Indonesia.",
+            "VIDEO": false
         },
         "SUPER": {
             "CEO": "Steven Wongsoredjo",
             "FOUNDER": ["Steven Wongsoredjo", "Michael Rendy"],
-            "INFO": "Super is a social commerce platform targeting the over 240 million Indonesians who live in second-tier and third-tier cities in Indonesia. Super’s group buying model allows community leaders to become retailers in their communities and aggregates demand from households and MSMEs."
+            "INFO": "Super is a social commerce platform targeting the over 240 million Indonesians who live in second-tier and third-tier cities in Indonesia. Super’s group buying model allows community leaders to become retailers in their communities and aggregates demand from households and MSMEs.",
+            "VIDEO": false
         },
         "PINHOME": {
             "CEO": "Dayu Dara Permata",
             "FOUNDER": ["Dayu Dara Permata", "Ahmed Aljunied"],
-            "INFO": "Pinhome utilizes the best technology to ensure the property sale, purchase, and rental transactions through our platform become hassle-free, efficient, and transparent.Our mission is to remove the barriers that buyers and owners often experience when making property transactions by providing the best possible experience.We are a team of 200+ people with amazing backgrounds all across the functions. We called ourselves Pinfams and brace Customer Love, Impact Orientation, Entrepreneurial Mindset, Execution Excellence, and People Leadership as our core values."
+            "INFO": "Pinhome utilizes the best technology to ensure the property sale, purchase, and rental transactions through our platform become hassle-free, efficient, and transparent.Our mission is to remove the barriers that buyers and owners often experience when making property transactions by providing the best possible experience.We are a team of 200+ people with amazing backgrounds all across the functions. We called ourselves Pinfams and brace Customer Love, Impact Orientation, Entrepreneurial Mindset, Execution Excellence, and People Leadership as our core values.",
+            "VIDEO": false
         },
         "PAYFAZZ": {
             "CEO": "Hendra Kwik",
             "FOUNDER": ["Hendra Kwik", "Ricky Winata", "Jefriyanto"],
-            "INFO": "PAYFAZZ is a financial technology startup from Indonesia that was established in 2016. PAYFAZZ creates a distributed network of bank agents in Indonesia, who performs financial transactions on behalf of unbanked and underbanked customers."
+            "INFO": "PAYFAZZ is a financial technology startup from Indonesia that was established in 2016. PAYFAZZ creates a distributed network of bank agents in Indonesia, who performs financial transactions on behalf of unbanked and underbanked customers.",
+            "VIDEO": false
         }
     },
-    "INTRO": "Welcome, my name is Insignia Bot, I'm here to tell you more about Insignia Ventures Partners",
-    "FOUNDER": "Tan Yinglan is the CEO and Founding Managing Partner at Insignia Ventures Partners. Insignia Ventures Partners is an early stage technology venture fund focusing on Southeast Asia started in 2017 and manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America. Insignia Ventures Partners is the recipient of 'Deal of the Year (Small Cap / VC)' for Ajaib (2021) by AVCJ, 'Best Early-Stage Technology Venture Capital Fund - Southeast Asia (2020) from APAC Insider, Most Innovative Early-Stage Tech Partner - Southeast Asia (2020) from Capital Finance International, 'Investor of the Year' (2019) from New Entrepreneurs Foundation, two back-to-back VC Deal of Year awards for Payfazz (2019) and Carro (2018) from the Singapore Venture Capital and Private Equity Association and its portfolio include many other technology leaders in Southeast Asia."
+    "PEOPLE": {
+        "Tan Yinglan": "Tan Yinglan is the CEO and Founding Managing Partner at Insignia Ventures Partners. Insignia Ventures Partners is an early stage technology venture fund focusing on Southeast Asia started in 2017 and manages capital from premier institutional investors including sovereign wealth funds, foundations, university endowments and renowned family offices from Asia, Europe and North America. Insignia Ventures Partners is the recipient of 'Deal of the Year (Small Cap / VC)' for Ajaib (2021) by AVCJ, 'Best Early-Stage Technology Venture Capital Fund - Southeast Asia (2020) from APAC Insider, Most Innovative Early-Stage Tech Partner - Southeast Asia (2020) from Capital Finance International, 'Investor of the Year' (2019) from New Entrepreneurs Foundation, two back-to-back VC Deal of Year awards for Payfazz (2019) and Carro (2018) from the Singapore Venture Capital and Private Equity Association and its portfolio include many other technology leaders in Southeast Asia."
+    },
+    "INTRO": "Welcome, my name is Insignia Bot, I'm here to tell you more about Insignia Ventures Partners"
 }

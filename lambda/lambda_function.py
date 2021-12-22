@@ -13,8 +13,6 @@ from ask_sdk_core.utils import get_supported_interfaces
 from utils import *
 from news import *
 
-#test
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -25,6 +23,10 @@ DATA = load_json_from_path("data.json")
 def get_company(company):
     global DATA
     return DATA["COMPANIES"].get(company.upper())
+
+def get_person(name):
+    global DATA
+    return DATA["PEOPLE"].get(name)
 
 def get_video_directive(company_name):
     video_directive = RenderDocumentDirective(
@@ -148,10 +150,10 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
             data = get_company(company.split()[0])
         if data:
             speech_output = data["INFO"]
-            if "VIDEO" in data:
+            if data["VIDEO"] == True:
                 global CURRENT_STATE
                 CURRENT_STATE = "PROMPTING_VIDEO"
-                speech_output += " Would you like to watch a video from Insignia Ventures Partners?"
+                speech_output += " Would you like to watch a video on " + company + "?"
                 return (
                     handler_input.response_builder
                         .speak(speech_output)
