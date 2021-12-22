@@ -24,7 +24,7 @@ def get_company(company):
     global DATA
     return DATA["COMPANIES"].get(company.upper())
 
-def get_video_directive(companyname):
+def get_video_directive(company_name):
     video_directive = RenderDocumentDirective(
         token = "VideoPlayer",
         document = load_json_from_path("apl/videoplayer.json"),
