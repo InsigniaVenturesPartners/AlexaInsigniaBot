@@ -206,7 +206,7 @@ class YesIntentHandler(AbstractRequestHandler):
             return response_builder.speak(speak_output).response
         elif CURRENT_STATE == "PROMPTING_NEWS":
             global READ_NEWS
-            speak_output += get_news()[READ_NEWS]["title"]
+            speak_output += get_insignia_news()[READ_NEWS]["title"]
             READ_NEWS += 1
             speak_output += ". Would you like more news?"
             CURRENT_STATE = "PROMPTING_NEWS"
