@@ -13,8 +13,6 @@ from ask_sdk_core.utils import get_supported_interfaces
 from utils import *
 from news import *
 
-#test
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
