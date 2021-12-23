@@ -66,14 +66,14 @@ class InsigniaNewsIntentHandler(AbstractRequestHandler):
         global CURRENT_STATE
         READ_NEWS = 0
         response_builder = handler_input.response_builder
-        speech_output = get_insignia_news()[READ_NEWS]["title"]
+        speak_output = get_insignia_news()[READ_NEWS]["title"]
         READ_NEWS += 1
-        speech_output += ". Would you like more news?"
+        speak_output += ". Would you like more news?"
         CURRENT_STATE = "PROMPTING_NEWS"
         return (
             handler_input.response_builder
-            .speak(speech_output)
-            .ask(speech_output)
+            .speak(speak_output)
+            .ask(speak_output)
             .response
         )
 
@@ -83,10 +83,10 @@ class NewsIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         response_builder = handler_input.response_builder
-        speech_output = get_other_news()[0]["title"]
+        speak_output = get_other_news()[0]["title"]
         return (
             handler_input.response_builder
-            .speak(speech_output)
+            .speak(speak_output)
             .response
         )
 
@@ -99,15 +99,15 @@ class CompanyCEOIntentHandler(AbstractRequestHandler):
         data = None
         if company:
             data = get_company(company.split()[0])
-        speech_output = ""
+        speak_output = ""
         if data:
-            speech_output = "The CEO of " + company + " is " + data["CEO"] + "."
+            speak_output = "The CEO of " + company + " is " + data["CEO"] + "."
         else:
-            speech_output = "Sorry, the company could not be found."
+            speak_output = "Sorry, the company could not be found."
 
         return (
             handler_input.response_builder
-                .speak(speech_output)
+                .speak(speak_output)
                 .response
         )
 
@@ -120,23 +120,23 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
         data = None
         if company:
             data = get_company(company.split()[0])
-        speech_output = ""
+        speak_output = ""
         if data:
             founders = data["FOUNDER"]
             if len(founders) > 1:
-                speech_output = "The Founders of " + company + " are "
+                speak_output = "The Founders of " + company + " are "
                 for i in range(len(founders) - 1):
-                    speech_output += founders[i]
-                    speech_output += ", "
-                speech_output += " and " + founders[len(founders) - 1] + "."
+                    speak_output += founders[i]
+                    speak_output += ", "
+                speak_output += " and " + founders[len(founders) - 1] + "."
             else:
-                speech_output = "The Founder of " + company +  " is " + founders[0] + "."
+                speak_output = "The Founder of " + company +  " is " + founders[0] + "."
         else:
-            speech_output = "Sorry, the company could not be found."
+            speak_output = "Sorry, the company could not be found."
 
         return (
             handler_input.response_builder
-                .speak(speech_output)
+                .speak(speak_output)
                 .response
         )
 
@@ -150,26 +150,26 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
         if company:
             data = get_company(company.split()[0])
         if data:
-            speech_output = data["INFO"]
+            speak_output = data["INFO"]
             if data["VIDEO"] == True:
                 global CURRENT_STATE
                 global PROMPTING_VIDEO_COMPANY
                 CURRENT_STATE = "PROMPTING_VIDEO"
                 PROMPTING_VIDEO_COMPANY = company
-                speech_output += " Would you like to watch a video on " + company + "?"
+                speak_output += " Would you like to watch a video on " + company + "?"
                 return (
                     handler_input.response_builder
-                        .speak(speech_output)
-                        .ask(speech_output)
+                        .speak(speak_output)
+                        .ask(speak_output)
                         .response
                 )
 
         else:
-            speech_output = "Sorry, the company could not be found."
+            speak_output = "Sorry, the company could not be found."
 
         return (
             handler_input.response_builder
-                .speak(speech_output)
+                .speak(speak_output)
                 .response
         )
 
