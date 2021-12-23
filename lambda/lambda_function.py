@@ -16,6 +16,7 @@ from news import *
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+PROMPTING_VIDEO_COMPANY = ""
 CURRENT_STATE = "IDLE"
 READ_NEWS = 0
 DATA = load_json_from_path("data.json")
@@ -102,7 +103,7 @@ class CompanyCEOIntentHandler(AbstractRequestHandler):
         if data:
             speech_output = "The CEO of " + company + " is " + data["CEO"] + "."
         else:
-            speech_output = "Sorry, the company " + company + " could not be found."
+            speech_output = "Sorry, the company could not be found."
 
         return (
             handler_input.response_builder
@@ -152,7 +153,9 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
             speech_output = data["INFO"]
             if data["VIDEO"] == True:
                 global CURRENT_STATE
+                global PROMPTING_VIDEO_COMPANY
                 CURRENT_STATE = "PROMPTING_VIDEO"
+                PROMPTING_VIDEO_COMPANY = company
                 speech_output += " Would you like to watch a video on " + company + "?"
                 return (
                     handler_input.response_builder
@@ -162,7 +165,7 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
                 )
 
         else:
-            speech_output = "Sorry, the coinvestor " + company + " could not be found."
+            speech_output = "Sorry, the company could not be found."
 
         return (
             handler_input.response_builder
@@ -175,17 +178,29 @@ class VideoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("VideoIntent")(handler_input)
 
     def handle(self, handler_input):
-        speak_output = ""
         response_builder = handler_input.response_builder
-
-        if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
-            response_builder.add_directive(
-                get_video_directive("Insignia")
-            )
+        company = handler_input.request_envelope.request.intent.slots["company"].value
+        data = None
+        if company:
+            data = get_company(company.split()[0])
+        if data:
+            if data["VIDEO"] == True:
+                if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
+                    response_builder.add_directive(
+                        get_video_directive(company)
+                    )
+                else:
+                    speech_output = "Sorry, this device does not support video playing."
+            else:
+                speech_output = "Sorry, we could not find a video related to the company"
         else:
-            speak_output += "Sorry, this device does not support video playing."
+            speech_output = "Sorry, the company could not be found."
 
-        return response_builder.speak(speak_output).response
+        return (
+            handler_input.response_builder
+                .speak(speech_output)
+                .response
+        )
 
 class YesIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -196,13 +211,23 @@ class YesIntentHandler(AbstractRequestHandler):
         response_builder = handler_input.response_builder
 
         global CURRENT_STATE
+        global PROMPTING_VIDEO_COMPANY
         if CURRENT_STATE == "PROMPTING_VIDEO":
-            if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
-                response_builder.add_directive(
-                    get_video_directive("Insignia")
-                )
+            company = PROMPTING_VIDEO_COMPANY
+            data = get_company(company.split()[0])
+            if data:
+                if data["VIDEO"] == True:
+                    if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
+                        response_builder.add_directive(
+                            get_video_directive(company)
+                        )
+                    else:
+                        speak_output = "Sorry, this device does not support video playing."
+                else:
+                    speak_output = "Sorry, we could not find a video related to the company"
             else:
-                speak_output += "Sorry, this device does not support video playing."
+                speak_output = "Sorry, the company could not be found."
+            
             return response_builder.speak(speak_output).response
         elif CURRENT_STATE == "PROMPTING_NEWS":
             global READ_NEWS
