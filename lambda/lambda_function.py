@@ -52,7 +52,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         return (
             handler_input.response_builder
-                .speak(DATA["INTRO"])
+                .speak(DATA["INTRO"] + "i am cool")
                 .ask(DATA["INTRO"])
                 .response
         )
