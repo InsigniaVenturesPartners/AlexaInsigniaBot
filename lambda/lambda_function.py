@@ -178,6 +178,7 @@ class VideoIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("VideoIntent")(handler_input)
 
     def handle(self, handler_input):
+        speak_output = ""
         response_builder = handler_input.response_builder
         company = handler_input.request_envelope.request.intent.slots["company"].value
         data = None
@@ -190,15 +191,15 @@ class VideoIntentHandler(AbstractRequestHandler):
                         get_video_directive(company)
                     )
                 else:
-                    speech_output = "Sorry, this device does not support video playing."
+                    speak_output = "Sorry, this device does not support video playing."
             else:
-                speech_output = "Sorry, we could not find a video related to the company"
+                speak_output = "Sorry, we could not find a video related to the company"
         else:
-            speech_output = "Sorry, the company could not be found."
+            speak_output = "Sorry, the company could not be found."
 
         return (
             handler_input.response_builder
-                .speak(speech_output)
+                .speak(speak_output)
                 .response
         )
 
