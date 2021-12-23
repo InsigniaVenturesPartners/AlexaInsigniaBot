@@ -16,6 +16,8 @@ from news import *
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+#test
+
 PROMPTING_VIDEO_COMPANY = ""
 CURRENT_STATE = "IDLE"
 READ_NEWS = 0
