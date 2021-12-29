@@ -1,4 +1,5 @@
 import logging
+from os import name
 import ask_sdk_core.utils as ask_utils
 
 from ask_sdk_core.skill_builder import SkillBuilder
@@ -18,11 +19,13 @@ logger.setLevel(logging.INFO)
 
 PROMPTING_VIDEO_COMPANY = ""
 CURRENT_STATE = "IDLE"
+READ_INSIGNIA_NEWS = 0
 READ_NEWS = 0
 DATA = load_json_from_path("data.json")
 
 def get_company(company):
     global DATA
+    print(company.upper())
     return DATA["COMPANIES"].get(company.upper())
 
 def get_person(name):
@@ -30,19 +33,65 @@ def get_person(name):
     return DATA["PEOPLE"].get(name)
 
 def get_video_directive(company_name):
+    data = load_json_from_path("datasources/videoplayer.json")
+    data["videoPlayerData"]["properties"]["url"] = create_presigned_url("Media/" + company_name.upper() + ".mov")
     video_directive = RenderDocumentDirective(
         token = "VideoPlayer",
         document = load_json_from_path("apl/videoplayer.json"),
-        datasources = {
-            "videoPlayerData": {
-                "properties" : {
-                    "url" : create_presigned_url("Media/" + company_name.upper() + ".mov")
-                }
-            }
-        }
+        datasources = data
     )
 
     return video_directive
+
+def get_companyintro_directive(company_name):
+    data = load_json_from_path("datasources/companyintro.json")
+    data["longTextTemplateData"]["properties"]["backgroundImage"]["sources"][0]["url"] = create_presigned_url("Media/PERSON_DISPLAY_BG.png")
+    data["longTextTemplateData"]["properties"]["textContent"]["primaryText"]["text"] = get_company(company_name)["INFO"]
+    companyintro_directive = RenderDocumentDirective(
+        token = "CompanyIntroDirective",
+        document = load_json_from_path("apl/companyintro.json"),
+        datasources = data
+    )
+    
+    return companyintro_directive
+
+def get_founderdisplay_directive(company_name):
+    data = load_json_from_path("datasources/founderdisplay.json")
+    text_content = ""
+    founders = get_company(company_name.split()[0])["FOUNDER"]
+    if len(founders) > 1:
+        for i in range(len(founders) - 1):
+            text_content += founders[i]
+            text_content += ", "
+        text_content += " and " + founders[-1] + "."
+    else:
+        text_content = founders[0]
+    print("Media/" + company_name.upper() + "_FOUNDER.png")
+    data["imageTemplateData"]["properties"]["image"]["sources"][0]["url"] = create_presigned_url("Media/" + company_name.upper() + "_FOUNDER.png")
+    print(data["imageTemplateData"]["properties"]["image"]["sources"][0]["url"])
+    data["imageTemplateData"]["properties"]["text"]["content"] = text_content 
+    data["imageTemplateData"]["properties"]["backgroundImage"]["sources"][0]["url"] = create_presigned_url("Media/PERSON_DISPLAY_BG.png")
+    
+    directive = RenderDocumentDirective(
+        token = "FounderDisplay",
+        document = load_json_from_path("apl/founderdisplay.json"),
+        datasources = data
+    )
+    
+    return directive
+
+def get_persondisplay_directive(name):
+    data = load_json_from_path("datasources/persondisplay.json")
+    data["detailImageRightData"]["backgroundImage"]["sources"][0]["url"] = create_presigned_url("Media/PERSON_DISPLAY_BG.png")
+    data["detailImageRightData"]["image"]["sources"][0]["url"] = create_presigned_url("Media/" + name + ".png")
+    data["detailImageRightData"]["textContent"]["primaryText"]["text"] = name
+    data["detailImageRightData"]["textContent"]["secondaryText"]["text"] = get_person(name)
+    directive = RenderDocumentDirective(
+        token = "PersonDisplay",
+        document = load_json_from_path("apl/persondisplay.json"),
+        datasources = data
+    )
+    return directive
 
 class LaunchRequestHandler(AbstractRequestHandler):
     #Handler for Skill Launch
@@ -52,7 +101,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         return (
             handler_input.response_builder
-                .speak(DATA["INTRO"] + "i am cool")
+                .speak(DATA["INTRO"])
                 .ask(DATA["INTRO"])
                 .response
         )
@@ -62,14 +111,14 @@ class InsigniaNewsIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("InsigniaNewsIntent")(handler_input)
 
     def handle(self, handler_input):
-        global READ_NEWS
+        global READ_INSIGNIA_NEWS
         global CURRENT_STATE
-        READ_NEWS = 0
+        READ_INSIGNIA_NEWS = 0
         response_builder = handler_input.response_builder
-        speak_output = get_insignia_news()[READ_NEWS]["title"]
-        READ_NEWS += 1
+        speak_output = get_insignia_news()[READ_INSIGNIA_NEWS]["title"]
+        READ_INSIGNIA_NEWS += 1
         speak_output += ". Would you like more news?"
-        CURRENT_STATE = "PROMPTING_NEWS"
+        CURRENT_STATE = "PROMPTING_INSIGNIA_NEWS"
         return (
             handler_input.response_builder
             .speak(speak_output)
@@ -82,11 +131,18 @@ class NewsIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("NewsIntent")(handler_input)
 
     def handle(self, handler_input):
+        global READ_NEWS
+        global CURRENT_STATE
+        READ_NEWS = 0
         response_builder = handler_input.response_builder
-        speak_output = get_other_news()[0]["title"]
+        speak_output = get_other_news()[READ_NEWS]["title"]
+        READ_NEWS += 1
+        speak_output += ". Would you like more news?"
+        CURRENT_STATE = "PROMPTING_NEWS"
         return (
             handler_input.response_builder
             .speak(speak_output)
+            .ask(speak_output)
             .response
         )
 
@@ -96,17 +152,22 @@ class CompanyCEOIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         company = handler_input.request_envelope.request.intent.slots["company"].value
+        response_builder = handler_input.response_builder
         data = None
         if company:
-            data = get_company(company.split()[0])
+            company = company.split()[0].upper()
+            data = get_company(company)
         speak_output = ""
         if data:
-            speak_output = "The CEO of " + company + " is " + data["CEO"] + "."
+            name = data["CEO"]
+            speak_output = "The CEO of " + company.lower().capitalize() + " is " + name + ". "
+            speak_output += get_person(name)
+            response_builder.add_directive(get_persondisplay_directive(name))
         else:
             speak_output = "Sorry, the company could not be found."
 
         return (
-            handler_input.response_builder
+            response_builder
                 .speak(speak_output)
                 .response
         )
@@ -117,6 +178,7 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         company = handler_input.request_envelope.request.intent.slots["company"].value
+        response_builder = handler_input.response_builder
         data = None
         if company:
             data = get_company(company.split()[0])
@@ -131,11 +193,12 @@ class CompanyFounderIntentHandler(AbstractRequestHandler):
                 speak_output += " and " + founders[len(founders) - 1] + "."
             else:
                 speak_output = "The Founder of " + company +  " is " + founders[0] + "."
+            response_builder.add_directive(get_founderdisplay_directive(company))
         else:
             speak_output = "Sorry, the company could not be found."
 
         return (
-            handler_input.response_builder
+            response_builder
                 .speak(speak_output)
                 .response
         )
@@ -151,19 +214,18 @@ class CompanyInfoIntentHandler(AbstractRequestHandler):
             data = get_company(company.split()[0])
         if data:
             speak_output = data["INFO"]
-            if data["VIDEO"] == True:
-                global CURRENT_STATE
-                global PROMPTING_VIDEO_COMPANY
-                CURRENT_STATE = "PROMPTING_VIDEO"
-                PROMPTING_VIDEO_COMPANY = company
-                speak_output += " Would you like to watch a video on " + company + "?"
-                return (
-                    handler_input.response_builder
-                        .speak(speak_output)
-                        .ask(speak_output)
-                        .response
-                )
-
+            handler_input.response_builder.add_directive(get_companyintro_directive(company))
+            global CURRENT_STATE
+            global PROMPTING_VIDEO_COMPANY
+            CURRENT_STATE = "PROMPTING_VIDEO"
+            PROMPTING_VIDEO_COMPANY = company
+            speak_output += " Would you like to watch a video on " + company + "?"
+            return (
+                handler_input.response_builder
+                    .speak(speak_output)
+                    .ask(speak_output)
+                    .response
+            )
         else:
             speak_output = "Sorry, the company could not be found."
 
@@ -185,15 +247,12 @@ class VideoIntentHandler(AbstractRequestHandler):
         if company:
             data = get_company(company.split()[0])
         if data:
-            if data["VIDEO"] == True:
-                if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
-                    response_builder.add_directive(
-                        get_video_directive(company)
-                    )
-                else:
-                    speak_output = "Sorry, this device does not support video playing."
+            if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
+                response_builder.add_directive(
+                    get_video_directive(company)
+                )
             else:
-                speak_output = "Sorry, we could not find a video related to the company"
+                speak_output = "Sorry, this device does not support video playing."
         else:
             speak_output = "Sorry, the company could not be found."
 
@@ -216,28 +275,41 @@ class YesIntentHandler(AbstractRequestHandler):
         if CURRENT_STATE == "PROMPTING_VIDEO":
             company = PROMPTING_VIDEO_COMPANY
             data = get_company(company.split()[0])
-            if data:
-                if data["VIDEO"] == True:
-                    if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
-                        response_builder.add_directive(
-                            get_video_directive(company)
-                        )
-                    else:
-                        speak_output = "Sorry, this device does not support video playing."
+            if data:    
+                if get_supported_interfaces(handler_input).alexa_presentation_apl is not None:
+                    response_builder.add_directive(
+                        get_video_directive(company)
+                    )
                 else:
-                    speak_output = "Sorry, we could not find a video related to the company"
+                    speak_output = "Sorry, this device does not support video playing."
             else:
                 speak_output = "Sorry, the company could not be found."
             
             return response_builder.speak(speak_output).response
+        elif CURRENT_STATE == "PROMPTING_INSIGNIA_NEWS":
+            global READ_INSIGNIA_NEWS
+            news_list = get_insignia_news()
+            if READ_INSIGNIA_NEWS >= len(news_list):
+                speak_output = "There is no more news. Starting from the latest news. "
+                READ_INSIGNIA_NEWS = 0
+            speak_output += news_list[READ_INSIGNIA_NEWS]["title"]
+            READ_INSIGNIA_NEWS += 1
+            speak_output += ". Would you like more news?"
+            CURRENT_STATE = "PROMPTING_INSIGNIA_NEWS"
+            return response_builder.speak(speak_output).ask(speak_output).response
         elif CURRENT_STATE == "PROMPTING_NEWS":
             global READ_NEWS
-            speak_output += get_insignia_news()[READ_NEWS]["title"]
+            news_list = get_other_news()
+            if READ_NEWS >= len(news_list):
+                speak_output = "There is no more news. Starting from the latest news. "
+                READ_NEWS = 0
+            speak_output += news_list[READ_NEWS]["title"]
             READ_NEWS += 1
             speak_output += ". Would you like more news?"
             CURRENT_STATE = "PROMPTING_NEWS"
-            return response_builder.speak_output(speak_output).ask(speak_output).response
-        else: return response_builder.speak_output(speak_output).response
+            return response_builder.speak(speak_output).ask(speak_output).response
+        else: 
+            return response_builder.speak(speak_output).response
 
 class NoIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
@@ -373,7 +445,7 @@ sb.add_request_handler(CompanyCEOIntentHandler())
 sb.add_request_handler(CompanyFounderIntentHandler())
 sb.add_request_handler(VideoIntentHandler())
 sb.add_request_handler(InsigniaNewsIntentHandler())
-
+sb.add_request_handler(NewsIntentHandler())
 
 
 sb.add_request_handler(YesIntentHandler())

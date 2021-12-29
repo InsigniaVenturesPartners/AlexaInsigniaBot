@@ -85,13 +85,21 @@
         },
         {
           "name": "VideoIntent",
-          "slots": [],
+          "slots": [
+            {
+              "name": "company",
+              "type": "company"
+            }
+          ],
           "samples": [
-            "play the video",
-            "play the insignia A.G.M. video",
-            "play the insignia annual general meeting video",
-            "play the video from insignia",
-            "play the insignia video"
+            "play a video on {company}",
+            "play a video of {company}",
+            "play a video from {company}",
+            "play the video from {company}",
+            "play the video of {company}",
+            "play the video on {company}",
+            "play a {company} video",
+            "play the {company} video"
           ]
         },
         {
@@ -106,6 +114,13 @@
             "what is the news on insignia",
             "what is the latest news from insignia",
             "What is the current news on insignia"
+          ]
+        },
+        {
+          "name": "NewsIntent",
+          "slots": [],
+          "samples": [
+            "tell me about the news"
           ]
         }
       ],
@@ -178,5 +193,5 @@
       ]
     }
   },
-  "version": "6"
+  "version": "11"
 }

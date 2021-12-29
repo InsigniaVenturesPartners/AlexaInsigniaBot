@@ -1,0 +1,38 @@
+{
+    "detailImageRightData": {
+        "type": "object",
+        "objectId": "detailImageRightSample",
+        "backgroundImage": {
+            "contentDescription": null,
+            "smallSourceUrl": null,
+            "largeSourceUrl": null,
+            "sources": [
+                {
+                    "url": "BACKGROUNDIMAGE",
+                    "size": "large"
+                }
+            ]
+        },
+        "image": {
+            "contentDescription": "",
+            "smallSourceUrl": null,
+            "largeSourceUrl": null,
+            "sources": [
+                {
+                    "url": "PERSONPHOTO",
+                    "size": "large"
+                }
+            ]
+        },
+        "textContent": {
+            "primaryText": {
+                "type": "PlainText",
+                "text": "NAME"
+            },
+            "secondaryText": {
+                "type": "PlainText",
+                "text": "PERSON DESCRIPTION"
+            }
+        }
+    }
+}
